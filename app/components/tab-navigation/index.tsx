@@ -36,7 +36,10 @@ const TabNavigation = ({ state, descriptors, navigation }: any) => {
         };
 
         return (
-          <Tab props={{ label, isFocused, options, onPress, onLongPress }} />
+          <Tab
+            key={label}
+            props={{ label, isFocused, options, onPress, onLongPress }}
+          />
         );
       })}
     </View>
