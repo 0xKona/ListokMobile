@@ -20,6 +20,25 @@ export type MainScreenNavigationProp = StackNavigationProp<
   'Home'
 >;
 
+export interface SettingType {
+  value: string;
+  name: string;
+  onPress?: () => void;
+}
+
+export type SettingsStackParamList = {
+  Settings: undefined;
+  'Change Theme': undefined;
+};
+
+export type SettingsNavigationProp =
+  StackNavigationProp<SettingsStackParamList>;
+
+export type SettingsRouteProp = RouteProp<
+  SettingsStackParamList,
+  'Change Theme'
+>;
+
 export type LoadingScreenRouteProp = RouteProp<RootStackParamList, 'Loading'>;
 export type LoginScreenRouteProp = RouteProp<RootStackParamList, 'Login'>;
 export type MainScreenRouteProp = RouteProp<RootStackParamList, 'Home'>;
