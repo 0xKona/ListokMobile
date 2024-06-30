@@ -19,7 +19,7 @@ const NavBarIcon = ({ label, isFocused }: any) => {
         return <Text style={navBarIconStyle}>Icon</Text>;
       case 'Public Library':
         return <Text style={navBarIconStyle}>Icon</Text>;
-      case 'Settings':
+      case 'Profile':
         return getUserProfilePicture(user.user?.picture);
       default:
         return null;

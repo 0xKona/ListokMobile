@@ -3,10 +3,12 @@ import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import userReducer from './slices/userSlice';
 import configReducer from './slices/configSlice';
+import themeReducer from './slices/themeSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
   config: configReducer,
+  theme: themeReducer,
 });
 
 const persistConfig = {

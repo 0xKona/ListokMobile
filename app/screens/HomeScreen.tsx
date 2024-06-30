@@ -7,8 +7,8 @@ import RecipeManager from '@app/components/recipe-manager';
 import ListokManager from '@app/components/listok-manager';
 import ShoppingList from '@app/components/shopping-list';
 import PublicLibrary from '@app/components/public-library';
-import Settings from '@app/components/settings';
 import TabNavigation from '@app/components/tab-navigation';
+import SettingsNavigator from '@app/navigators/settings-navigator';
 
 const MainScreen = () => {
   const user = useSelector((state: RootState) => state.user);
@@ -17,13 +17,19 @@ const MainScreen = () => {
   const Tab = createBottomTabNavigator();
 
   return (
-    <Tab.Navigator tabBar={props => <TabNavigation {...props} />}>
-      <Tab.Screen name="Recipes" component={RecipeManager} />
-      <Tab.Screen name="Listoks" component={ListokManager} />
-      <Tab.Screen name="Shopping" component={ShoppingList} />
-      <Tab.Screen name="Public Library" component={PublicLibrary} />
-      <Tab.Screen name="Settings" component={Settings} />
-    </Tab.Navigator>
+    user.user && (
+      <Tab.Navigator tabBar={props => <TabNavigation {...props} />}>
+        <Tab.Screen name="Recipes" component={RecipeManager} />
+        <Tab.Screen name="Listoks" component={ListokManager} />
+        <Tab.Screen name="Shopping" component={ShoppingList} />
+        <Tab.Screen name="Public Library" component={PublicLibrary} />
+        <Tab.Screen
+          options={{ headerShown: false }}
+          name="Profile"
+          component={SettingsNavigator}
+        />
+      </Tab.Navigator>
+    )
   );
 };
 

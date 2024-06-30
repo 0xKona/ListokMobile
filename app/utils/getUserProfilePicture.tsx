@@ -2,10 +2,10 @@ import { navBarIconStyle } from '@app/styles/navBarIcon';
 import React from 'react';
 import { Image } from 'react-native';
 
-const getUserProfilePicture = (url: string) => {
+const getUserProfilePicture = (url: string, styles?: StyleMedia) => {
   return (
     <Image
-      style={navBarIconStyle}
+      style={styles ? styles : navBarIconStyle}
       source={{
         uri: url,
       }}
