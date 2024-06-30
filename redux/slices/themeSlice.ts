@@ -1,11 +1,12 @@
+import { ThemeType, themeColors } from '@app/constants/themes';
 import { createSlice } from '@reduxjs/toolkit';
 
 interface ThemeState {
-  currentTheme: string;
+  currentTheme: ThemeType;
 }
 
 const initialState: ThemeState = {
-  currentTheme: 'light',
+  currentTheme: themeColors.light,
 };
 
 const themeSlice = createSlice({
@@ -13,12 +14,16 @@ const themeSlice = createSlice({
   initialState,
   reducers: {
     setLightMode(state) {
-      state.currentTheme = 'light';
+      state.currentTheme = themeColors.light;
     },
     setDarkMode(state) {
-      state.currentTheme = 'dark';
+      state.currentTheme = themeColors.dark;
+    },
+    setBarbieMode(state) {
+      state.currentTheme = themeColors.barbie;
     },
   },
 });
 
+export const { setLightMode, setDarkMode, setBarbieMode } = themeSlice.actions;
 export default themeSlice.reducer;
