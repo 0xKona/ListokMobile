@@ -1,23 +1,15 @@
-import { RootState } from '@redux/store';
 import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { setDarkMode } from '@redux/slices/themeSlice';
+import { StyleSheet, Text, View } from 'react-native';
+import { themeColors } from '@app/constants/themes';
+import ThemeButton from './theme-button';
 
 const ChangeTheme = () => {
-  const theme = useSelector((state: RootState) => state.theme);
-  const dispatch = useDispatch();
-
-  console.log('current theme: ', theme);
-
-  const handleSetDarkMode = () => {
-    dispatch(setDarkMode());
-  };
-
   return (
     <View style={styles.container}>
-      <Text>Theme Selection</Text>
-      <Button title="setDakMode" onPress={handleSetDarkMode} />
+      <Text style={styles.headerText}>Theme Selection</Text>
+      {Object.keys(themeColors).map((theme: string) => (
+        <ThemeButton key={theme} theme={theme} />
+      ))}
     </View>
   );
 };
@@ -26,6 +18,13 @@ const styles = StyleSheet.create({
   container: {
     margin: 10,
     backgroundColor: 'white',
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerText: {
+    fontSize: 20,
+    marginBottom: 20,
   },
 });
 
