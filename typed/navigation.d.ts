@@ -29,6 +29,7 @@ export interface SettingType {
 export type SettingsStackParamList = {
   Settings: undefined;
   'Change Theme': undefined;
+  'Account Details': undefined;
 };
 
 export type SettingsNavigationProp =

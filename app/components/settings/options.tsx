@@ -14,7 +14,11 @@ const SettingOptions = () => {
       name: 'Change Theme',
       onPress: () => navigation.navigate('Change Theme'),
     },
-    { value: 'accountDetails', name: 'Account Details' },
+    {
+      value: 'accountDetails',
+      name: 'Account Details',
+      onPress: () => navigation.navigate('Account Details'),
+    },
   ];
 
   return (
