@@ -1,10 +1,12 @@
+import { ThemeType } from '@app/constants/themes';
 import { logout } from '@redux/slices/userSlice';
-import { AppDispatch } from '@redux/store';
+import { AppDispatch, RootState } from '@redux/store';
 import React from 'react';
-import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 const LogoutButton = () => {
+  const { currentTheme } = useSelector((state: RootState) => state.theme);
   const dispatch = useDispatch<AppDispatch>();
 
   const handleLogout = () => {
@@ -12,24 +14,28 @@ const LogoutButton = () => {
   };
 
   return (
-    <TouchableOpacity style={style.logoutButton} onPress={handleLogout}>
-      <View>
-        <Text>Logout</Text>
-      </View>
+    <TouchableOpacity
+      style={styles(currentTheme).logoutButton}
+      onPress={handleLogout}>
+      <Text style={styles(currentTheme).text}>Logout</Text>
     </TouchableOpacity>
   );
 };
 
 console.log('test push');
-const style = StyleSheet.create({
-  logoutButton: {
-    height: 50,
-    width: '100%',
-    marginTop: 'auto',
-    backgroundColor: 'pink',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+const styles = (props: ThemeType) =>
+  StyleSheet.create({
+    logoutButton: {
+      height: 50,
+      width: '100%',
+      marginTop: 'auto',
+      backgroundColor: props.buttonPrimaryBackground,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    text: {
+      color: props.buttonPrimaryText,
+    },
+  });
 
 export default LogoutButton;

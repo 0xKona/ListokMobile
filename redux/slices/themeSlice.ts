@@ -1,7 +1,7 @@
 import { ThemeType, themeColors } from '@app/constants/themes';
 import { createSlice } from '@reduxjs/toolkit';
 
-interface ThemeState {
+export interface ThemeState {
   currentTheme: ThemeType;
 }
 
