@@ -1,30 +1,29 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import RecipeHeader from './recipe-header-manager';
-import { useSelector } from 'react-redux';
-import { RootState } from '@redux/store';
-import { ThemeType } from '@app/constants/themes';
+import RecipeHeader from './recipe-manager-home/recipe-manager-header';
+// import { useSelector } from 'react-redux';
+// import { RootState } from '@redux/store';
+import RecipeList from './recipe-manager-home/recipe-list';
 
 const RecipeManager = () => {
-  const { currentTheme } = useSelector((state: RootState) => state.theme);
-  const componentStyle = styles(currentTheme);
+  // const { currentTheme } = useSelector((state: RootState) => state.theme);
+  const componentStyle = styles();
 
   return (
     <View style={componentStyle.container}>
       <RecipeHeader />
+      <RecipeList />
     </View>
   );
 };
 
-const styles = (props: ThemeType) =>
+const styles = () =>
   StyleSheet.create({
     container: {
-      justifyContent: 'center',
       alignItems: 'center',
       margin: 10,
       paddingHorizontal: 10,
-      height: 60,
-      backgroundColor: props.surface,
+      flexGrow: 1,
     },
   });
 
