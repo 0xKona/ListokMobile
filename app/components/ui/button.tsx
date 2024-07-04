@@ -13,7 +13,12 @@ interface PropType {
 const ListokButton = ({ onPress, text, propStyles }: PropType): JSX.Element => {
   const { currentTheme } = useSelector((state: RootState) => state.theme);
   const defaultStyles = styles(currentTheme);
-  const style = propStyles ? { ...defaultStyles, propStyles } : defaultStyles;
+  const style = propStyles
+    ? {
+        ...defaultStyles,
+        container: { ...defaultStyles.container, ...propStyles },
+      }
+    : defaultStyles;
 
   return (
     <TouchableOpacity style={style.container} onPress={onPress}>
