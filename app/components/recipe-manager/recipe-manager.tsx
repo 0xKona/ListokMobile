@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import RecipeHeader from './recipe-manager-home/recipe-manager-header';
 // import { useSelector } from 'react-redux';
 // import { RootState } from '@redux/store';
-import RecipeList from './recipe-manager-home/recipe-list';
+import RecipeListContainer from './recipe-manager-home/recipe-list-container';
 
 const RecipeManager = () => {
   // const { currentTheme } = useSelector((state: RootState) => state.theme);
@@ -12,7 +12,7 @@ const RecipeManager = () => {
   return (
     <View style={componentStyle.container}>
       <RecipeHeader />
-      <RecipeList />
+      <RecipeListContainer />
     </View>
   );
 };

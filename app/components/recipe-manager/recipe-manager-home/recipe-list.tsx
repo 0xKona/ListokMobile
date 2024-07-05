@@ -1,27 +1,31 @@
-import { recipeTabs } from '@app/constants/recipe-tabs';
-import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import RecipeTabs from './recipe-tabs';
+import useTheme from '@app/components/hooks/useTheme';
+// import { ThemeType } from '@app/constants/themes';
+import React from 'react';
+import { FlatList, StyleSheet } from 'react-native';
+import RecipeCard from './recipe-card';
 
-const RecipeList = () => {
-  const [currentTab, setCurrentTab] = useState(recipeTabs[0].value);
+interface PropsType {
+  recipes: any;
+}
 
-  const handlePressTab = (tab: string) => {
-    setCurrentTab(tab);
-  };
+const RecipeList = ({ recipes }: PropsType) => {
+  const componentStyle = useTheme(styles);
 
   return (
-    <View style={styles.container}>
-      <RecipeTabs currentTab={currentTab} handlePressTab={handlePressTab} />
-    </View>
+    <FlatList
+      style={componentStyle.container}
+      data={recipes}
+      renderItem={({ item }) => <RecipeCard data={item} />}
+      keyExtractor={recipe => recipe.id}
+    />
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 10,
-    width: '100%',
-  },
-});
+const styles = () =>
+  StyleSheet.create({
+    container: {
+      width: '100%',
+    },
+  });
 
 export default RecipeList;
