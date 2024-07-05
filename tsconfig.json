@@ -15,5 +15,5 @@
       "@app/*": ["app/*"]
     }
   },
-  "include": ["app", "typed"]
+  "include": ["app/**/*", "typed/**/*", "redux/**/*"]
 }
