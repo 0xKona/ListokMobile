@@ -18,6 +18,20 @@ export type CategoryType =
   | 'confectionary'
   | 'other';
 
+export type ErrorKeyType =
+  | 'title'
+  | 'desc'
+  | 'public'
+  | 'picture'
+  | 'ingredients'
+  | 'method';
+
+export type RecipeErrorInterface = {
+  [key in ErrorKeyType]: null | string;
+};
+
+export type RecipeErrorsType = false | RecipeErrorInterface;
+
 export interface IngredientType {
   name: string;
   amount: number | null;

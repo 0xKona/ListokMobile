@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRouter from './routes/auth.js';
 import configRouter from './routes/config.js';
+import recipeRouter from './routes/recipes.js';
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(express.json());
 
 app.use('/api/auth', authRouter);
 app.use('/api/config', configRouter);
+app.use('/api/recipes', recipeRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello, World!');

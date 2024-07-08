@@ -1,4 +1,4 @@
-import { StepType, RecipeType } from '@app/types/recipe-types';
+import { StepType, RecipeType } from '@typed/recipe-types';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export interface RecipeEditorState {
