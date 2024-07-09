@@ -10,7 +10,6 @@ const RecipesNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen name="Your Recipes" component={RecipeManager} />
       <Stack.Screen name="New Recipe" component={RecipeEditor} />
-      <Stack.Screen name="Edit Recipe" component={RecipeEditor} />
     </Stack.Navigator>
   );
 };

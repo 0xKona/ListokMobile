@@ -37,8 +37,22 @@ const recipeEditorSlice = createSlice({
     openRecipeEditor(state, action: PayloadAction<RecipeType>) {
       state.recipeData = action.payload;
     },
+    changeCurrentStep(state, action: PayloadAction<number>) {
+      state.currentStep = action.payload;
+    },
+    updateRecipeTitle(state, action: PayloadAction<string>) {
+      state.recipeData.title = action.payload;
+    },
+    updateRecipeDesc(state, action: PayloadAction<string>) {
+      state.recipeData.desc = action.payload;
+    },
   },
 });
 
-export const { resetRecipeEditor } = recipeEditorSlice.actions;
+export const {
+  resetRecipeEditor,
+  changeCurrentStep,
+  updateRecipeTitle,
+  updateRecipeDesc,
+} = recipeEditorSlice.actions;
 export default recipeEditorSlice.reducer;

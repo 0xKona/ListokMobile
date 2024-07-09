@@ -10,6 +10,7 @@ module.exports = {
           '@types': './types',
           '@redux': './redux',
           '@app': './app',
+          '@root': './',
         },
       },
     ],
