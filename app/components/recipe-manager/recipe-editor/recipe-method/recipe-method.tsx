@@ -1,4 +1,3 @@
-import { recipeManagerApis } from '@app/utils/api-connections/recipe-manager';
 import {
   changeCurrentStep,
   RecipeEditorState,
@@ -12,27 +11,28 @@ interface PropsType {
   recipeData: RecipeEditorState;
 }
 
-const SectionThree = ({ recipeData }: PropsType) => {
+const RecipeMethodEditor = ({ recipeData }: PropsType) => {
   const { user } = useSelector((state: RootState) => state.user);
   console.log(user);
   console.log(recipeData);
   const dispatch = useDispatch();
+
+  const handleNext = () => {
+    dispatch(changeCurrentStep(4));
+  };
+
+  const handleBack = () => {
+    dispatch(changeCurrentStep(2));
+  };
+
   return (
     <View>
       <Text>SectionThree</Text>
 
-      <Button title="Back" onPress={() => dispatch(changeCurrentStep(2))} />
-      <Button
-        title="Temp Submit"
-        onPress={() =>
-          recipeManagerApis.postNewRecipe(
-            JSON.stringify(recipeData.recipeData),
-            user.userInfo.token,
-          )
-        }
-      />
+      <Button title="Back" onPress={handleBack} />
+      <Button title="Next" onPress={handleNext} />
     </View>
   );
 };
 
-export default SectionThree;
+export default RecipeMethodEditor;

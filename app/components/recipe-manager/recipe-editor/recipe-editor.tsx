@@ -1,12 +1,13 @@
 import { RootState } from '@redux/store';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import SectionOne from './section-one';
-import SectionThree from './section-three';
-import SectionTwo from './section-two';
 import { useNavigation } from '@react-navigation/native';
 import { Alert } from 'react-native';
 import { resetRecipeEditor } from '@redux/slices/recipeEditorSlice';
+import RecipeDetailsEditor from './recipe-details/recipe-details';
+import RecipeIngredientsEditor from './recipe-ingredients.tsx/recipe-ingredients';
+import RecipeMethodEditor from './recipe-method/recipe-method';
+import RecipeEditorConfirmation from './recipe-confirmation/recipe-confirmation';
 
 const RecipeEditor = () => {
   const navigation = useNavigation();
@@ -41,11 +42,13 @@ const RecipeEditor = () => {
 
   switch (recipeState.currentStep) {
     case 1:
-      return <SectionOne recipeData={recipeState} />;
+      return <RecipeDetailsEditor recipeData={recipeState} />;
     case 2:
-      return <SectionTwo recipeData={recipeState} />;
+      return <RecipeIngredientsEditor recipeData={recipeState} />;
     case 3:
-      return <SectionThree recipeData={recipeState} />;
+      return <RecipeMethodEditor recipeData={recipeState} />;
+    case 4:
+      return <RecipeEditorConfirmation recipeData={recipeState} />;
   }
 };
 

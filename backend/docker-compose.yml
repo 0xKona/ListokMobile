@@ -9,14 +9,14 @@ services:
     volumes:
       - mongo-data:/data/db
 
-  server:
+  listok_server:
     build:
       context: .
       dockerfile: server/Dockerfile
     ports:
       - "3000:3000"
     env_file:
-      - .env
+      - prod.env
     depends_on:
       - mongo
 

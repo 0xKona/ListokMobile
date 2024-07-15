@@ -1,3 +1,4 @@
+import ListokInput from '@app/components/ui/input';
 import {
   changeCurrentStep,
   RecipeEditorState,
@@ -5,14 +6,14 @@ import {
   updateRecipeTitle,
 } from '@redux/slices/recipeEditorSlice';
 import React from 'react';
-import { Button, Text, TextInput, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 interface PropsType {
   recipeData: RecipeEditorState;
 }
 
-const SectionOne = ({ recipeData }: PropsType) => {
+const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
   const dispatch = useDispatch();
   const [title, setTitle] = React.useState<string>(recipeData.recipeData.title);
   const [desc, setDesc] = React.useState<string>(recipeData.recipeData.desc);
@@ -21,20 +22,34 @@ const SectionOne = ({ recipeData }: PropsType) => {
     // TODO Verify fields here
     dispatch(updateRecipeTitle(title));
     dispatch(updateRecipeDesc(desc));
-
     dispatch(changeCurrentStep(2));
   };
 
+  const updateTitle = () => dispatch(updateRecipeTitle(title));
+  const updateDesc = () => dispatch(updateRecipeDesc(desc));
+
   return (
     <View>
-      <Text>SectionOne</Text>
+      <Text>Recipe Details</Text>
 
-      <TextInput value={title} onChangeText={setTitle} />
-      <TextInput value={desc} onChangeText={setDesc} />
+      <Text>Recipe Name:</Text>
+
+      <ListokInput
+        value={title}
+        onChangeText={setTitle}
+        onEndEditing={updateTitle}
+      />
+
+      <Text>Recipe Description:</Text>
+      <ListokInput
+        value={desc}
+        onChangeText={setDesc}
+        onEndEditing={updateDesc}
+      />
 
       <Button title="Next" onPress={handleNextPress} />
     </View>
   );
 };
 
-export default SectionOne;
+export default RecipeDetailsEditor;
