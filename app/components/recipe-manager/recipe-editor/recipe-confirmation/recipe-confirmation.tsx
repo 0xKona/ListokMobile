@@ -1,11 +1,14 @@
 import { recipeManagerApis } from '@app/utils/api-connections/recipe-manager';
+import { useNavigation } from '@react-navigation/native';
 import { changeCurrentStep } from '@redux/slices/recipeEditorSlice';
 import { RootState } from '@redux/store';
+import { RecipeNavigationProp } from '@typed/navigation';
 import React from 'react';
 import { Button, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-const RecipeEditorConfirmation = ({ recipeData }: any) => {
+const RecipeEditorConfirmation = ({ recipeData, setIgnorePopup }: any) => {
+  const navigation = useNavigation<RecipeNavigationProp>();
   const { user } = useSelector((state: RootState) => state.user);
   console.log('User State Token at Confirmation Screen:', user.token);
   const dispatch = useDispatch();
@@ -17,15 +20,19 @@ const RecipeEditorConfirmation = ({ recipeData }: any) => {
   const handleSubmit = async () => {
     try {
       console.log('recipeSubmitted: ', recipeData.recipeData);
+      setIgnorePopup(true);
       await recipeManagerApis.postNewRecipe(
         JSON.stringify({
           ...recipeData.recipeData,
-          createdBy: { userId: user.userId, name: user.name },
+          createdBy: user.userId,
+          createdByName: user.name,
         }),
         user.token,
       );
+      navigation.navigate('Your Recipes');
     } catch (error) {
       console.error('Error submitting recipe:', error);
+      setIgnorePopup(false);
     }
   };
 

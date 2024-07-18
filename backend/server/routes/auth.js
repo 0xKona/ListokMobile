@@ -10,7 +10,7 @@ router.post('/login', async (req, res) => {
   const { token } = req.body;
   console.log('Login Requested with token:', token);
   try {
-    // Verify the token
+    // Verify the google token
     const ticket = await client.verifyIdToken({
       idToken: token,
       audience: process.env.GOOGLE_OAUTH_CLIENT_ID,

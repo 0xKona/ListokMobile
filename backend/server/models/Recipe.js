@@ -22,6 +22,11 @@ const recipeSchema = new mongoose.Schema({
     required: true,
     unique: false,
   },
+  createdByName: {
+    type: String,
+    required: true,
+    unique: false,
+  },
   createdOn: {
     type: String,
     required: true,

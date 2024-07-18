@@ -48,7 +48,8 @@ export interface RecipeType {
   id: number | null;
   title: string;
   desc: string;
-  createdBy: { userId: number | null; name: string };
+  createdBy: string | null;
+  createdByName: string | null;
   createdOn: string;
   public: boolean;
   picture: string;

@@ -10,11 +10,18 @@ import RecipeMethodEditor from './recipe-method/recipe-method';
 import RecipeEditorConfirmation from './recipe-confirmation/recipe-confirmation';
 
 const RecipeEditor = () => {
+  const [ignorePopup, setIgnorePopup] = React.useState<boolean>(false);
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  console.log('Ignore Popup:', ignorePopup);
 
   React.useEffect(() => {
     const backButton = navigation.addListener('beforeRemove', e => {
+      if (ignorePopup) {
+        dispatch(resetRecipeEditor());
+        setIgnorePopup(false);
+        return;
+      }
       e.preventDefault();
 
       Alert.alert(
@@ -35,7 +42,8 @@ const RecipeEditor = () => {
     });
 
     return backButton;
-  }, [dispatch, navigation]);
+  }, [dispatch, ignorePopup, navigation]);
+
   const recipeState = useSelector((state: RootState) => state.recipeEditor);
 
   console.log('Recipe State:: ', recipeState);
@@ -48,7 +56,14 @@ const RecipeEditor = () => {
     case 3:
       return <RecipeMethodEditor recipeData={recipeState} />;
     case 4:
-      return <RecipeEditorConfirmation recipeData={recipeState} />;
+      return (
+        <RecipeEditorConfirmation
+          recipeData={recipeState}
+          setIgnorePopup={setIgnorePopup}
+        />
+      );
+    default:
+      return null; // Return null for safety if no cases match
   }
 };
 
