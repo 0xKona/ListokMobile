@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import * as config from '@root/config/config.json';
 
 interface UserState {
   user: any | null;
@@ -17,12 +18,9 @@ export const loginWithGoogle = createAsyncThunk(
   'user/loginWithGoogle',
   async (token: string, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        'http://192.168.1.20:3000/api/auth/login',
-        {
-          token,
-        },
-      );
+      const response = await axios.post(`${config.serverURL}/api/auth/login`, {
+        token,
+      });
       return response.data;
     } catch (error: any) {
       console.error('loginWithGoogle error:', error);

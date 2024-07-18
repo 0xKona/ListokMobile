@@ -5,15 +5,22 @@ import authRouter from './routes/auth.js';
 import configRouter from './routes/config.js';
 import recipeRouter from './routes/recipes.js';
 
-dotenv.config();
+dotenv.config({ path: './backend/.env' });
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-const mongoUri = process.env.MONGO_URI || 'mongodb://mongo:27017/yourdatabase';
+const devMode = process.env.NODE_ENV === 'dev';
+console.log('Dev Mode', devMode);
+const mongoUri = devMode
+  ? process.env.MONGO_URI_DEV
+  : process.env.MONGO_URI_PROD;
+
+console.log('Dev Uri: ', process.env.MONGO_URI_DEV);
+console.log('Mongo Uri: ', mongoUri);
 mongoose
   .connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected'))
+  .then(() => console.log('MongoDB connected successfully'))
   .catch(err => console.error('MongoDB connection error:', err));
 
 app.use(express.json());

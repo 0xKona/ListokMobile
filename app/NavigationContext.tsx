@@ -33,7 +33,7 @@ export const NavigationProvider: React.FC<NavigationProviderProps> = ({
     if (!config.loading && !user.loading) {
       if (config.googleClientId && user.user) {
         navigation.dispatch(StackActions.replace('Home'));
-      } else {
+      } else if (config.googleClientId && !user.user) {
         navigation.dispatch(StackActions.replace('Login'));
       }
     }

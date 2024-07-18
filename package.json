@@ -8,7 +8,9 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "dev-database": "docker-compose -f backend/docker-compose.dev.yml up -d",
+    "dev-server":  "NODE_ENV=dev nodemon --watch backend backend/server/index.js"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.23.1",
