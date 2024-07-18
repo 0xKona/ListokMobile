@@ -12,6 +12,8 @@ const RecipeListContainer = () => {
     setCurrentTab(tab);
   };
 
+  // TO DO API-CALL TO GET RECIPE'S
+
   return (
     <View style={styles.container}>
       <RecipeTabs currentTab={currentTab} handlePressTab={handlePressTab} />

@@ -39,4 +39,23 @@ router.post('/create_new', authMiddleware, async (req, res) => {
   }
 });
 
+router.get('/recipes_by_user/:userId', authMiddleware, async (req, res) => {
+  const { userId } = req.params;
+  console.log('Fetching recipes for user:', userId);
+
+  try {
+    const recipes = await Recipe.find({ createdBy: userId });
+    if (recipes.length === 0) {
+      res.status(404).json({ message: 'No recipes found for this user' });
+      return;
+    }
+    res.status(200).json(recipes);
+  } catch (error) {
+    console.log('Failed to fetch recipes:', error);
+    res
+      .status(500)
+      .json({ message: 'Error: Internal Server Error, Please try again.' });
+  }
+});
+
 export default router;
