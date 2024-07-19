@@ -1,32 +1,35 @@
 import useTheme from '@app/components/hooks/useTheme';
-// import { ThemeType } from '@app/constants/themes';
 import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import RecipeCard from './recipe-card';
 import { useSelector } from 'react-redux';
 import { RootState } from '@redux/store';
 import { RecipeType } from '@typed/recipe-types';
+import EmptyRecipeList from './empty-recipe-list';
 
 interface PropsType {
-  fetchRecipes: (setLoadingState?: any) => void;
+  refreshRecipes: () => void;
 }
 
-const RecipeList = ({ fetchRecipes }: PropsType) => {
-  const [reLoading, setReLoading] = React.useState<boolean>(false);
-
+const RecipeList = ({ refreshRecipes }: PropsType) => {
   const componentStyle = useTheme(styles);
-  const { userRecipes } = useSelector(
+  const { userRecipes, loading } = useSelector(
     (state: RootState) => state.recipeManager,
   );
 
+  // TODO : User needs to manually refresh to update any changes to list
   return (
     <FlatList
-      refreshing={reLoading}
-      onRefresh={() => fetchRecipes(setReLoading)}
+      refreshing={loading}
+      onRefresh={refreshRecipes}
+      extraData={loading}
       style={componentStyle.container}
       data={userRecipes}
-      renderItem={({ item }) => <RecipeCard data={item} />}
+      renderItem={({ item }) => (
+        <RecipeCard data={item} refreshRecipes={refreshRecipes} />
+      )}
       keyExtractor={(recipe: RecipeType) => String(recipe.id)}
+      ListEmptyComponent={<EmptyRecipeList />}
     />
   );
 };

@@ -3,41 +3,40 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import RecipeTabs from './recipe-tabs';
 import RecipeList from './recipe-list';
-import { recipeManagerApis } from '@app/utils/api-connections/recipe-manager';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@redux/store';
-import { setUserRecipes } from '@redux/slices/recipeManagerSlice';
+import { AppDispatch, RootState } from '@redux/store';
+import { fetchRecipes } from '@redux/slices/recipeManagerSlice';
 
 const RecipeListContainer = () => {
   const [currentTab, setCurrentTab] = useState(recipeTabs[0].value);
-  const { userId, token } = useSelector((state: RootState) => state.user.user);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { userRecipes, loading } = useSelector(
+    (state: RootState) => state.recipeManager,
+  );
+  console.log('Redux State of Recipes: ', userRecipes);
+  const { userId, token } = useSelector((state: RootState) => state.user.user);
 
   const handlePressTab = (tab: string) => {
     setCurrentTab(tab);
   };
 
-  const fetchRecipes = async (setLoadingState?: any) => {
-    if (setLoadingState) {
-      setLoadingState(true);
-    }
-    const userRecipes = await recipeManagerApis.getUserRecipes(userId, token);
-    dispatch(setUserRecipes(userRecipes));
-    if (setLoadingState) {
-      setLoadingState(false);
-    }
-  };
+  const refreshRecipes = () => dispatch(fetchRecipes({ userId, token }));
 
   useEffect(() => {
-    fetchRecipes();
+    refreshRecipes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [token, userId]);
+
+  useEffect(() => {
+    console.log('Loading Recipes: ', loading);
+  }, [loading]);
 
   return (
     <View style={styles.container}>
       <RecipeTabs currentTab={currentTab} handlePressTab={handlePressTab} />
-      <RecipeList fetchRecipes={fetchRecipes} />
+      <RecipeList refreshRecipes={refreshRecipes} />
     </View>
   );
 };

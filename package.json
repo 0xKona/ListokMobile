@@ -10,7 +10,7 @@
     "start": "react-native start",
     "test": "jest",
     "dev-database": "docker-compose -f backend/docker-compose.dev.yml up -d",
-    "dev-server":  "NODE_ENV=dev nodemon --watch backend backend/server/index.js"
+    "dev-server": "NODE_ENV=dev nodemon --watch backend backend/server/index.js"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.23.1",
@@ -22,6 +22,7 @@
     "@react-navigation/stack": "^6.3.29",
     "@reduxjs/toolkit": "^2.2.5",
     "axios": "^1.7.2",
+    "immutable": "^4.3.6",
     "react": "18.2.0",
     "react-native": "0.74.2",
     "react-native-gesture-handler": "^2.17.1",

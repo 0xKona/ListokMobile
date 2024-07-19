@@ -23,7 +23,6 @@ const authenticatedAxios = async (
     return response.data;
   } catch (error) {
     console.error('Error making API call:', error);
-    throw error;
   }
 };
 
@@ -40,13 +39,26 @@ export const recipeManagerApis = {
   },
   getUserRecipes: async (userId: string, authToken: string) => {
     console.log('Fetch user recipes api called');
+    try {
+      const response = await authenticatedAxios(
+        `api/recipes/recipes_by_user/${userId}`,
+        'GET',
+        authToken,
+      );
+      console.log('Get Recipes response: ', response);
+      const unpackedRecipes = await unpackFetchedRecipes(response);
+      return unpackedRecipes;
+    } catch (error) {
+      return error;
+    }
+  },
+  deleteRecipe: async (recipeId: string, authToken: string) => {
+    console.log('Delete recipe api called for recipe id: ', recipeId);
     const response = await authenticatedAxios(
-      `api/recipes/recipes_by_user/${userId}`,
-      'GET',
+      `api/recipes/delete_recipe/${recipeId}`,
+      'DELETE',
       authToken,
     );
-    console.log('Get Recipes response: ', response);
-    const unpackedRecipes = unpackFetchedRecipes(response);
-    return unpackedRecipes;
+    console.log('Delete recipe response: ', response);
   },
 };

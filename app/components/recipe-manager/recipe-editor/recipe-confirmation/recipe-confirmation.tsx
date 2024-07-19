@@ -1,4 +1,4 @@
-import { recipeManagerApis } from '@app/utils/api-connections/recipe-manager';
+import { recipeManagerApis } from '@app/utils/api-connections/recipe-manager-api';
 import { useNavigation } from '@react-navigation/native';
 import { changeCurrentStep } from '@redux/slices/recipeEditorSlice';
 import { RootState } from '@redux/store';

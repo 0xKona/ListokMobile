@@ -46,7 +46,7 @@ router.get('/recipes_by_user/:userId', authMiddleware, async (req, res) => {
   try {
     const recipes = await Recipe.find({ createdBy: userId });
     if (recipes.length === 0) {
-      res.status(404).json({ message: 'No recipes found for this user' });
+      res.status(204).json([]);
       return;
     }
     res.status(200).json(recipes);
@@ -55,6 +55,23 @@ router.get('/recipes_by_user/:userId', authMiddleware, async (req, res) => {
     res
       .status(500)
       .json({ message: 'Error: Internal Server Error, Please try again.' });
+  }
+});
+
+router.delete('/delete_recipe/:recipeId', authMiddleware, async (req, res) => {
+  const { recipeId } = req.params;
+  console.log(
+    '[Server]: Delete recipe request recieved for recipeId: ',
+    recipeId,
+  );
+
+  try {
+    await Recipe.deleteOne({ _id: recipeId });
+    console.log('[Server]: Recipe ', recipeId, ' deleted successfully');
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: 'Internal Server Error, failed to delete recipe' });
   }
 });
 
