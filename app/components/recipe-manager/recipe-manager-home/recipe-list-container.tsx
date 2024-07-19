@@ -6,13 +6,15 @@ import RecipeList from './recipe-list';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@redux/store';
 import { fetchRecipes } from '@redux/slices/recipeManagerSlice';
+import { useIsFocused } from '@react-navigation/native';
 
 const RecipeListContainer = () => {
+  const isFocused = useIsFocused();
   const [currentTab, setCurrentTab] = useState(recipeTabs[0].value);
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const { userRecipes, loading } = useSelector(
+  const { userRecipes } = useSelector(
     (state: RootState) => state.recipeManager,
   );
   console.log('Redux State of Recipes: ', userRecipes);
@@ -22,16 +24,15 @@ const RecipeListContainer = () => {
     setCurrentTab(tab);
   };
 
-  const refreshRecipes = () => dispatch(fetchRecipes({ userId, token }));
+  const refreshRecipes = () => {
+    console.log('Refresh Recipes Called');
+    dispatch(fetchRecipes({ userId, token }));
+  };
 
   useEffect(() => {
     refreshRecipes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token, userId]);
-
-  useEffect(() => {
-    console.log('Loading Recipes: ', loading);
-  }, [loading]);
+  }, [token, userId, isFocused]);
 
   return (
     <View style={styles.container}>

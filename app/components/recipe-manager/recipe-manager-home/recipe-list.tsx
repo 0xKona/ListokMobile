@@ -17,7 +17,6 @@ const RecipeList = ({ refreshRecipes }: PropsType) => {
     (state: RootState) => state.recipeManager,
   );
 
-  // TODO : User needs to manually refresh to update any changes to list
   return (
     <FlatList
       refreshing={loading}
