@@ -5,18 +5,20 @@ import userReducer from './slices/userSlice';
 import configReducer from './slices/configSlice';
 import themeReducer from './slices/themeSlice';
 import recipeEditorReducer from './slices/recipeEditorSlice';
+import recipeManagerReducer from './slices/recipeManagerSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
   config: configReducer,
   theme: themeReducer,
   recipeEditor: recipeEditorReducer,
+  recipeManager: recipeManagerReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['user', 'config', 'theme', 'recipeEditor'],
+  whitelist: ['user', 'config', 'theme', 'recipeEditor', 'recipeManager'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

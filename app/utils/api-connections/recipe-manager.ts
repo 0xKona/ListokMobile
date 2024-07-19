@@ -1,11 +1,12 @@
 import axios from 'axios';
 import * as config from '@root/config/config.json';
+import { unpackFetchedRecipes } from '../unpackFetchedRecipes';
 
 const authenticatedAxios = async (
   apiURL: string,
   method: string,
-  data: string,
   authToken: string,
+  data?: string,
 ) => {
   try {
     const response = await axios({
@@ -28,13 +29,24 @@ const authenticatedAxios = async (
 
 export const recipeManagerApis = {
   postNewRecipe: async (recipeData: string, authToken: string) => {
-    console.log('create new api called');
+    console.log('Create new recipe api called');
     const response = await authenticatedAxios(
       '/api/recipes/create_new',
       'POST',
-      recipeData,
       authToken,
+      recipeData,
     );
     console.log('Post New Recipe Response:', response);
+  },
+  getUserRecipes: async (userId: string, authToken: string) => {
+    console.log('Fetch user recipes api called');
+    const response = await authenticatedAxios(
+      `api/recipes/recipes_by_user/${userId}`,
+      'GET',
+      authToken,
+    );
+    console.log('Get Recipes response: ', response);
+    const unpackedRecipes = unpackFetchedRecipes(response);
+    return unpackedRecipes;
   },
 };
