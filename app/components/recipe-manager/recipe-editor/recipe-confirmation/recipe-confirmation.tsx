@@ -11,6 +11,7 @@ const RecipeEditorConfirmation = ({ recipeData, setIgnorePopup }: any) => {
   const navigation = useNavigation<RecipeNavigationProp>();
   const { user } = useSelector((state: RootState) => state.user);
   console.log('User State Token at Confirmation Screen:', user.token);
+  console.log('RecipeData.existing: ', recipeData.existingRecipe);
   const dispatch = useDispatch();
 
   const handleBack = () => {
@@ -18,21 +19,35 @@ const RecipeEditorConfirmation = ({ recipeData, setIgnorePopup }: any) => {
   };
 
   const handleSubmit = async () => {
-    try {
-      console.log('recipeSubmitted: ', recipeData.recipeData);
-      setIgnorePopup(true);
-      await recipeManagerApis.postNewRecipe(
-        JSON.stringify({
-          ...recipeData.recipeData,
-          createdBy: user.userId,
-          createdByName: user.name,
-        }),
-        user.token,
-      );
-      navigation.navigate('Your Recipes');
-    } catch (error) {
-      console.error('Error submitting recipe:', error);
-      setIgnorePopup(false);
+    if (recipeData.existingRecipe) {
+      console.log('Existing Recipe Submit Triggered: ', recipeData.recipeData);
+      try {
+        setIgnorePopup(true);
+        await recipeManagerApis.updateExistingRecipe(
+          JSON.stringify(recipeData.recipeData),
+          user.token,
+        );
+        navigation.navigate('Your Recipes');
+      } catch (error) {
+        console.log('Error submitting changes: ', error);
+      }
+    } else {
+      try {
+        console.log('recipeSubmitted: ', recipeData.recipeData);
+        setIgnorePopup(true);
+        await recipeManagerApis.postNewRecipe(
+          JSON.stringify({
+            ...recipeData.recipeData,
+            createdBy: user.userId,
+            createdByName: user.name,
+          }),
+          user.token,
+        );
+        navigation.navigate('Your Recipes');
+      } catch (error) {
+        console.error('Error submitting recipe:', error);
+        setIgnorePopup(false);
+      }
     }
   };
 

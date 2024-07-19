@@ -2,12 +2,14 @@ import { StepType, RecipeType, IngredientType } from '@typed/recipe-types';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export interface RecipeEditorState {
+  existingRecipe: boolean;
   steps: StepType[];
   currentStep: number;
   recipeData: RecipeType;
 }
 
 const initialState: RecipeEditorState = {
+  existingRecipe: false,
   steps: [
     { stepNumber: 1, errors: false, completed: false },
     { stepNumber: 2, errors: false, completed: false },
@@ -38,6 +40,7 @@ const recipeEditorSlice = createSlice({
     },
     openRecipeEditor(state, action: PayloadAction<RecipeType>) {
       state.recipeData = action.payload;
+      state.existingRecipe = true;
     },
     changeCurrentStep(state, action: PayloadAction<number>) {
       state.currentStep = action.payload;
@@ -56,6 +59,7 @@ const recipeEditorSlice = createSlice({
 
 export const {
   resetRecipeEditor,
+  openRecipeEditor,
   changeCurrentStep,
   updateRecipeTitle,
   updateRecipeDesc,

@@ -75,4 +75,39 @@ router.delete('/delete_recipe/:recipeId', authMiddleware, async (req, res) => {
   }
 });
 
+router.put('/edit_recipe/', authMiddleware, async (req, res) => {
+  const recipeData = req.body;
+  console.log('received edit recipe request:', recipeData);
+
+  if (!recipeData.id || !recipeData.title || !recipeData.createdBy) {
+    console.log('missing params triggered');
+    res
+      .status(400)
+      .json({ message: 'Error: Recipe not saved, missing parameters' });
+    return;
+  }
+
+  try {
+    const updateData = {
+      title: recipeData.title,
+      desc: recipeData.desc || null,
+      createdBy: recipeData.createdBy,
+      createdByName: recipeData.createdByName,
+      createdOn: recipeData.createdOn || Date.now(),
+      public: recipeData.public,
+      picture: recipeData.picture || null,
+      ingredients: JSON.stringify(recipeData.ingredients) || null,
+      method: JSON.stringify(recipeData.method) || null,
+    };
+
+    await Recipe.updateOne({ _id: recipeData.id }, { $set: updateData });
+    res.status(200).json({ message: 'Success: Recipe updated' });
+  } catch (error) {
+    console.log('Failed to update recipe: ', error);
+    res
+      .status(500)
+      .json({ message: 'Error: Internal Server Error, please try again.' });
+  }
+});
+
 export default router;

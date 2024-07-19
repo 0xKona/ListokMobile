@@ -37,6 +37,16 @@ export const recipeManagerApis = {
     );
     console.log('Post New Recipe Response:', response);
   },
+  updateExistingRecipe: async (recipeData: string, authToken: string) => {
+    console.log('Edit recipe api called.');
+    const response = await authenticatedAxios(
+      '/api/recipes/edit_recipe',
+      'PUT',
+      authToken,
+      recipeData,
+    );
+    console.log('Edit Existing Recipe Response: ', response);
+  },
   getUserRecipes: async (userId: string, authToken: string) => {
     console.log('Fetch user recipes api called');
     try {
