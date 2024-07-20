@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import OptionCard from './option-card';
-import { SettingType } from '@app/types/settings';
+import { SettingType } from '@typed/settings';
 import { useNavigation } from '@react-navigation/native';
 import { SettingsNavigationProp } from '@typed/navigation';
 

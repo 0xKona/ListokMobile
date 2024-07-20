@@ -28,7 +28,7 @@ const LoadingScreen: React.FC = () => {
         alignItems: 'center',
       }}>
       <ActivityIndicator size="large" />
-      <Text>{config.error || 'Loading Configuration'}</Text>
+      <Text>{'Loading'}</Text>
     </View>
   );
 };

@@ -3,12 +3,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@redux/store';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ListokManager from '@app/components/listok-manager';
 import ShoppingList from '@app/components/shopping-list';
 import PublicLibrary from '@app/components/public-library';
 import TabNavigation from '@app/components/tab-navigation';
 import SettingsNavigator from '@app/navigators/settings-navigator';
 import RecipesNavigator from '@app/navigators/recipes-navigator';
+import ListoksNavigator from '@app/navigators/listoks-navigator';
 
 const MainScreen = () => {
   const user = useSelector((state: RootState) => state.user);
@@ -24,7 +24,11 @@ const MainScreen = () => {
           name="Recipes"
           component={RecipesNavigator}
         />
-        <Tab.Screen name="Listoks" component={ListokManager} />
+        <Tab.Screen
+          options={{ headerShown: false }}
+          name="Listoks"
+          component={ListoksNavigator}
+        />
         <Tab.Screen name="Shopping" component={ShoppingList} />
         <Tab.Screen name="Public Library" component={PublicLibrary} />
         <Tab.Screen

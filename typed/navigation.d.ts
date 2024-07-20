@@ -35,10 +35,14 @@ export type SettingsStackParamList = {
 export type SettingsNavigationProp =
   StackNavigationProp<SettingsStackParamList>;
 
-export type SettingsRouteProp = RouteProp<
-  SettingsStackParamList,
-  'Change Theme'
->;
+export type RecipeStackParamList = {
+  'Your Recipes': undefined;
+  'New Recipe': undefined;
+};
+
+export type RecipeNavigationProp = StackNavigationProp<RecipeStackParamList>;
+
+export type RecipeRouteProp = RouteProp<RecipeStackParamList, 'Your Recipes'>;
 
 export type LoadingScreenRouteProp = RouteProp<RootStackParamList, 'Loading'>;
 export type LoginScreenRouteProp = RouteProp<RootStackParamList, 'Login'>;

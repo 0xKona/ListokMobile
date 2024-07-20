@@ -1,4 +1,4 @@
-import { SettingType } from '@app/types/settings';
+import { SettingType } from '@typed/settings';
 import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 

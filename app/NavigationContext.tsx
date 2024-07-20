@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useEffect, ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '@redux/store'; // Import AppDispatch
+import { RootState, AppDispatch } from '@redux/store';
 import { StackActions, useNavigation } from '@react-navigation/native';
 import { LoadingScreenNavigationProp } from '@typed/navigation';
 import { fetchConfig } from '@redux/slices/configSlice';
 
-// TODO - (unrelated to this comp). fix warn: Sending `onAnimatedValueUpdate` with no listeners registered.
+// TODO - (unrelated to this component). fix warn: Sending `onAnimatedValueUpdate` with no listeners registered.
 
 interface NavigationProviderProps {
   children: ReactNode;
@@ -21,6 +21,7 @@ export const NavigationProvider: React.FC<NavigationProviderProps> = ({
   const config = useSelector((state: RootState) => state.config);
   const user = useSelector((state: RootState) => state.user);
   console.log('User (Navigation Context)::', user);
+
   useEffect(() => {
     if (!config.googleClientId) {
       console.log('No Google ClientID useEffect Triggered');
@@ -30,13 +31,19 @@ export const NavigationProvider: React.FC<NavigationProviderProps> = ({
 
   useEffect(() => {
     if (!config.loading && !user.loading) {
-      if (user.user) {
+      if (config.googleClientId && user.user) {
         navigation.dispatch(StackActions.replace('Home'));
-      } else {
+      } else if (config.googleClientId && !user.user) {
         navigation.dispatch(StackActions.replace('Login'));
       }
     }
-  }, [config.loading, user.loading, user.user, navigation]);
+  }, [
+    config.loading,
+    user.loading,
+    user.user,
+    navigation,
+    config.googleClientId,
+  ]);
 
   return (
     <NavigationContext.Provider value={{}}>
