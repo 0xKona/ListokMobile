@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const recipeSchema = new mongoose.Schema({
+const listokSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -9,6 +9,16 @@ const recipeSchema = new mongoose.Schema({
   desc: {
     type: String,
     required: false,
+    unique: false,
+  },
+  picture: {
+    type: String,
+    required: false,
+    unique: false,
+  },
+  days: {
+    type: String,
+    required: true,
     unique: false,
   },
   createdBy: {
@@ -26,27 +36,7 @@ const recipeSchema = new mongoose.Schema({
     required: true,
     unique: false,
   },
-  public: {
-    type: Boolean,
-    required: true,
-    unique: false,
-  },
-  picture: {
-    type: String,
-    required: false,
-    unique: false,
-  },
-  ingredients: {
-    type: String,
-    required: false,
-    unique: false,
-  },
-  method: {
-    type: String,
-    required: false,
-    unique: false,
-  },
 });
 
-const Recipe = mongoose.model('Recipe', recipeSchema);
-export default Recipe;
+const Listok = mongoose.model('Listok', listokSchema);
+export default Listok;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import SearchBar from '../../ui/search';
+// import SearchBar from '../../ui/search';
 import ListokButton from '../../ui/button';
 import useTheme from '../../hooks/useTheme';
 import { ThemeType } from '@app/constants/themes';
@@ -19,14 +19,16 @@ const RecipeHeader = () => {
     navigation.navigate('New Recipe');
   };
 
+  // TODO - Add search filter to recipe's
+
   return (
     <View style={componentStyles.container}>
-      <SearchBar />
+      {/* <SearchBar /> */}
       <ListokButton
         onPress={handleOpenNewRecipe}
         text="New Recipe"
         // eslint-disable-next-line react-native/no-inline-styles
-        propStyles={{ width: '30%', height: '100%' }}
+        propStyles={{ width: '100%', height: '100%' }}
       />
     </View>
   );

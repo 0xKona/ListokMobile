@@ -6,6 +6,7 @@ import configReducer from './slices/configSlice';
 import themeReducer from './slices/themeSlice';
 import recipeEditorReducer from './slices/recipeEditorSlice';
 import recipeManagerReducer from './slices/recipeManagerSlice';
+import listokManagerReducer from './slices/listokManagerSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -13,12 +14,20 @@ const rootReducer = combineReducers({
   theme: themeReducer,
   recipeEditor: recipeEditorReducer,
   recipeManager: recipeManagerReducer,
+  listokManager: listokManagerReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['user', 'config', 'theme', 'recipeEditor', 'recipeManager'],
+  whitelist: [
+    'user',
+    'config',
+    'theme',
+    'recipeEditor',
+    'recipeManager',
+    'listokManager',
+  ],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
