@@ -9,7 +9,7 @@ services:
     volumes:
       - mongo-data:/data/db
 
-  server:
+  listok_server:
     build:
       context: .
       dockerfile: server/Dockerfile

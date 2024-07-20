@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import * as config from '@root/config/config.json';
 
 interface ConfigState {
   googleClientId: string | undefined;
@@ -23,7 +24,7 @@ export const fetchConfig = createAsyncThunk(
   'config/fetchConfig',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get('http://192.168.1.20:3000/api/config');
+      const response = await axios.get(`${config.serverURL}/api/config`);
       console.log('fetchConfig response:', response.data);
       return response.data;
     } catch (error: any) {
@@ -53,7 +54,7 @@ const configSlice = createSlice({
       state.error = null;
     });
     builder.addCase(fetchConfig.rejected, (state, action) => {
-      console.log('fetchConfig.rejected', action.error.message);
+      console.log('fetchConfig.rejected', action.error);
       state.loading = false;
       state.error = action.error.message || 'Failed to fetch config';
     });

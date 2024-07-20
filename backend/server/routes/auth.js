@@ -6,12 +6,11 @@ import User from '../models/User.js';
 const router = express.Router();
 const client = new OAuth2Client(process.env.GOOGLE_OAUTH_CLIENT_ID);
 
-// Login route
 router.post('/login', async (req, res) => {
   const { token } = req.body;
   console.log('Login Requested with token:', token);
   try {
-    // Verify the token
+    // Verify the google token
     const ticket = await client.verifyIdToken({
       idToken: token,
       audience: process.env.GOOGLE_OAUTH_CLIENT_ID,
@@ -26,7 +25,7 @@ router.post('/login', async (req, res) => {
     let user = await User.findOne({ googleId });
     console.log('User Details:', user);
     if (!user) {
-      // Create a new user if not exists
+      // Create a new user if does not exist in db
       user = new User({
         googleId,
         email: payload.email,

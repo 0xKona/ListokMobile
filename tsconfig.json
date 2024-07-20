@@ -12,8 +12,9 @@
     "paths": {
       "@typed/*": ["typed/*"],
       "@redux/*": ["redux/*"],
-      "@app/*": ["app/*"]
+      "@app/*": ["app/*"],
+      "@root/*": ["./*"],
     }
   },
-  "include": ["app", "typed"]
+  "include": ["app/**/*", "typed/**/*", "redux/**/*"]
 }

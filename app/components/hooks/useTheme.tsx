@@ -1,4 +1,4 @@
-import { StyleType } from '@app/types/styles';
+import { StyleType } from '@typed/styles';
 import { RootState } from '@redux/store';
 import { useSelector } from 'react-redux';
 

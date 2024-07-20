@@ -1,21 +1,43 @@
 import { recipeTabs } from '@app/constants/recipe-tabs';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import RecipeTabs from './recipe-tabs';
 import RecipeList from './recipe-list';
-import { testRecipes } from '@app/constants/test-data';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@redux/store';
+import { fetchRecipes } from '@redux/slices/recipeManagerSlice';
+import { useIsFocused } from '@react-navigation/native';
 
 const RecipeListContainer = () => {
+  const isFocused = useIsFocused();
   const [currentTab, setCurrentTab] = useState(recipeTabs[0].value);
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { userRecipes } = useSelector(
+    (state: RootState) => state.recipeManager,
+  );
+  console.log('Redux State of Recipes: ', userRecipes);
+  const { userId, token } = useSelector((state: RootState) => state.user.user);
 
   const handlePressTab = (tab: string) => {
     setCurrentTab(tab);
   };
 
+  const refreshRecipes = () => {
+    console.log('Refresh Recipes Called');
+    dispatch(fetchRecipes({ userId, token }));
+  };
+
+  useEffect(() => {
+    refreshRecipes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token, userId, isFocused]);
+
   return (
     <View style={styles.container}>
       <RecipeTabs currentTab={currentTab} handlePressTab={handlePressTab} />
-      <RecipeList recipes={testRecipes} />
+      <RecipeList refreshRecipes={refreshRecipes} />
     </View>
   );
 };
@@ -25,6 +47,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: '100%',
     flexGrow: 1,
+    maxHeight: '90%',
   },
 });
 

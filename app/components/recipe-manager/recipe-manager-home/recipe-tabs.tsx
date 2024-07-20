@@ -26,7 +26,8 @@ const RecipeTabs = ({ currentTab, handlePressTab }: PropsType) => {
       {recipeTabs.map((tab: any) => (
         <TouchableHighlight
           style={selectedStyle(currentTab === tab.value)}
-          onPress={() => handlePressTab(tab.value)}>
+          onPress={() => handlePressTab(tab.value)}
+          key={tab.value}>
           <Text>{tab.text}</Text>
         </TouchableHighlight>
       ))}

@@ -4,17 +4,30 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import userReducer from './slices/userSlice';
 import configReducer from './slices/configSlice';
 import themeReducer from './slices/themeSlice';
+import recipeEditorReducer from './slices/recipeEditorSlice';
+import recipeManagerReducer from './slices/recipeManagerSlice';
+import listokManagerReducer from './slices/listokManagerSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
   config: configReducer,
   theme: themeReducer,
+  recipeEditor: recipeEditorReducer,
+  recipeManager: recipeManagerReducer,
+  listokManager: listokManagerReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['user', 'config', 'theme'],
+  whitelist: [
+    'user',
+    'config',
+    'theme',
+    'recipeEditor',
+    'recipeManager',
+    'listokManager',
+  ],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
