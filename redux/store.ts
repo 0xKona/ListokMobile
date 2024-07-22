@@ -27,6 +27,7 @@ const persistConfig = {
     'recipeEditor',
     'recipeManager',
     'listokManager',
+    'listokEditor',
   ],
 };
 

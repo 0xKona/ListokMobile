@@ -1,4 +1,4 @@
-import ListokManager from '@app/components/listok-manager';
+import ListokManager from '@app/components/listok-manager/listok-manager';
 import ListokEditor from '@app/components/listok-manager/listok-editor/listok-editor';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';

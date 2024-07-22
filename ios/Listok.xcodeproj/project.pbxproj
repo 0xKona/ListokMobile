@@ -8,12 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* ListokTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ListokTests.m */; };
-		0C80B921A6F3F58F76C31292 /* libPods-Listok.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-Listok.a */; };
+		0E3B4B5A8DAA5D06C11571DC /* libPods-Listok.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F74270E24351636231F1A38 /* libPods-Listok.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		7699B88040F8A987B510C191 /* libPods-Listok-ListokTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Listok-ListokTests.a */; };
+		4011366A2C4E6B7A00965DBA /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 401136562C4E6B7900965DBA /* AntDesign.ttf */; };
+		4011366E2C4E6B7A00965DBA /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4011365A2C4E6B7900965DBA /* FontAwesome.ttf */; };
+		4011366F2C4E6B7A00965DBA /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4011365B2C4E6B7900965DBA /* FontAwesome5_Brands.ttf */; };
+		401136702C4E6B7A00965DBA /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4011365C2C4E6B7900965DBA /* FontAwesome5_Regular.ttf */; };
+		401136712C4E6B7A00965DBA /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4011365D2C4E6B7900965DBA /* FontAwesome5_Solid.ttf */; };
+		401136722C4E6B7A00965DBA /* FontAwesome6_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4011365E2C4E6B7900965DBA /* FontAwesome6_Brands.ttf */; };
+		401136732C4E6B7A00965DBA /* FontAwesome6_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4011365F2C4E6B7900965DBA /* FontAwesome6_Regular.ttf */; };
+		401136742C4E6B7A00965DBA /* FontAwesome6_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 401136602C4E6B7900965DBA /* FontAwesome6_Solid.ttf */; };
+		401136752C4E6B7A00965DBA /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 401136612C4E6B7900965DBA /* Fontisto.ttf */; };
+		401136772C4E6B7A00965DBA /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 401136632C4E6B7900965DBA /* Ionicons.ttf */; };
+		401136782C4E6B7A00965DBA /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 401136642C4E6B7900965DBA /* MaterialCommunityIcons.ttf */; };
+		401136792C4E6B7A00965DBA /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 401136652C4E6B7900965DBA /* MaterialIcons.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		9E51B9CD0FE39F0733796C7C /* libPods-Listok-ListokTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0048C63A6626BDFBC1A5A9B4 /* libPods-Listok-ListokTests.a */; };
 		F643814CE9D92DB2BBF210F8 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9B9ACFA8304E24EA893D3B98 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0048C63A6626BDFBC1A5A9B4 /* libPods-Listok-ListokTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Listok-ListokTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356EE1AD99517003FC87E /* ListokTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ListokTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* ListokTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListokTests.m; sourceTree = "<group>"; };
@@ -38,14 +51,25 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Listok/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Listok/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = Listok/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		19F6CBCC0A4E27FBF8BF4A61 /* libPods-Listok-ListokTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Listok-ListokTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B4392A12AC88292D35C810B /* Pods-Listok.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listok.debug.xcconfig"; path = "Target Support Files/Pods-Listok/Pods-Listok.debug.xcconfig"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-Listok.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listok.release.xcconfig"; path = "Target Support Files/Pods-Listok/Pods-Listok.release.xcconfig"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-Listok-ListokTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listok-ListokTests.debug.xcconfig"; path = "Target Support Files/Pods-Listok-ListokTests/Pods-Listok-ListokTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-Listok.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Listok.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		401136562C4E6B7900965DBA /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
+		4011365A2C4E6B7900965DBA /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		4011365B2C4E6B7900965DBA /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
+		4011365C2C4E6B7900965DBA /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
+		4011365D2C4E6B7900965DBA /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
+		4011365E2C4E6B7900965DBA /* FontAwesome6_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome6_Brands.ttf; sourceTree = "<group>"; };
+		4011365F2C4E6B7900965DBA /* FontAwesome6_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome6_Regular.ttf; sourceTree = "<group>"; };
+		401136602C4E6B7900965DBA /* FontAwesome6_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome6_Solid.ttf; sourceTree = "<group>"; };
+		401136612C4E6B7900965DBA /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
+		401136632C4E6B7900965DBA /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		401136642C4E6B7900965DBA /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		401136652C4E6B7900965DBA /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
+		4A3F381383ACB36E9E63E9BF /* Pods-Listok-ListokTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listok-ListokTests.debug.xcconfig"; path = "Target Support Files/Pods-Listok-ListokTests/Pods-Listok-ListokTests.debug.xcconfig"; sourceTree = "<group>"; };
+		548AC64060ABBFC187DB7319 /* Pods-Listok.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listok.release.xcconfig"; path = "Target Support Files/Pods-Listok/Pods-Listok.release.xcconfig"; sourceTree = "<group>"; };
+		7727FC2A913E845E86830871 /* Pods-Listok-ListokTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listok-ListokTests.release.xcconfig"; path = "Target Support Files/Pods-Listok-ListokTests/Pods-Listok-ListokTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Listok/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-Listok-ListokTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listok-ListokTests.release.xcconfig"; path = "Target Support Files/Pods-Listok-ListokTests/Pods-Listok-ListokTests.release.xcconfig"; sourceTree = "<group>"; };
+		8F74270E24351636231F1A38 /* libPods-Listok.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Listok.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B9ACFA8304E24EA893D3B98 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = Listok/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		A7C74CF8905F480E6B5B80B6 /* Pods-Listok.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listok.debug.xcconfig"; path = "Target Support Files/Pods-Listok/Pods-Listok.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -54,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7699B88040F8A987B510C191 /* libPods-Listok-ListokTests.a in Frameworks */,
+				9E51B9CD0FE39F0733796C7C /* libPods-Listok-ListokTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,7 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-Listok.a in Frameworks */,
+				0E3B4B5A8DAA5D06C11571DC /* libPods-Listok.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +113,7 @@
 		13B07FAE1A68108700A75B9A /* Listok */ = {
 			isa = PBXGroup;
 			children = (
+				401136692C4E6B7900965DBA /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -105,10 +130,30 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-Listok.a */,
-				19F6CBCC0A4E27FBF8BF4A61 /* libPods-Listok-ListokTests.a */,
+				8F74270E24351636231F1A38 /* libPods-Listok.a */,
+				0048C63A6626BDFBC1A5A9B4 /* libPods-Listok-ListokTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		401136692C4E6B7900965DBA /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				401136562C4E6B7900965DBA /* AntDesign.ttf */,
+				4011365A2C4E6B7900965DBA /* FontAwesome.ttf */,
+				4011365B2C4E6B7900965DBA /* FontAwesome5_Brands.ttf */,
+				4011365C2C4E6B7900965DBA /* FontAwesome5_Regular.ttf */,
+				4011365D2C4E6B7900965DBA /* FontAwesome5_Solid.ttf */,
+				4011365E2C4E6B7900965DBA /* FontAwesome6_Brands.ttf */,
+				4011365F2C4E6B7900965DBA /* FontAwesome6_Regular.ttf */,
+				401136602C4E6B7900965DBA /* FontAwesome6_Solid.ttf */,
+				401136612C4E6B7900965DBA /* Fontisto.ttf */,
+				401136632C4E6B7900965DBA /* Ionicons.ttf */,
+				401136642C4E6B7900965DBA /* MaterialCommunityIcons.ttf */,
+				401136652C4E6B7900965DBA /* MaterialIcons.ttf */,
+			);
+			name = Fonts;
+			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -145,10 +190,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-Listok.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-Listok.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-Listok-ListokTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-Listok-ListokTests.release.xcconfig */,
+				A7C74CF8905F480E6B5B80B6 /* Pods-Listok.debug.xcconfig */,
+				548AC64060ABBFC187DB7319 /* Pods-Listok.release.xcconfig */,
+				4A3F381383ACB36E9E63E9BF /* Pods-Listok-ListokTests.debug.xcconfig */,
+				7727FC2A913E845E86830871 /* Pods-Listok-ListokTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -160,12 +205,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "ListokTests" */;
 			buildPhases = (
-				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
+				60F19F024F984723EE58FFAD /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */,
-				F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */,
+				A1C38DF308208AD252B0A7FE /* [CP] Embed Pods Frameworks */,
+				4B56B568FF7297E54B54B455 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -181,13 +226,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Listok" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				14F85EB784EBA0177FE6E2F6 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				E418F0EE21079E300C654BF8 /* [CP] Embed Pods Frameworks */,
+				1B39E9E65465922F1B4D15FC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -247,7 +292,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				401136732C4E6B7A00965DBA /* FontAwesome6_Regular.ttf in Resources */,
+				401136792C4E6B7A00965DBA /* MaterialIcons.ttf in Resources */,
+				401136772C4E6B7A00965DBA /* Ionicons.ttf in Resources */,
+				401136702C4E6B7A00965DBA /* FontAwesome5_Regular.ttf in Resources */,
+				4011366F2C4E6B7A00965DBA /* FontAwesome5_Brands.ttf in Resources */,
+				401136742C4E6B7A00965DBA /* FontAwesome6_Solid.ttf in Resources */,
+				4011366E2C4E6B7A00965DBA /* FontAwesome.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				4011366A2C4E6B7A00965DBA /* AntDesign.ttf in Resources */,
+				401136712C4E6B7A00965DBA /* FontAwesome5_Solid.ttf in Resources */,
+				401136752C4E6B7A00965DBA /* Fontisto.ttf in Resources */,
+				401136722C4E6B7A00965DBA /* FontAwesome6_Brands.ttf in Resources */,
+				401136782C4E6B7A00965DBA /* MaterialCommunityIcons.ttf in Resources */,
 				F643814CE9D92DB2BBF210F8 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,46 +328,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Listok/Pods-Listok-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Listok/Pods-Listok-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Listok/Pods-Listok-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Listok-ListokTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		14F85EB784EBA0177FE6E2F6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -332,24 +350,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Listok-ListokTests/Pods-Listok-ListokTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Listok-ListokTests/Pods-Listok-ListokTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Listok-ListokTests/Pods-Listok-ListokTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
+		1B39E9E65465922F1B4D15FC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -366,7 +367,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Listok/Pods-Listok-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
+		4B56B568FF7297E54B54B455 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -381,6 +382,62 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Listok-ListokTests/Pods-Listok-ListokTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		60F19F024F984723EE58FFAD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Listok-ListokTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A1C38DF308208AD252B0A7FE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Listok-ListokTests/Pods-Listok-ListokTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Listok-ListokTests/Pods-Listok-ListokTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Listok-ListokTests/Pods-Listok-ListokTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E418F0EE21079E300C654BF8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Listok/Pods-Listok-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Listok/Pods-Listok-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Listok/Pods-Listok-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -416,7 +473,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-Listok-ListokTests.debug.xcconfig */;
+			baseConfigurationReference = 4A3F381383ACB36E9E63E9BF /* Pods-Listok-ListokTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -443,7 +500,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-Listok-ListokTests.release.xcconfig */;
+			baseConfigurationReference = 7727FC2A913E845E86830871 /* Pods-Listok-ListokTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -467,7 +524,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-Listok.debug.xcconfig */;
+			baseConfigurationReference = A7C74CF8905F480E6B5B80B6 /* Pods-Listok.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -495,7 +552,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-Listok.release.xcconfig */;
+			baseConfigurationReference = 548AC64060ABBFC187DB7319 /* Pods-Listok.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
