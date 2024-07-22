@@ -16,3 +16,9 @@ export interface ListokInterface {
   createdByName: string | null;
   createdOn: string | null;
 }
+
+export interface ListokStepInterface {
+  stepNumber: number;
+  completed: boolean;
+  errors: boolean;
+}

@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import authRouter from './routes/auth.js';
 import configRouter from './routes/config.js';
 import recipeRouter from './routes/recipes.js';
+import listokRouter from './routes/listoks.js';
 
 dotenv.config({ path: './backend/.env' });
 
@@ -25,9 +26,11 @@ mongoose
 
 app.use(express.json());
 
+// Routers
 app.use('/api/auth', authRouter);
 app.use('/api/config', configRouter);
 app.use('/api/recipes', recipeRouter);
+app.use('/api/listoks', listokRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello, World!');
