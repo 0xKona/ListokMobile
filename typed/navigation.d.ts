@@ -44,6 +44,14 @@ export type RecipeNavigationProp = StackNavigationProp<RecipeStackParamList>;
 
 export type RecipeRouteProp = RouteProp<RecipeStackParamList, 'Your Recipes'>;
 
+export type ListokStackParamList = {
+  'Your Listoks': undefined;
+  'New Listok': undefined;
+  'Listok Editor': undefined;
+};
+export type ListokNavigationProp = StackNavigationProp<ListokStackParamList>;
+export type ListokRouteProp = RouteProp<ListokStackParamList, 'Your Listoks'>;
+
 export type LoadingScreenRouteProp = RouteProp<RootStackParamList, 'Loading'>;
 export type LoginScreenRouteProp = RouteProp<RootStackParamList, 'Login'>;
 export type MainScreenRouteProp = RouteProp<RootStackParamList, 'Home'>;
