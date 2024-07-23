@@ -44,6 +44,7 @@ export type ListokStackParamList = {
   'Your Listoks': undefined;
   'New Listok': undefined;
   'Listok Editor': undefined;
+  'Select Recipes': undefined;
 };
 export type ListokNavigationProp = StackNavigationProp<ListokStackParamList>;
 export type ListokRouteProp = RouteProp<ListokStackParamList, 'Your Listoks'>;
