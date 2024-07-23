@@ -1,4 +1,4 @@
-import { unpackFetchedRecipes } from '../unpackFetchedRecipes';
+import { unpackFetchedRecipes } from '../unpackFetched';
 import { authenticatedAxios } from './authenicatedAxios';
 
 export const recipeManagerApis = {

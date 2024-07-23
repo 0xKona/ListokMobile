@@ -1,3 +1,4 @@
+import { listokManagerApis } from '@app/utils/api-connections/listok-manager-api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ListokInterface } from '@typed/listok-types';
 
@@ -20,7 +21,11 @@ export const fetchListoks = createAsyncThunk(
   'listokManager/fetchListoks',
   async (params: { userId: string; token: string }, { rejectWithValue }) => {
     try {
-      // Api Call Here
+      const fetchedListoks = await listokManagerApis.getUserListoks(
+        params.userId,
+        params.token,
+      );
+      return fetchedListoks;
     } catch (error: any) {
       return rejectWithValue(error.message);
     }
