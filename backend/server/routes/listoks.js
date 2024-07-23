@@ -4,11 +4,14 @@ import Listok from '../models/Listok.js';
 
 const router = express.Router();
 
-router.post('create_new_listok', authMiddleware, async (req, res) => {
+router.post('/create_new_listok', authMiddleware, async (req, res) => {
   const listokData = req.body;
-  console.log('Recieved new create listok request');
+  console.log('Recieved new create listok request: ', listokData);
   if (!listokData.title || !listokData.createdBy) {
-    console.log('create_new_listok api missing params triggered');
+    console.log('create_new_listok api missing params triggered: ', {
+      title: !listokData.title,
+      createdBy: !listokData.createdBy,
+    });
     res
       .status(400)
       .json({ message: 'Error: Listok not saved, missing parameters' });
@@ -20,7 +23,7 @@ router.post('create_new_listok', authMiddleware, async (req, res) => {
       title: listokData.title,
       desc: listokData.desc,
       picture: listokData.picture,
-      days: listokData.days,
+      days: JSON.stringify(listokData.days),
       createdBy: listokData.createdBy,
       createdByName: listokData.createdByName,
       createdOn: Date.now(),
@@ -37,7 +40,7 @@ router.post('create_new_listok', authMiddleware, async (req, res) => {
   }
 });
 
-router.get('get_listoks/user=:userId', authMiddleware, async (req, res) => {
+router.get('/get_listoks/user=:userId', authMiddleware, async (req, res) => {
   const { userId } = req.params;
   console.log('Fetching Listoks for user: ', userId);
 

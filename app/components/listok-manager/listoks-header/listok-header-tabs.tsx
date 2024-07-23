@@ -38,14 +38,14 @@ const ListokTabs = ({ currentTab, handlePressTab }: PropsInterface) => {
   );
 };
 
-const styles = (props: ThemeType) =>
+const styles = (theme: ThemeType) =>
   StyleSheet.create({
     container: {
       flexDirection: 'row',
       height: 50,
     },
     tab: {
-      backgroundColor: props.surface,
+      backgroundColor: theme.surface,
       height: '100%',
       justifyContent: 'center',
       alignItems: 'center',
