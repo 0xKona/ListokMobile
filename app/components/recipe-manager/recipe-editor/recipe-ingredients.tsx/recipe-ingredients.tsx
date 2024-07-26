@@ -5,12 +5,13 @@ import {
 } from '@redux/slices/recipeEditorSlice';
 import { IngredientType } from '@typed/recipe-types';
 import React, { useEffect } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import IngredientList from './ingredient-list';
 import IngredientForm from './ingredient-form';
 import { ThemeType } from '@app/constants/themes';
 import useTheme from '@app/components/hooks/useTheme';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface PropsType {
   recipeData: RecipeEditorState;
@@ -62,12 +63,20 @@ const RecipeIngredientsEditor = ({ recipeData }: PropsType) => {
         ) : (
           <>
             <Text style={theme.titleText}>Ingredients</Text>
+            <TouchableOpacity
+              onPress={openIngredient}
+              style={theme.addNewButton}>
+              <>
+                {/* eslint-disable-next-line react-native/no-inline-styles */}
+                <Text style={{ color: '#007AFF' }}>Add New </Text>
+                <Icon name="add-circle-outline" size={20} color={'#007AFF'} />
+              </>
+            </TouchableOpacity>
             {noIngredients ? (
               <Text>No Ingredients</Text>
             ) : (
               <IngredientList ingredients={ingredients} />
             )}
-            <Button title="Add New" onPress={openIngredient} />
           </>
         )}
       </View>
@@ -89,6 +98,14 @@ const styles = (theme: ThemeType) =>
       padding: 20,
       margin: 20,
     },
+    addNewButton: {
+      width: '100%',
+      color: 'lightblue',
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+      height: 30,
+    },
     buttonContainer: {
       flexDirection: 'row',
       justifyContent: 'space-around',
@@ -101,26 +118,5 @@ const styles = (theme: ThemeType) =>
       marginBottom: 20,
     },
   });
-
-// const styles = (theme: ThemeType) =>
-//   StyleSheet.create({
-//     container: {
-//       backgroundColor: theme.surface,
-//       padding: 20,
-//       margin: 20,
-//     },
-//     titleText: {
-//       alignSelf: 'center',
-//       fontSize: 20,
-//       marginBottom: 20,
-//     },
-//     inputSection: {
-//       marginTop: 10,
-//     },
-//     buttonContainer: {
-//       marginTop: 'auto',
-//       marginBottom: 20,
-//     },
-//   });
 
 export default RecipeIngredientsEditor;
