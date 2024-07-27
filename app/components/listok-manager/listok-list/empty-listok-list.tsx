@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const ShoppingList = () => {
+const EmptyListokList = () => {
   return (
     <View style={styles.container}>
-      <Icon name="construction" size={100} />
-      <Text>Screen under construction</Text>
+      <Text>You have no Listoks!</Text>
+      <Text>(pull down to try refreshing)</Text>
     </View>
   );
 };
@@ -14,9 +13,11 @@ const ShoppingList = () => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    justifyContent: 'center',
+    height: 200,
+    display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
-export default ShoppingList;
+export default EmptyListokList;

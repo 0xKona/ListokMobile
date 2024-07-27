@@ -5,8 +5,16 @@ export interface ListokEditorStateInterface {
   existingListok: boolean;
   steps: ListokStepInterface[];
   currentStep: number;
+  selectingRecipesForDay: number;
   listokData: ListokInterface;
 }
+
+export interface PressOnRecipeActionInterface {
+  day: string;
+  recipeId: string;
+}
+
+export type DaysOfWeek = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun';
 
 const initialState: ListokEditorStateInterface = {
   existingListok: false,
@@ -16,6 +24,7 @@ const initialState: ListokEditorStateInterface = {
     { stepNumber: 3, errors: false, completed: false },
   ],
   currentStep: 1,
+  selectingRecipesForDay: 0,
   listokData: {
     id: null,
     title: '',
@@ -50,11 +59,26 @@ const listokEditorSlice = createSlice({
     changeListokStep(state, action: PayloadAction<number>) {
       state.currentStep = action.payload;
     },
-    updateListokTitle(state, action: PayloadAction<string>) {
+    updateListokTitle(state, action: PayloadAction<string | null>) {
       state.listokData.title = action.payload;
     },
-    updateListokDesc(state, action: PayloadAction<string>) {
+    updateListokDesc(state, action: PayloadAction<string | null>) {
       state.listokData.desc = action.payload;
+    },
+    setDayToSelectRecipes(state, action: PayloadAction<number>) {
+      state.selectingRecipesForDay = action.payload;
+    },
+    pressOnRecipe(state, action: PayloadAction<PressOnRecipeActionInterface>) {
+      const day = action.payload.day;
+      const recipeId = action.payload.recipeId;
+
+      if (state.listokData.days[day as DaysOfWeek].includes(recipeId)) {
+        state.listokData.days[day as DaysOfWeek] = state.listokData.days[
+          day as DaysOfWeek
+        ].filter(id => id !== recipeId);
+      } else {
+        state.listokData.days[day as DaysOfWeek].push(recipeId);
+      }
     },
   },
 });
@@ -65,6 +89,8 @@ export const {
   changeListokStep,
   updateListokTitle,
   updateListokDesc,
+  setDayToSelectRecipes,
+  pressOnRecipe,
 } = listokEditorSlice.actions;
 
 export default listokEditorSlice.reducer;

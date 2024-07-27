@@ -25,13 +25,11 @@ export interface SettingType {
   name: string;
   onPress?: () => void;
 }
-
 export type SettingsStackParamList = {
   Settings: undefined;
   'Change Theme': undefined;
   'Account Details': undefined;
 };
-
 export type SettingsNavigationProp =
   StackNavigationProp<SettingsStackParamList>;
 
@@ -39,10 +37,17 @@ export type RecipeStackParamList = {
   'Your Recipes': undefined;
   'New Recipe': undefined;
 };
-
 export type RecipeNavigationProp = StackNavigationProp<RecipeStackParamList>;
-
 export type RecipeRouteProp = RouteProp<RecipeStackParamList, 'Your Recipes'>;
+
+export type ListokStackParamList = {
+  'Your Listoks': undefined;
+  'New Listok': undefined;
+  'Listok Editor': undefined;
+  'Select Recipes': undefined;
+};
+export type ListokNavigationProp = StackNavigationProp<ListokStackParamList>;
+export type ListokRouteProp = RouteProp<ListokStackParamList, 'Your Listoks'>;
 
 export type LoadingScreenRouteProp = RouteProp<RootStackParamList, 'Loading'>;
 export type LoginScreenRouteProp = RouteProp<RootStackParamList, 'Login'>;

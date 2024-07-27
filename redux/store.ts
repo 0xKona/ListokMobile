@@ -7,6 +7,7 @@ import themeReducer from './slices/themeSlice';
 import recipeEditorReducer from './slices/recipeEditorSlice';
 import recipeManagerReducer from './slices/recipeManagerSlice';
 import listokManagerReducer from './slices/listokManagerSlice';
+import listokEditorSlice from './slices/listokEditorSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   recipeEditor: recipeEditorReducer,
   recipeManager: recipeManagerReducer,
   listokManager: listokManagerReducer,
+  listokEditor: listokEditorSlice,
 });
 
 const persistConfig = {
