@@ -71,6 +71,7 @@ const RecipeMethodEditor = ({ recipeData }: PropsType) => {
             </TouchableOpacity>
             <View style={theme.stepContainer}>
               {noSteps ? (
+                // eslint-disable-next-line react-native/no-inline-styles
                 <Text style={{ alignSelf: 'center' }}>No Steps</Text>
               ) : (
                 <StepList steps={steps} setSteps={setSteps} />
