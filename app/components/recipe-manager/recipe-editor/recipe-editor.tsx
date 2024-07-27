@@ -6,7 +6,7 @@ import { Alert } from 'react-native';
 import { resetRecipeEditor } from '@redux/slices/recipeEditorSlice';
 import RecipeDetailsEditor from './recipe-details/recipe-details';
 import RecipeIngredientsEditor from './recipe-ingredients.tsx/recipe-ingredients';
-import RecipeMethodEditor from './recipe-method/recipe-method';
+import RecipeMethodEditor from './recipe-method/recipe-method-editor';
 import RecipeEditorConfirmation from './recipe-confirmation/recipe-confirmation';
 
 const RecipeEditor = () => {

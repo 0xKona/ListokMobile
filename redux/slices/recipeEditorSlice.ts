@@ -1,4 +1,9 @@
-import { StepType, RecipeType, IngredientType } from '@typed/recipe-types';
+import {
+  StepType,
+  RecipeType,
+  IngredientType,
+  MethodStepType,
+} from '@typed/recipe-types';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export interface RecipeEditorState {
@@ -54,6 +59,9 @@ const recipeEditorSlice = createSlice({
     updateRecipeIngredients(state, action: PayloadAction<IngredientType[]>) {
       state.recipeData.ingredients = action.payload;
     },
+    updateRecipeMethod(state, action: PayloadAction<MethodStepType[]>) {
+      state.recipeData.method = action.payload;
+    },
   },
 });
 
@@ -64,5 +72,6 @@ export const {
   updateRecipeTitle,
   updateRecipeDesc,
   updateRecipeIngredients,
+  updateRecipeMethod,
 } = recipeEditorSlice.actions;
 export default recipeEditorSlice.reducer;
