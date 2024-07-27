@@ -1,4 +1,6 @@
+import useTheme from '@app/components/hooks/useTheme';
 import ListokInput from '@app/components/ui/input';
+import { ThemeType } from '@app/constants/themes';
 import {
   changeCurrentStep,
   RecipeEditorState,
@@ -6,7 +8,7 @@ import {
   updateRecipeTitle,
 } from '@redux/slices/recipeEditorSlice';
 import React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 interface PropsType {
@@ -17,6 +19,8 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
   const dispatch = useDispatch();
   const [title, setTitle] = React.useState<string>(recipeData.recipeData.title);
   const [desc, setDesc] = React.useState<string>(recipeData.recipeData.desc);
+
+  const theme = useTheme(styles);
 
   const handleNextPress = () => {
     // TODO Verify fields here
@@ -29,27 +33,54 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
   const updateDesc = () => dispatch(updateRecipeDesc(desc));
 
   return (
-    <View>
-      <Text>Recipe Details</Text>
+    <>
+      <View style={theme.container}>
+        <Text style={theme.titleText}>Recipe Details</Text>
 
-      <Text>Recipe Name:</Text>
+        <View style={theme.inputSection}>
+          <Text>Recipe Name:</Text>
+          <ListokInput
+            value={title}
+            onChangeText={setTitle}
+            onEndEditing={updateTitle}
+          />
+        </View>
 
-      <ListokInput
-        value={title}
-        onChangeText={setTitle}
-        onEndEditing={updateTitle}
-      />
-
-      <Text>Recipe Description:</Text>
-      <ListokInput
-        value={desc}
-        onChangeText={setDesc}
-        onEndEditing={updateDesc}
-      />
-
-      <Button title="Next" onPress={handleNextPress} />
-    </View>
+        <View style={theme.inputSection}>
+          <Text>Recipe Description:</Text>
+          <ListokInput
+            value={desc}
+            onChangeText={setDesc}
+            onEndEditing={updateDesc}
+          />
+        </View>
+      </View>
+      <View style={theme.buttonContainer}>
+        <Button title="Next" onPress={handleNextPress} />
+      </View>
+    </>
   );
 };
+
+const styles = (theme: ThemeType) =>
+  StyleSheet.create({
+    container: {
+      backgroundColor: theme.surface,
+      padding: 20,
+      margin: 20,
+    },
+    titleText: {
+      alignSelf: 'center',
+      fontSize: 20,
+      marginBottom: 20,
+    },
+    inputSection: {
+      marginTop: 10,
+    },
+    buttonContainer: {
+      marginTop: 'auto',
+      marginBottom: 20,
+    },
+  });
 
 export default RecipeDetailsEditor;

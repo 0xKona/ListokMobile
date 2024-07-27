@@ -1,82 +1,82 @@
 import {
   changeCurrentStep,
   RecipeEditorState,
-  updateRecipeIngredients,
+  updateRecipeMethod,
 } from '@redux/slices/recipeEditorSlice';
-import { IngredientType } from '@typed/recipe-types';
 import React, { useEffect } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
-import IngredientList from './ingredient-list';
-import IngredientForm from './ingredient-form';
 import { ThemeType } from '@app/constants/themes';
 import useTheme from '@app/components/hooks/useTheme';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { MethodStepType } from '@typed/recipe-types';
+import StepForm from './step-form';
+import StepList from './step-list';
 
 interface PropsType {
   recipeData: RecipeEditorState;
 }
 
-const RecipeIngredientsEditor = ({ recipeData }: PropsType) => {
-  const [ingredients, setIngredients] = React.useState(
-    recipeData.recipeData.ingredients,
+const RecipeMethodEditor = ({ recipeData }: PropsType) => {
+  const [steps, setSteps] = React.useState<MethodStepType[]>(
+    recipeData.recipeData.method,
   );
 
   useEffect(() => {
-    setIngredients(recipeData.recipeData.ingredients);
+    setSteps(recipeData.recipeData.method);
   }, [recipeData]);
 
-  const [openIngredientForm, setOpenIngredientForm] = React.useState(false);
-
-  const noIngredients = ingredients.length === 0;
-  console.log(recipeData);
+  const [openStepForm, setOpenStepForm] = React.useState(false);
+  const noSteps = steps.length === 0;
   const dispatch = useDispatch();
   const theme = useTheme(styles);
 
-  const openIngredient = () => {
-    setOpenIngredientForm(true);
+  const openStep = () => {
+    setOpenStepForm(true);
   };
 
-  const addNewIngredient = (newIngredient: IngredientType) => {
-    setIngredients([...ingredients, newIngredient]);
-    setOpenIngredientForm(false);
+  const addNewStep = (newStep: string) => {
+    const updatedSteps = [...steps, { index: steps.length + 1, step: newStep }];
+    setSteps(updatedSteps);
+    setOpenStepForm(false);
   };
 
   const handleBack = () => {
-    dispatch(updateRecipeIngredients(ingredients));
-    dispatch(changeCurrentStep(1));
+    dispatch(updateRecipeMethod(steps));
+    dispatch(changeCurrentStep(2));
   };
 
   const handleNext = () => {
-    dispatch(updateRecipeIngredients(ingredients));
-    dispatch(changeCurrentStep(3));
+    dispatch(updateRecipeMethod(steps));
+    dispatch(changeCurrentStep(4));
   };
 
   return (
     <>
       <View style={theme.container}>
-        {openIngredientForm ? (
-          <IngredientForm
-            addNewIngredient={addNewIngredient}
-            closeForm={() => setOpenIngredientForm(false)}
+        {openStepForm ? (
+          <StepForm
+            addNewStep={addNewStep}
+            closeForm={() => setOpenStepForm(false)}
           />
         ) : (
           <>
-            <Text style={theme.titleText}>Ingredients</Text>
-            <TouchableOpacity
-              onPress={openIngredient}
-              style={theme.addNewButton}>
+            <Text style={theme.titleText}>Steps</Text>
+            <TouchableOpacity onPress={openStep} style={theme.addNewButton}>
               <>
                 {/* eslint-disable-next-line react-native/no-inline-styles */}
                 <Text style={{ color: '#007AFF' }}>Add New </Text>
                 <Icon name="add-circle-outline" size={20} color={'#007AFF'} />
               </>
             </TouchableOpacity>
-            {noIngredients ? (
-              <Text>No Ingredients</Text>
-            ) : (
-              <IngredientList ingredients={ingredients} />
-            )}
+            <View style={theme.stepContainer}>
+              {noSteps ? (
+                // eslint-disable-next-line react-native/no-inline-styles
+                <Text style={{ alignSelf: 'center' }}>No Steps</Text>
+              ) : (
+                <StepList steps={steps} setSteps={setSteps} />
+              )}
+            </View>
           </>
         )}
       </View>
@@ -117,6 +117,11 @@ const styles = (theme: ThemeType) =>
       fontSize: 20,
       marginBottom: 20,
     },
+    stepContainer: {
+      width: '100%',
+      flexDirection: 'column',
+      maxHeight: '85%',
+    },
   });
 
-export default RecipeIngredientsEditor;
+export default RecipeMethodEditor;
