@@ -1,8 +1,8 @@
-import { navBarIconStyle } from '@app/styles/navBarIcon';
 import getUserProfilePicture from '@app/utils/getUserProfilePicture';
 import { RootState } from '@redux/store';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useSelector } from 'react-redux';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -12,13 +12,13 @@ const NavBarIcon = ({ label, isFocused }: any) => {
   const getIcon = () => {
     switch (label) {
       case 'Recipes':
-        return <Text style={navBarIconStyle}>Icon</Text>;
+        return <Icon name="bowl-mix-outline" size={30} />;
       case 'Listoks':
-        return <Text style={navBarIconStyle}>Icon</Text>;
+        return <Icon name="book-outline" size={30} />;
       case 'Shopping':
-        return <Text style={navBarIconStyle}>Icon</Text>;
+        return <Icon name="shopping-outline" size={30} />;
       case 'Public Library':
-        return <Text style={navBarIconStyle}>Icon</Text>;
+        return <Icon name="book-open-page-variant-outline" size={30} />;
       case 'Profile':
         return getUserProfilePicture(user.user?.picture);
       default:
