@@ -8,6 +8,19 @@ export const authenticatedAxios = async (
   data?: string,
 ) => {
   try {
+    console.log(
+      'authenticatedAxios call with following: ',
+      `${JSON.stringify({
+        baseURL: config.serverURL,
+        url: apiURL,
+        data,
+        method,
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          'Content-Type': 'application/json',
+        },
+      })}`,
+    );
     const response = await axios({
       baseURL: config.serverURL,
       url: apiURL,
