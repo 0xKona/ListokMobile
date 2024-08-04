@@ -12,6 +12,6 @@ export const shoppingListApis = {
       authToken,
       JSON.stringify({ listokId }),
     );
-    console.log('Fetch Shopping List:', response);
+    return response.ingredients;
   },
 };

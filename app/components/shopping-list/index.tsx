@@ -4,15 +4,22 @@ import useTheme from '@app/components/hooks/useTheme';
 import ListokDropdownSelector from './listok-dropdown-selector';
 import ShoppingListComponent from './shopping-list';
 import ShoppingOptions from './options';
+import { useSelector } from 'react-redux';
+import { RootState } from '@redux/store';
 
 const ShoppingList = () => {
   const theme = useTheme(styles);
+
+  const { ingredients } = useSelector(
+    (state: RootState) => state.shoppingManager,
+  );
+  console.log('State Shopping List: ', ingredients);
 
   return (
     <View style={theme.container}>
       <ListokDropdownSelector />
       <ShoppingOptions />
-      <ShoppingListComponent />
+      <ShoppingListComponent shoppingIngredients={ingredients} />
     </View>
   );
 };
