@@ -8,6 +8,7 @@ import recipeEditorReducer from './slices/recipeEditorSlice';
 import recipeManagerReducer from './slices/recipeManagerSlice';
 import listokManagerReducer from './slices/listokManagerSlice';
 import listokEditorSlice from './slices/listokEditorSlice';
+import shoppingManagerSlice from './slices/shoppingManagerSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   recipeManager: recipeManagerReducer,
   listokManager: listokManagerReducer,
   listokEditor: listokEditorSlice,
+  shoppingManager: shoppingManagerSlice,
 });
 
 const persistConfig = {
@@ -30,6 +32,7 @@ const persistConfig = {
     'recipeManager',
     'listokManager',
     'listokEditor',
+    'shoppingManager',
   ],
 };
 
