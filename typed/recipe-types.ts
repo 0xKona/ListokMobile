@@ -37,6 +37,8 @@ export interface IngredientType {
   amount: number | null;
   measurement: MeasurementType;
   category: CategoryType;
+  checked?: boolean;
+  id?: string;
 }
 
 export interface MethodStepType {

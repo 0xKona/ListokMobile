@@ -31,7 +31,7 @@ const ListokManager = () => {
   };
 
   const refreshListoks = () => {
-    console.log('Refresh Recipes Called');
+    console.log('Refresh Listoks Called');
     dispatch(fetchListoks({ userId, token }));
   };
 
