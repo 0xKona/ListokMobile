@@ -42,13 +42,16 @@ router.post('/login', async (req, res) => {
       { expiresIn: '24h' },
     );
 
-    res.status(200).json({
-      userId: user._id,
-      email: user.email,
-      name: user.name,
-      picture: user.picture,
-      token: sessionToken,
-    });
+    // Simulate delay with setTimeout
+    setTimeout(() => {
+      res.status(200).json({
+        userId: user._id,
+        email: user.email,
+        name: user.name,
+        picture: user.picture,
+        token: sessionToken,
+      });
+    }, 2000) // Set delay amount here
   } catch (error) {
     console.error('Error during Google login:', error);
     res.status(401).json({ message: 'Unauthorized' });

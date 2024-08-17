@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import useTheme from "../hooks/useTheme";
 import LoadingSpinner from "../ui/loading-spinner";
 
+// TODO : Implement ListokLogin for users that don't want to use Google.
+
 const LoginForm = () => {
 
     const dispatch = useDispatch<AppDispatch>();
@@ -15,6 +17,7 @@ const LoginForm = () => {
     const user = useSelector((state: RootState) => state.user);
     const theme = useTheme(styles)
 
+    // Initialize Google sign in with client id's
     useEffect(() => {
         if (config.iosClientId || config.androidClientId) {
           GoogleSignin.configure({
@@ -25,7 +28,7 @@ const LoginForm = () => {
         }
       }, [config.iosClientId, config.androidClientId, config.webClientId]);
 
-    const handleLogin = async () => {
+    const handleLoginWithGoogle = async () => {
         try {
           await GoogleSignin.hasPlayServices();
           const userInfo = await GoogleSignin.signIn();
@@ -48,8 +51,14 @@ const LoginForm = () => {
 
     return (
         <View style={theme.buttonContainer}>
-            {user.loading && <LoadingSpinner />}
-          <GoogleSigninButton onPress={handleLogin} />
+            {user.loading ?
+              <LoadingSpinner text="Logging in..."/>
+            : 
+              <View>
+                <GoogleSigninButton onPress={handleLoginWithGoogle} color="dark"/>
+              </View>
+        
+            }
         </View>
     )
 }
