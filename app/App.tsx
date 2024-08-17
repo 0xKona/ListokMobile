@@ -6,7 +6,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { store, persistor } from '../redux/store';
 import { NavigationProvider } from '@app/NavigationContext';
 import { createStackNavigator } from '@react-navigation/stack';
-// import LoadingScreen from '@app/screens/LoadingScreen';
 import LoginScreen from '@app/screens/LoginScreen';
 import HomeScreen from '@app/screens/HomeScreen';
 import { RootStackParamList } from '../typed/navigation';
@@ -22,7 +21,6 @@ const App = () => {
           <NavigationContainer>
             <NavigationProvider>
               <Stack.Navigator initialRouteName="Login">
-                {/* <Stack.Screen name="Loading" component={LoadingScreen} /> */}
                 <Stack.Screen 
                   name="Login" 
                   component={LoginScreen} 

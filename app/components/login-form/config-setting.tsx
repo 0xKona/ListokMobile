@@ -20,7 +20,7 @@ const ConfigSetting = () => {
     return (
         <View style={theme.container}>
             {config.loading ? (
-                <LoadingSpinner text="Loading Configurations" />
+                <LoadingSpinner text="Loading Configuration..." />
             ) : (config.error || !config.googleClientId) ? (
                 <>
                     <View style={theme.textContainer}>

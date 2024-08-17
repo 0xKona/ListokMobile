@@ -4,7 +4,9 @@ import {
   IngredientType,
   MethodStepType,
 } from '@typed/recipe-types';
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { recipeManagerApis } from '@app/utils/api-connections/recipe-manager-api';
+import { RootState } from '@redux/store';
 
 export interface RecipeEditorState {
   existingRecipe: boolean;
@@ -36,6 +38,34 @@ const initialState: RecipeEditorState = {
   },
 };
 
+// Thunk for submitting the recipe
+export const submitRecipe = createAsyncThunk(
+  'recipe/submitRecipe',
+  async (_, { getState }) => {
+    const state = getState() as RootState;
+    const { recipeData, existingRecipe } = state.recipeEditor;
+    const { user } = state.user;
+    
+    const recipePayload = {
+      ...recipeData,
+      createdBy: user.userId,
+      createdByName: user.name,
+    };
+    
+    if (existingRecipe) {
+      await recipeManagerApis.updateExistingRecipe(
+        JSON.stringify(recipePayload),
+        user.token,
+      );
+    } else {
+      await recipeManagerApis.postNewRecipe(
+        JSON.stringify(recipePayload),
+        user.token,
+      );
+    }
+  }
+);
+
 const recipeEditorSlice = createSlice({
   name: 'recipe',
   initialState,
@@ -56,6 +86,9 @@ const recipeEditorSlice = createSlice({
     updateRecipeDesc(state, action: PayloadAction<string>) {
       state.recipeData.desc = action.payload;
     },
+    updateRecipePicture(state, action: PayloadAction<string>) {
+      state.recipeData.picture = action.payload;
+    },
     updateRecipeIngredients(state, action: PayloadAction<IngredientType[]>) {
       state.recipeData.ingredients = action.payload;
     },
@@ -71,7 +104,9 @@ export const {
   changeCurrentStep,
   updateRecipeTitle,
   updateRecipeDesc,
+  updateRecipePicture,
   updateRecipeIngredients,
   updateRecipeMethod,
 } = recipeEditorSlice.actions;
+
 export default recipeEditorSlice.reducer;

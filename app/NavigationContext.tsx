@@ -16,6 +16,7 @@ const NavigationContext = createContext({});
 export const NavigationProvider: React.FC<NavigationProviderProps> = ({
   children,
 }) => {
+  
   const navigation = useNavigation<LoadingScreenNavigationProp>();
   const dispatch = useDispatch<AppDispatch>();
   const config = useSelector((state: RootState) => state.config);
