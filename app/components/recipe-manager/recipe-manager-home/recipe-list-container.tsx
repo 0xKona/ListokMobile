@@ -18,7 +18,7 @@ const RecipeListContainer = () => {
     (state: RootState) => state.recipeManager,
   );
   console.log('Redux State of Recipes: ', userRecipes);
-  const { userId, token } = useSelector((state: RootState) => state.user.user);
+  const { user } = useSelector((state: RootState) => state.user);
 
   const handlePressTab = (tab: string) => {
     setCurrentTab(tab);
@@ -26,13 +26,13 @@ const RecipeListContainer = () => {
 
   const refreshRecipes = () => {
     console.log('Refresh Recipes Called');
-    dispatch(fetchRecipes({ userId, token }));
+    dispatch(fetchRecipes({ userId: user?.userId, token: user?.token }));
   };
 
   useEffect(() => {
     refreshRecipes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token, userId, isFocused]);
+  }, [user?.token, user?.userId, isFocused]);
 
   return (
     <View style={styles.container}>

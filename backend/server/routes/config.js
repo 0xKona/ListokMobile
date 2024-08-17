@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
         webClientId: process.env.WEB_CLIENT_ID,
       }),
     );
-  }, 5000); // 5 second delay
+  }, 0);
 });
 
 export default router;

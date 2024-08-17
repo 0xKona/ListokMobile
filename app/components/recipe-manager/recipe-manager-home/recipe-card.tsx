@@ -17,12 +17,12 @@ interface PropsType {
 const RecipeCard = ({ data, refreshRecipes }: PropsType) => {
   const navigation = useNavigation<RecipeNavigationProp>();
 
-  const { token } = useSelector((state: RootState) => state.user.user);
+  const { user } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const componentStyles = useTheme(styles);
 
   const handleDeleteRecipe = () => {
-    recipeManagerApis.deleteRecipe(data.id, token);
+    recipeManagerApis.deleteRecipe(data.id, user?.token);
     refreshRecipes();
   };
 
