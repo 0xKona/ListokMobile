@@ -14,14 +14,9 @@ const LoginScreen = () => {
 
   
   const config = useSelector((state: RootState) => state.config);
-  const user = useSelector((state: RootState) => state.user);
   const theme = useTheme(styles)
 
   console.log('[Listok Login Screen]: Config State:', config);
-
-  
-  
-  
 
   return (
     <View style={theme.container}>
