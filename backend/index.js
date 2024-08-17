@@ -21,7 +21,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/config', configRouter);
 
 app.get('/', (req, res) => {
-  res.send('Hello, World!');
+  res.send('');
 });
 
 app.listen(port, () => {
