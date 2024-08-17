@@ -51,7 +51,7 @@ router.post('/login', async (req, res) => {
         picture: user.picture,
         token: sessionToken,
       });
-    }, 2000) // Set delay amount here
+    }, 500) // Set delay amount here
   } catch (error) {
     console.error('Error during Google login:', error);
     res.status(401).json({ message: 'Unauthorized' });
