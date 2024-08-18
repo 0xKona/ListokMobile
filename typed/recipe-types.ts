@@ -46,6 +46,8 @@ export interface MethodStepType {
   step: string;
 }
 
+export type PictureType = { uri: string; name?: string; type?: string } | ''; 
+
 export interface RecipeType {
   id: number | null;
   title: string;
@@ -54,7 +56,7 @@ export interface RecipeType {
   createdByName: string | null;
   createdOn: string;
   public: boolean;
-  picture: string;
+  picture: PictureType; 
   ingredients: IngredientType[];
   method: MethodStepType[];
 }

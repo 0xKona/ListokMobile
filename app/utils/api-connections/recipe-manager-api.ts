@@ -2,23 +2,25 @@ import { unpackFetchedRecipes } from '../unpackFetched';
 import { authenticatedAxios } from './authenicatedAxios';
 
 export const recipeManagerApis = {
-  postNewRecipe: async (recipeData: string, authToken: string) => {
-    console.log('Create new recipe api called');
+  postNewRecipe: async (recipeData: FormData, authToken: string) => {
+    console.log('Create new recipe API called with: ', recipeData);
     const response = await authenticatedAxios(
       '/api/recipes/create_new',
       'POST',
       authToken,
       recipeData,
+      'multipart/form-data' // Updated content type
     );
     console.log('Post New Recipe Response:', response);
   },
-  updateExistingRecipe: async (recipeData: string, authToken: string) => {
-    console.log('Edit recipe api called.');
+  updateExistingRecipe: async (recipeData: FormData, authToken: string) => {
+    console.log('Edit recipe API called with: ', recipeData);
     const response = await authenticatedAxios(
       '/api/recipes/edit_recipe',
       'PUT',
       authToken,
       recipeData,
+      'multipart/form-data' // Updated content type
     );
     console.log('Edit Existing Recipe Response: ', response);
   },

@@ -21,14 +21,14 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
   const dispatch = useDispatch();
   const [title, setTitle] = React.useState<string>(recipeData.recipeData.title);
   const [desc, setDesc] = React.useState<string>(recipeData.recipeData.desc);
-  const [image, setImage] = React.useState<string>(recipeData.recipeData.picture);
+  const [image, setImage] = React.useState<any>(recipeData.recipeData.picture);
 
   const theme = useTheme(styles);
 
   const handleNextPress = () => {
     dispatch(updateRecipeTitle(title));
     dispatch(updateRecipeDesc(desc));
-    dispatch(updateRecipePicture(image));
+    dispatch(updateRecipePicture(image)); // Now storing the full image object
     dispatch(changeCurrentStep(2));
   };
 
@@ -46,9 +46,9 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
         } else if (response.errorCode) {
           console.log('Image Picker Error: ', response.errorMessage);
         } else if (response.assets && response.assets.length > 0) {
-          const selectedUri = response.assets[0].uri;
-          if (selectedUri) {
-            setImage(selectedUri);  // Ensure that selectedUri is defined before calling setImage
+          const selectedImage = response.assets[0];
+          if (selectedImage) {
+            setImage(selectedImage); // Store the entire image object, not just the URI
           }
         }
       }
@@ -78,7 +78,7 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
 
         <View style={theme.inputSection}>
           <Button title="Pick an image" onPress={pickImage} />
-          {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+          {image && <Image source={{ uri: image.uri }} style={{ width: 200, height: 200 }} />}
         </View>
       </View>
       <View style={theme.buttonContainer}>

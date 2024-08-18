@@ -22,9 +22,9 @@ const recipeSchema = new mongoose.Schema({
     unique: false,
   },
   createdOn: {
-    type: String,
+    type: Date,  // Changed to Date to handle timestamps properly
     required: true,
-    unique: false,
+    default: Date.now, // Automatically set the creation date
   },
   public: {
     type: Boolean,

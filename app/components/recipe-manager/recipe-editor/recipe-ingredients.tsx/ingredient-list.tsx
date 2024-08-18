@@ -1,4 +1,5 @@
 import useTheme from '@app/components/hooks/useTheme';
+import { useUniqueId } from '@app/components/hooks/useUniqueId';
 import { ThemeType } from '@app/constants/themes';
 import { updateRecipeIngredients } from '@redux/slices/recipeEditorSlice';
 import { IngredientType } from '@typed/recipe-types';
@@ -37,7 +38,7 @@ const IngredientList = ({ ingredients }: PropsInterface) => {
   return (
     <ScrollView style={theme.container}>
       {ingredients.map((ingredient: IngredientType, index: number) => (
-        <Swipeable renderRightActions={() => renderDelete(index)}>
+        <Swipeable key={useUniqueId()} renderRightActions={() => renderDelete(index)}>
           <View style={theme.listItem} key={ingredient.name}>
             <Text>{ingredient.name}</Text>
           </View>

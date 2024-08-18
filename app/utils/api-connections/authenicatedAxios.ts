@@ -5,7 +5,8 @@ export const authenticatedAxios = async (
   apiURL: string,
   method: string,
   authToken: string,
-  data?: string,
+  data?: any,
+  contentType: string = 'application/json',
 ) => {
   try {
     console.log(
@@ -13,13 +14,12 @@ export const authenticatedAxios = async (
       `${JSON.stringify({
         baseURL: config.serverURL,
         url: apiURL,
-        data,
         method,
         headers: {
           Authorization: `Bearer ${authToken}`,
-          'Content-Type': 'application/json',
+          'Content-Type': contentType,
         },
-      })}`,
+      })}`
     );
     const response = await axios({
       baseURL: config.serverURL,
@@ -28,7 +28,7 @@ export const authenticatedAxios = async (
       method,
       headers: {
         Authorization: `Bearer ${authToken}`,
-        'Content-Type': 'application/json',
+        'Content-Type': contentType,
       },
     });
     console.log('Response from API:', response.data);

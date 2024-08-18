@@ -5,8 +5,11 @@ import useTheme from '@app/components/hooks/useTheme';
 import { changeCurrentStep, submitRecipe } from '@redux/slices/recipeEditorSlice';
 import { ThemeType } from '@app/constants/themes';
 import { AppDispatch } from '@redux/store';
+import { useNavigation } from '@react-navigation/native';
+import { RecipeNavigationProp } from '@typed/navigation';
 
 const RecipeEditorConfirmation = ({ recipeData, setIgnorePopup }: any) => {
+  const navigation = useNavigation<RecipeNavigationProp>()
   const dispatch = useDispatch<AppDispatch>();
   const theme = useTheme(styles);
 
@@ -17,12 +20,42 @@ const RecipeEditorConfirmation = ({ recipeData, setIgnorePopup }: any) => {
   const handleSubmit = () => {
     setIgnorePopup(true);
     dispatch(submitRecipe());
+    navigation.navigate('Your Recipes');
   };
 
   return (
     <ScrollView style={theme.container}>
       <Text style={theme.titleText}>Confirm</Text>
-      {/* Confirmation UI elements */}
+      <View style={theme.section}>
+        <Text style={theme.label}>Title:</Text>
+        <Text style={theme.value}>{recipeData.recipeData.title}</Text>
+      </View>
+      <View style={theme.section}>
+        <Text style={theme.label}>Description:</Text>
+        <Text style={theme.value}>{recipeData.recipeData.desc}</Text>
+      </View>
+      <View style={theme.section}>
+        <Text style={theme.label}>Created By:</Text>
+        <Text style={theme.value}>{recipeData.recipeData.createdByName}</Text>
+      </View>
+      <View style={theme.section}>
+        <Text style={theme.label}>Ingredients:</Text>
+        {recipeData.recipeData.ingredients.map(
+          (ingredient: any, index: number) => (
+            <Text key={index} style={theme.value}>
+              {ingredient.name} - {ingredient.amount} {ingredient.measurement}
+            </Text>
+          ),
+        )}
+      </View>
+      <View style={theme.section}>
+        <Text style={theme.label}>Method:</Text>
+        {recipeData.recipeData.method.map((step: any, index: number) => (
+          <Text key={index} style={theme.value}>
+            {index + 1}. {step.step}
+          </Text>
+        ))}
+      </View>
       <View style={theme.buttonContainer}>
         <Button title="Back" onPress={handleBack} />
         <Button title="Submit Recipe" onPress={handleSubmit} />
