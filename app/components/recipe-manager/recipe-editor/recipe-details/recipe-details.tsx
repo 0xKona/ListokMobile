@@ -1,15 +1,18 @@
 import useTheme from '@app/components/hooks/useTheme';
+import ImageUpload from '@app/components/ui/image-selector';
 import ListokInput from '@app/components/ui/input';
 import { ThemeType } from '@app/constants/themes';
 import {
   changeCurrentStep,
   RecipeEditorState,
   updateRecipeDesc,
+  updateRecipePicture,
   updateRecipeTitle,
 } from '@redux/slices/recipeEditorSlice';
-import React from 'react';
+import { RootState } from '@redux/store';
+import React, { useEffect } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface PropsType {
   recipeData: RecipeEditorState;
@@ -17,8 +20,15 @@ interface PropsType {
 
 const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state: RootState) => state.user)
+
   const [title, setTitle] = React.useState<string>(recipeData.recipeData.title);
   const [desc, setDesc] = React.useState<string>(recipeData.recipeData.desc);
+  const [image, setImage] = React.useState<string>(recipeData.recipeData.picture);
+
+  useEffect(() => {
+    dispatch(updateRecipePicture(image))
+  }, [image])
 
   const theme = useTheme(styles);
 
@@ -26,6 +36,7 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
     // TODO Verify fields here
     dispatch(updateRecipeTitle(title));
     dispatch(updateRecipeDesc(desc));
+    dispatch(updateRecipePicture(image))
     dispatch(changeCurrentStep(2));
   };
 
@@ -54,6 +65,7 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
             onEndEditing={updateDesc}
           />
         </View>
+        <ImageUpload image={image} setImage={setImage} authToken={user.token}/>
       </View>
       <View style={theme.buttonContainer}>
         <Button title="Next" onPress={handleNextPress} />
