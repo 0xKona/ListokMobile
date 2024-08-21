@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, StyleSheet, Text, View, Image } from 'react-native';
+import React, { useEffect } from 'react';
+import { Button, StyleSheet, Text, View, Image, Alert } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useDispatch } from 'react-redux';
 import useTheme from '@app/components/hooks/useTheme';
@@ -22,13 +22,23 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
   const [title, setTitle] = React.useState<string>(recipeData.recipeData.title);
   const [desc, setDesc] = React.useState<string>(recipeData.recipeData.desc);
   const [image, setImage] = React.useState<any>(recipeData.recipeData.picture);
+  const [localImage, setLocalImage] = React.useState<any>(null);
 
   const theme = useTheme(styles);
+
+  useEffect(() => {
+    if (typeof image === 'string') {
+      // Load the image from the URL (Google Cloud Storage)
+      setLocalImage({ uri: image });
+    } else {
+      setLocalImage(image);
+    }
+  }, [image]);
 
   const handleNextPress = () => {
     dispatch(updateRecipeTitle(title));
     dispatch(updateRecipeDesc(desc));
-    dispatch(updateRecipePicture(image)); // Now storing the full image object
+    dispatch(updateRecipePicture(localImage)); // Store the full image object or URL
     dispatch(changeCurrentStep(2));
   };
 
@@ -48,10 +58,28 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
         } else if (response.assets && response.assets.length > 0) {
           const selectedImage = response.assets[0];
           if (selectedImage) {
-            setImage(selectedImage); // Store the entire image object, not just the URI
+            setLocalImage(selectedImage); // Store the entire image object
           }
         }
       }
+    );
+  };
+
+  const deleteImage = () => {
+    Alert.alert(
+      'Delete Image?',
+      'Are you sure you want to delete this image?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: () => {
+            setLocalImage(null); // Remove the image
+            dispatch(updateRecipePicture('')); // Clear the image from the store
+          },
+        },
+      ]
     );
   };
 
@@ -78,7 +106,12 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
 
         <View style={theme.inputSection}>
           <Button title="Pick an image" onPress={pickImage} />
-          {image && <Image source={{ uri: image.uri }} style={{ width: 200, height: 200 }} />}
+          {localImage && (
+            <>
+              <Image source={{ uri: localImage.uri }} style={{ width: 200, height: 200 }} />
+              <Button title="Delete Image" onPress={deleteImage} color="red" />
+            </>
+          )}
         </View>
       </View>
       <View style={theme.buttonContainer}>

@@ -22,7 +22,7 @@ interface PropsInterface {
 const IngredientList = ({ ingredients }: PropsInterface) => {
   const theme = useTheme(styles);
   const dispatch = useDispatch();
-
+  console.log("[Ingredients-List]: Ingredients", ingredients)
   const handleDelete = (indexToDelete: number) => {
     const newIngredients = [...ingredients];
     newIngredients.splice(indexToDelete, 1);

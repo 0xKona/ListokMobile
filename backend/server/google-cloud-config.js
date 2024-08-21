@@ -5,7 +5,7 @@ const storage = new Storage({
   projectId: 'listok-414312', // Replace with your project ID
 });
 
-const bucketName = 'listok-images'; // Replace with your bucket name
+const bucketName = 'listok-images';
 const bucket = storage.bucket(bucketName);
 
 export default bucket

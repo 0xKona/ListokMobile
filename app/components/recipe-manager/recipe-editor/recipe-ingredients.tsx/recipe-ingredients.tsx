@@ -18,7 +18,7 @@ interface PropsType {
 }
 
 const RecipeIngredientsEditor = ({ recipeData }: PropsType) => {
-  const [ingredients, setIngredients] = React.useState(
+  const [ingredients, setIngredients] = React.useState<IngredientType[]>(
     recipeData.recipeData.ingredients,
   );
 

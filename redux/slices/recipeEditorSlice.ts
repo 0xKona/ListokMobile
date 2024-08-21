@@ -53,7 +53,9 @@ export const submitRecipe = createAsyncThunk(
     formData.append('ingredients', JSON.stringify(recipeData.ingredients));
     formData.append('method', JSON.stringify(recipeData.method));
 
-    if (recipeData.picture && recipeData.picture.uri) {
+    if (recipeData.picture === '') {
+      formData.append('removePicture', 'true'); // Signal to remove the picture
+    } else if (recipeData.picture && recipeData.picture.uri) {
       const localUri = recipeData.picture.uri;
       const filename = localUri.split('/').pop() || 'unknown_file';
       const match = /\.(\w+)$/.exec(filename);
@@ -86,6 +88,7 @@ export const submitRecipe = createAsyncThunk(
     }
   }
 );
+
 
 
 const recipeEditorSlice = createSlice({

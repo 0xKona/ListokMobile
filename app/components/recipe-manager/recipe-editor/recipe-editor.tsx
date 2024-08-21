@@ -13,7 +13,6 @@ const RecipeEditor = () => {
   const [ignorePopup, setIgnorePopup] = React.useState<boolean>(false);
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  console.log('Ignore Popup:', ignorePopup);
 
   React.useEffect(() => {
     const backButton = navigation.addListener('beforeRemove', e => {
@@ -46,7 +45,7 @@ const RecipeEditor = () => {
 
   const recipeState = useSelector((state: RootState) => state.recipeEditor);
 
-  console.log('Recipe State:: ', recipeState);
+  console.log('Recipe Editor Loaded with: ', recipeState.recipeData)
 
   switch (recipeState.currentStep) {
     case 1:
