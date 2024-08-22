@@ -50,7 +50,8 @@ router.post('/upload', authMiddleware, upload.single('picture'), async (req, res
     }
 
     const imageUrl = await uploadImageToGCS(req.file);
-    return res.status(200).json({ imageUrl }); // Return the URL of the uploaded image
+    console.log('[Upload Image]: New Image URL: ', imageUrl)
+    return res.status(200).json(imageUrl); // Return the URL of the uploaded image
   } catch (error) {
     console.error('Failed to upload image:', error);
     return res.status(500).json({ message: 'Failed to upload image' });

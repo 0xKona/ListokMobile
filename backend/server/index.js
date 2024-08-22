@@ -34,7 +34,7 @@ app.use('/api/config', configRouter);
 app.use('/api/recipes', recipeRouter);
 app.use('/api/listoks', listokRouter);
 app.use('/api/shopping', shoppingRouter);
-app.use('api/images', imagesRouter);
+app.use('/api/images', imagesRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello, World!');

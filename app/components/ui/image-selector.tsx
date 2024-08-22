@@ -5,6 +5,7 @@ import { imageApis } from '@app/utils/api-connections/image-api';
 import LoadingSpinner from '@app/components/ui/loading-spinner';
 import useTheme from '@app/components/hooks/useTheme';
 import { ThemeType } from '@app/constants/themes';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface ImageUploadProps {
     setImage: (image: string) => void;
@@ -44,6 +45,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ image, setImage, authToken })
     
                             // Call the upload image API
                             const imageUrl = await imageApis.uploadImage(formData, authToken);
+                            console.log('[Image-Selector]: New Image URL: ', imageUrl)
                             setImage(imageUrl);
                         } catch (error) {
                             console.error('Failed to upload image:', error);
@@ -78,7 +80,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ image, setImage, authToken })
             {loading && <LoadingSpinner text="Uploading Image..." />}
             {!image ? (
                 <TouchableOpacity style={theme.uploadButton} onPress={handleImageUpload}>
-                    <Text style={theme.uploadButtonText}>Upload Image</Text>
+                    <Icon name='add-a-photo' color={'black'} size={40}/>
                 </TouchableOpacity>
             ) : (
                 <View style={theme.imageContainer}>
@@ -97,10 +99,15 @@ const styles = (theme: ThemeType) =>
             alignItems: 'center',
             justifyContent: 'center',
             width: '100%',
+            aspectRatio: 1,
+            borderWidth: 1,
         },
         uploadButton: {
+            height: '100%',
+            width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
             padding: 10,
-            backgroundColor: theme.surface,
             borderRadius: 5,
         },
         uploadButtonText: {
