@@ -5,35 +5,32 @@ export const authenticatedAxios = async (
   apiURL: string,
   method: string,
   authToken: string,
-  data?: string,
+  data?: any
 ) => {
   try {
-    console.log(
-      'authenticatedAxios call with following: ',
-      `${JSON.stringify({
-        baseURL: config.serverURL,
-        url: apiURL,
-        data,
-        method,
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-          'Content-Type': 'application/json',
-        },
-      })}`,
-    );
+    const headers: any = {
+      Authorization: `Bearer ${authToken}`,
+    };
+
+    // Set the correct content-type based on the data type
+    if (data instanceof FormData) {
+      headers['Content-Type'] = 'multipart/form-data';
+    } else {
+      headers['Content-Type'] = 'application/json';
+    }
+
     const response = await axios({
-      baseURL: config.serverURL,
+      baseURL: config.serverURL, // Ensure this is correctly pointing to your server URL
       url: apiURL,
       data,
       method,
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-        'Content-Type': 'application/json',
-      },
+      headers,
     });
-    console.log('Response from API:', response.data);
+
+    console.log('Response from API:', response.data); // Optional: Log the response for debugging
     return response.data;
   } catch (error) {
     console.error('Error making API call:', error);
+    throw error; // Re-throw the error to be handled by the calling function
   }
 };

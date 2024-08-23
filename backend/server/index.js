@@ -6,6 +6,7 @@ import configRouter from './routes/config.js';
 import recipeRouter from './routes/recipes.js';
 import listokRouter from './routes/listoks.js';
 import shoppingRouter from './routes/shopping.js';
+import imagesRouter from './routes/images.js';
 
 dotenv.config({ path: './backend/.env' });
 
@@ -33,6 +34,7 @@ app.use('/api/config', configRouter);
 app.use('/api/recipes', recipeRouter);
 app.use('/api/listoks', listokRouter);
 app.use('/api/shopping', shoppingRouter);
+app.use('/api/images', imagesRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello, World!');
