@@ -1,8 +1,13 @@
 import useTheme from '@app/components/hooks/useTheme';
+import ListokButton from '@app/components/ui/button';
 import { recipeTabs } from '@app/constants/recipe-tabs';
 import { ThemeType } from '@app/constants/themes';
+import { useNavigation } from '@react-navigation/native';
+import { resetRecipeEditor } from '@redux/slices/recipeEditorSlice';
+import { RecipeNavigationProp } from '@typed/navigation';
 import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 interface PropsType {
   currentTab: string;
@@ -10,19 +15,28 @@ interface PropsType {
 }
 
 const RecipeTabs = ({ currentTab, handlePressTab }: PropsType) => {
-  const componentStyle = useTheme(styles);
+  
+  const theme = useTheme(styles);
+  const dispatch = useDispatch();
+  const navigation = useNavigation<RecipeNavigationProp>();
+
   const selectedStyle = (selected: boolean) => {
     return selected
       ? {
-          ...componentStyle.tab,
+          ...theme.tab,
           borderBottomWidth: 2,
           borderBottomColor: 'black',
         }
-      : componentStyle.tab;
+      : theme.tab;
+  };
+
+  const handleOpenNewRecipe = () => {
+    dispatch(resetRecipeEditor());
+    navigation.navigate('New Recipe');
   };
 
   return (
-    <View style={componentStyle.container}>
+    <View style={theme.container}>
       {recipeTabs.map((tab: any) => (
         <TouchableHighlight
           style={selectedStyle(currentTab === tab.value)}
@@ -31,6 +45,11 @@ const RecipeTabs = ({ currentTab, handlePressTab }: PropsType) => {
           <Text>{tab.text}</Text>
         </TouchableHighlight>
       ))}
+      <ListokButton
+        onPress={handleOpenNewRecipe}
+        text="New Recipe"
+        propStyles={theme.newRecipeButton}
+      />
     </View>
   );
 };
@@ -50,6 +69,13 @@ const styles = (props: ThemeType) =>
       paddingHorizontal: 10,
       minWidth: 100,
     },
+    newRecipeButton: {
+      width: 110,
+      height: '100%',
+      marginLeft: 'auto',
+      borderTopLeftRadius: 5,
+      borderTopRightRadius: 5
+    }
   });
 
 export default RecipeTabs;
