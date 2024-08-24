@@ -9,5 +9,6 @@ Listok Mobile is a react native applicationthat allows the user to create and ed
 - [Getting Started](./docs/getting-started.md)
 - [Configure Google Cloud](./docs/configure-google-cloud.md)
 - [Known Bugs and Issues](./docs/known-bugs.md)
+- [Styling Components](./docs/styling.md)
 
 

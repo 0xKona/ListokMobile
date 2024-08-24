@@ -11,7 +11,7 @@ const RecipeManager = () => {
 
   return (
     <View style={componentStyle.container}>
-      <RecipeHeader />
+      {/* <RecipeHeader /> */}
       <RecipeListContainer />
     </View>
   );
