@@ -8,7 +8,6 @@ export interface ThemeType {
   buttonPrimaryText: string;
   themeGradient: string[]
   themeGradientText: string;
-  gradientStartEnd?: any;
 }
 
 export interface ThemeColorsType {
@@ -23,10 +22,6 @@ export const themeGradient = {
     'hsl(201, 98%, 65%)',   
     'hsl(199, 100%, 74%)', 
   ],
-  lightStartEnd: {
-    start: { x: 0.2, y: 0 },
-    end: { x: 1, y: 1 }
-  },
   dark: [
     'hsl(270, 100%, 7%)',
     'hsl(249, 94%, 15%)',
@@ -61,7 +56,6 @@ export const themeColors: ThemeColorsType = {
     buttonPrimaryText: 'white',
     themeGradient: themeGradient.light,
     themeGradientText: 'white',
-    gradientStartEnd: themeGradient.lightStartEnd
   },
   dark: {
     themeName: 'dark',
