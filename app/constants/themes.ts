@@ -11,6 +11,7 @@ export interface ThemeType {
   buttonPrimaryText: string;
   themeGradient: string[]
   themeGradientText: string;
+  gradientStartEnd?: any;
 }
 
 export interface ThemeColorsType {
@@ -21,29 +22,14 @@ export interface ThemeColorsType {
 
 export const themeGradient = {
   light: [
-    'hsl(240, 100%, 89%)',
-    'hsl(232, 97%, 87%)',
-    'hsl(225, 93%, 84%)',
-    'hsl(220, 90%, 81%)',
-    'hsl(215, 87%, 79%)',
-    'hsl(211, 83%, 75%)',
-    'hsl(208, 80%, 72%)',
-    'hsl(204, 77%, 69%)',
-    'hsl(201, 74%, 65%)',
-    'hsl(199, 71%, 62%)',
-    'hsl(196, 68%, 58%)',
-    'hsl(194, 66%, 54%)',
-    'hsl(191, 66%, 49%)',
-    'hsl(189, 79%, 44%)',
-    'hsl(186, 100%, 38%)',
-    'hsl(185, 100%, 36%)',
-    'hsl(183, 100%, 34%)',
-    'hsl(181, 100%, 32%)',
-    'hsl(179, 100%, 31%)',
-    'hsl(176, 100%, 31%)',
-    'hsl(174, 100%, 30%)',
-    'hsl(171, 100%, 29%)',
+    'hsl(199, 100%, 49%)',  
+    'hsl(201, 98%, 65%)',   
+    'hsl(199, 100%, 74%)', 
   ],
+  lightStartEnd: {
+    start: { x: 0.2, y: 0 },
+    end: { x: 1, y: 1 }
+  },
   dark: [
     'hsl(270, 100%, 7%)',
     'hsl(249, 94%, 15%)',
@@ -77,7 +63,8 @@ export const themeColors: ThemeColorsType = {
     buttonPrimaryBackground: 'black',
     buttonPrimaryText: 'white',
     themeGradient: themeGradient.light,
-    themeGradientText: 'white'
+    themeGradientText: 'white',
+    gradientStartEnd: themeGradient.lightStartEnd
   },
   dark: {
     themeName: 'dark',
