@@ -42,6 +42,7 @@ const userSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(loginWithGoogle.pending, state => {
       state.loading = true;
+      state.error = null;
     });
     builder.addCase(loginWithGoogle.fulfilled, (state, action) => {
       state.loading = false;
@@ -50,7 +51,7 @@ const userSlice = createSlice({
     builder.addCase(loginWithGoogle.rejected, (state, action) => {
       state.loading = false;
       state.user = null;
-      state.error = action.error.message || 'Failed to login';
+      state.error = 'Unable to login to Listok, \n Please try again later'
     });
     builder.addCase(logout.fulfilled, state => {
       state.user = null;
