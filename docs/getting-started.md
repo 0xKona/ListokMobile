@@ -31,7 +31,7 @@
 - You'll then need a `config.json` file in the config folder that contains your server url in the following format:
     ```json
     {
-        "serverURL": "http://192.168.1.139:3000" 
+        "serverURL": "http://serverUrl:serverPort" 
     }
     ```
 

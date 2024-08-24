@@ -42,6 +42,7 @@ npm-debug.log
 yarn-error.log
 */.env
 config/listok-image-storage-config.json
+config/config.json
 
 # fastlane
 #
