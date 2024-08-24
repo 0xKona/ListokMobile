@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import LinearGradient from "react-native-linear-gradient";
 import { ThemeType } from "@app/constants/themes";
 import { GoogleSignin, statusCodes } from "@react-native-google-signin/google-signin";
 import { loginWithGoogle } from "@redux/slices/userSlice";
 import { AppDispatch, RootState } from "@redux/store";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import useTheme from "../hooks/useTheme";
 import LoadingSpinner from "../ui/loading-spinner";
 import Icon from "react-native-vector-icons/AntDesign";
+
+// TODO : Implement ListokLogin for users that don't want to use Google.
 
 const LoginForm = () => {
 
@@ -19,6 +20,7 @@ const LoginForm = () => {
 
     const [error, setError] = useState('');
 
+    // Initialize Google sign in with client id's
     useEffect(() => {
         if (config.iosClientId || config.androidClientId) {
           GoogleSignin.configure({
@@ -55,21 +57,7 @@ const LoginForm = () => {
       };
 
     return (
-        <LinearGradient
-          colors={[
-            'hsl(270, 100%, 7%)',
-            'hsl(219, 50%, 18%)',
-            'hsl(205, 49%, 27%)',
-            'hsl(196, 38%, 36%)',
-            'hsl(186, 24%, 48%)',
-            'hsl(171, 24%, 62%)',
-            'hsl(148, 32%, 79%)',
-            'hsl(104, 100%, 95%)'
-          ]}
-          start={{ x: 0.5, y: 0 }}
-          end={{ x: 0.5, y: 1 }}
-          style={theme.container}
-        >
+        <View style={theme.container}>
             {user.loading ?
               <LoadingSpinner text="Logging in..."/>
             : 
@@ -81,8 +69,9 @@ const LoginForm = () => {
               {error && <Text style={theme.errorText}>{error}</Text>}
               {user.error && <Text style={theme.errorText}>{user.error}</Text>}
             </>
+        
             }
-        </LinearGradient>
+        </View>
     )
 }
 
@@ -107,4 +96,4 @@ const styles = (theme: ThemeType) => StyleSheet.create({
     }
 })
 
-export default LoginForm;
+export default LoginForm

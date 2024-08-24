@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
         webClientId: process.env.WEB_CLIENT_ID,
       }),
     );
-  }, 0);
+  }, 1000);
 });
 
 export default router;
