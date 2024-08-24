@@ -1,3 +1,6 @@
+import React from "react";
+import LinearGradient from "react-native-linear-gradient";
+
 export interface ThemeType {
   themeName: string;
   surface: string;
@@ -7,6 +10,7 @@ export interface ThemeType {
   buttonPrimaryBackground: string;
   buttonPrimaryText: string;
   themeGradient: string[]
+  themeGradientText: string;
 }
 
 export interface ThemeColorsType {
@@ -61,7 +65,7 @@ export const themeGradient = {
     'hsl(355, 83%, 84%)',
     'hsl(0, 100%, 90%)',
   ]
-}
+};
 
 export const themeColors: ThemeColorsType = {
   light: {
@@ -72,7 +76,8 @@ export const themeColors: ThemeColorsType = {
     backgroundText: 'black',
     buttonPrimaryBackground: 'black',
     buttonPrimaryText: 'white',
-    themeGradient: themeGradient.light
+    themeGradient: themeGradient.light,
+    themeGradientText: 'white'
   },
   dark: {
     themeName: 'dark',
@@ -82,7 +87,8 @@ export const themeColors: ThemeColorsType = {
     backgroundText: 'white',
     buttonPrimaryBackground: 'white',
     buttonPrimaryText: 'black',
-    themeGradient: themeGradient.dark
+    themeGradient: themeGradient.dark,
+    themeGradientText: 'white'
   },
   barbie: {
     themeName: 'barbie',
@@ -92,7 +98,8 @@ export const themeColors: ThemeColorsType = {
     backgroundText: 'black',
     buttonPrimaryBackground: 'pink',
     buttonPrimaryText: 'white',
-    themeGradient: themeGradient.barbie
+    themeGradient: themeGradient.barbie,
+    themeGradientText: 'white'
   },
 };
 
