@@ -25,7 +25,7 @@ const ConfigSetting = () => {
                 <>
                     <View style={theme.textContainer}>
                         <Text style={theme.textMessage}>There was an error setting up!</Text>
-                        <Text style={theme.textMessage}>Check your internet connection and try again</Text>
+                        <Text style={theme.textMessage}>{'Check your internet connection \n and try again'}</Text>
                     </View>
                     <ListokButton text="Try Again" onPress={handleRetry} propStyles={theme.tryAgainButton} />
                 </>
@@ -53,7 +53,9 @@ const styles = (theme: ThemeType) => StyleSheet.create({
         fontSize: 16,
     },
     tryAgainButton: {
-        marginTop: 'auto',
+        width: 200,
+        marginTop: 10,
+        borderRadius: 10
     },
 });
 
