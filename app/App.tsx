@@ -20,7 +20,7 @@ const App = () => {
         <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer>
             <NavigationProvider>
-              <Stack.Navigator initialRouteName="Login">
+              <Stack.Navigator initialRouteName="Login" >
                 <Stack.Screen 
                   name="Login" 
                   component={LoginScreen} 
