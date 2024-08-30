@@ -54,7 +54,7 @@ const userSlice = createSlice({
       state.error = 'Unable to login to Listok, \n Please try again later'
     });
     builder.addCase(logout.fulfilled, state => {
-      state.user = null;
+      state = initialState;
     });
   },
 });
