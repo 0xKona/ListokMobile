@@ -1,5 +1,7 @@
 import axios from 'axios';
 import * as config from '@root/config/config.json';
+import { logout } from '@redux/slices/userSlice';
+import { store } from '@redux/store';
 
 export const authenticatedAxios = async (
   apiURL: string,
@@ -7,12 +9,12 @@ export const authenticatedAxios = async (
   authToken: string,
   data?: any
 ) => {
+
   try {
     const headers: any = {
       Authorization: `Bearer ${authToken}`,
     };
 
-    // Set the correct content-type based on the data type
     if (data instanceof FormData) {
       headers['Content-Type'] = 'multipart/form-data';
     } else {
@@ -20,17 +22,22 @@ export const authenticatedAxios = async (
     }
 
     const response = await axios({
-      baseURL: config.serverURL, // Ensure this is correctly pointing to your server URL
+      baseURL: config.serverURL,
       url: apiURL,
       data,
       method,
       headers,
     });
 
-    console.log('Response from API:', response.data); // Optional: Log the response for debugging
+    if (response.status === 401) {
+      store.dispatch(logout());
+    }
+
+    console.log('Response from API:', response.data); 
     return response.data;
   } catch (error) {
     console.error('Error making API call:', error);
-    throw error; // Re-throw the error to be handled by the calling function
+    store.dispatch(logout());
+    throw error; 
   }
 };
