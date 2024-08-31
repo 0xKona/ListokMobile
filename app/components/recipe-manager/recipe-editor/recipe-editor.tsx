@@ -9,6 +9,8 @@ import RecipeIngredientsEditor from './recipe-ingredients.tsx/recipe-ingredients
 import RecipeMethodEditor from './recipe-method/recipe-method-editor';
 import RecipeEditorConfirmation from './recipe-confirmation/recipe-confirmation';
 
+// TODO : Fix when to display discard popup
+
 const RecipeEditor = () => {
   const [ignorePopup, setIgnorePopup] = React.useState<boolean>(false);
   const navigation = useNavigation();

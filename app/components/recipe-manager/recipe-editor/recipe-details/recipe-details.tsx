@@ -1,4 +1,5 @@
 import useTheme from '@app/components/hooks/useTheme';
+import ListokButton from '@app/components/ui/button';
 import ImageUpload from '@app/components/ui/image-selector';
 import ListokInput from '@app/components/ui/input';
 import { ThemeType } from '@app/constants/themes';
@@ -44,33 +45,34 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
   const updateDesc = () => dispatch(updateRecipeDesc(desc));
 
   return (
-    <>
       <View style={theme.container}>
         <Text style={theme.titleText}>Recipe Details</Text>
 
         <View style={theme.inputSection}>
-          <Text>Recipe Name:</Text>
           <ListokInput
+            inputName='Recipe Name'
             value={title}
             onChangeText={setTitle}
             onEndEditing={updateTitle}
+            backgroundColor={theme.container.backgroundColor}
           />
         </View>
 
         <View style={theme.inputSection}>
-          <Text>Recipe Description:</Text>
           <ListokInput
+            inputName='Recipe Description'
             value={desc}
             onChangeText={setDesc}
             onEndEditing={updateDesc}
+            multiline={true}
+            backgroundColor={theme.container.backgroundColor}
           />
         </View>
         <ImageUpload image={image} setImage={setImage} authToken={user.token}/>
+        <View style={theme.buttonContainer}>
+          <ListokButton text="Next" onPress={handleNextPress} propStyles={{width: '40%', borderRadius: 5}}/>
+        </View>
       </View>
-      <View style={theme.buttonContainer}>
-        <Button title="Next" onPress={handleNextPress} />
-      </View>
-    </>
   );
 };
 
@@ -80,6 +82,9 @@ const styles = (theme: ThemeType) =>
       backgroundColor: theme.surface,
       padding: 20,
       margin: 20,
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10,
+      height: '100%'
     },
     titleText: {
       alignSelf: 'center',
@@ -91,6 +96,7 @@ const styles = (theme: ThemeType) =>
     },
     buttonContainer: {
       marginTop: 'auto',
+      alignItems: 'flex-end',
       marginBottom: 20,
     },
   });
