@@ -6,7 +6,7 @@ import { openRecipeEditor } from '@redux/slices/recipeEditorSlice';
 import { RootState } from '@redux/store';
 import { RecipeNavigationProp } from '@typed/navigation';
 import React from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -23,16 +23,23 @@ const RecipeCard = ({ data, refreshRecipes }: PropsType) => {
   const { user } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const theme = useTheme(styles);
+  
+  const swipeableRef = React.useRef<any>(null);
+  const closeSwipeable = () => {
+    if (swipeableRef.current) {
+      swipeableRef.current.close();
+    }
+  }
 
   const handleDeleteRecipe = () => {
+    closeSwipeable();
     recipeManagerApis.deleteRecipe(data.id, user?.token);
     refreshRecipes();
   };
 
   const confirmDelete = () => {
     const actions: ActionInterface[] = [{actionName: 'Delete this recipe', actionFunction: handleDeleteRecipe}];
-
-    actionSheet(actions, 1);
+    actionSheet(actions, 1, closeSwipeable);
   }
 
   const openRecipe = () => {
@@ -47,7 +54,7 @@ const RecipeCard = ({ data, refreshRecipes }: PropsType) => {
   )
 
   return (
-    <Swipeable renderRightActions={renderRightAction} overshootRight={false} >
+    <Swipeable ref={swipeableRef} renderRightActions={renderRightAction} overshootRight={false} >
       <View style={theme.container}>
         <View style={theme.titleContainer}>
           <Text>{data.title}</Text>
