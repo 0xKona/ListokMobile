@@ -8,12 +8,13 @@ export interface ActionInterface {
 
 export const actionSheet = (
     actions: ActionInterface[],
-    destructiveIndex?: number
+    destructiveIndex?: number,
+    cancelFunction?: () => any
 ) => {
 
     if (Platform.OS === 'ios') {
         const actionNames = ['Cancel', ...actions.map((action: ActionInterface) => action.actionName)];
-        const actionFuncs = [() => {}, ...actions.map((action: ActionInterface) => action.actionFunction)];
+        const actionFuncs = [cancelFunction ? cancelFunction : () => {}, ...actions.map((action: ActionInterface) => action.actionFunction)];
     
         const checkDarkMode = () => store.getState().theme.currentTheme.themeName === 'dark'
     

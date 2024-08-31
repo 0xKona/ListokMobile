@@ -10,8 +10,15 @@ import LoginScreen from '@app/screens/LoginScreen';
 import HomeScreen from '@app/screens/HomeScreen';
 import { RootStackParamList } from '../typed/navigation';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { LogBox } from 'react-native';
 
 const Stack = createStackNavigator<RootStackParamList>();
+
+LogBox.ignoreLogs([
+  '[Reanimated] Tried to modify key `velocity` of an object which has been already passed to a worklet.', 
+  // Add any other warnings you want to ignore
+]);
+
 
 const App = () => {
   return (
