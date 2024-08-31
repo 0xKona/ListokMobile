@@ -10,7 +10,7 @@ import { useIsFocused } from '@react-navigation/native';
 
 const RecipeListContainer = () => {
   const isFocused = useIsFocused();
-  const [currentTab, setCurrentTab] = useState(recipeTabs[0].value);
+  const [currentTab, setCurrentTab] = useState<string>(recipeTabs[0].value);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -37,7 +37,7 @@ const RecipeListContainer = () => {
   return (
     <View style={styles.container}>
       <RecipeTabs currentTab={currentTab} handlePressTab={handlePressTab} />
-      <RecipeList refreshRecipes={refreshRecipes} />
+      <RecipeList currentTab={currentTab} refreshRecipes={refreshRecipes} />
     </View>
   );
 };
