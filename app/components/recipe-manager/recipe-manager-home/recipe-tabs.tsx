@@ -4,10 +4,11 @@ import { recipeTabs } from '@app/constants/recipe-tabs';
 import { ThemeType } from '@app/constants/themes';
 import { useNavigation } from '@react-navigation/native';
 import { resetRecipeEditor } from '@redux/slices/recipeEditorSlice';
+import { RootState } from '@redux/store';
 import { RecipeNavigationProp } from '@typed/navigation';
 import React from 'react';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface PropsType {
   currentTab: string;
@@ -17,17 +18,26 @@ interface PropsType {
 const RecipeTabs = ({ currentTab, handlePressTab }: PropsType) => {
   
   const theme = useTheme(styles);
+  const { currentTheme } = useSelector((state: RootState) => state.theme);
   const dispatch = useDispatch();
   const navigation = useNavigation<RecipeNavigationProp>();
 
-  const selectedStyle = (selected: boolean) => {
+  const selectedStyle = (selected: boolean, tabIndex: number) => {
+    const borderRadius = {
+      borderTopLeftRadius: tabIndex === 0 && 5,
+      borderTopRightRadius: tabIndex === recipeTabs.length - 1 && 5
+    }
     return selected
       ? {
           ...theme.tab,
+          ...borderRadius,
           borderBottomWidth: 2,
-          borderBottomColor: 'black',
+          borderBottomColor: currentTheme.buttonPrimaryBackground
         }
-      : theme.tab;
+      : {...theme.tab,
+        ...borderRadius,
+        backgroundColor: 'white'
+      };
   };
 
   const handleOpenNewRecipe = () => {
@@ -37,13 +47,13 @@ const RecipeTabs = ({ currentTab, handlePressTab }: PropsType) => {
 
   return (
     <View style={theme.container}>
-      {recipeTabs.map((tab: any) => (
-        <TouchableHighlight
-          style={selectedStyle(currentTab === tab.value)}
+      {recipeTabs.map((tab: any, index: number) => (
+        <TouchableOpacity
+          style={selectedStyle(currentTab === tab.value, index)}
           onPress={() => handlePressTab(tab.value)}
           key={tab.value}>
           <Text>{tab.text}</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
       ))}
       <ListokButton
         onPress={handleOpenNewRecipe}

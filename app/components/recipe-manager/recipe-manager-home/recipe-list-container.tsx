@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: '100%',
     flexGrow: 1,
-    maxHeight: '90%',
+    height: '99%'
   },
 });
 

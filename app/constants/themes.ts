@@ -52,7 +52,7 @@ export const themeColors: ThemeColorsType = {
     surfaceText: 'black',
     background: 'darkgrey',
     backgroundText: 'black',
-    buttonPrimaryBackground: 'black',
+    buttonPrimaryBackground: '#4CA8F4',
     buttonPrimaryText: 'white',
     themeGradient: themeGradient.light,
     themeGradientText: 'white',
@@ -70,11 +70,11 @@ export const themeColors: ThemeColorsType = {
   },
   barbie: {
     themeName: 'barbie',
-    surface: 'pink',
+    surface: '#E0218A',
     surfaceText: 'white',
     background: 'white',
     backgroundText: 'black',
-    buttonPrimaryBackground: 'pink',
+    buttonPrimaryBackground: '#E0218A',
     buttonPrimaryText: 'white',
     themeGradient: themeGradient.barbie,
     themeGradientText: 'white'
