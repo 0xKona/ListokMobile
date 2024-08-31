@@ -6,6 +6,7 @@ import LoadingSpinner from '@app/components/ui/loading-spinner';
 import useTheme from '@app/components/hooks/useTheme';
 import { ThemeType } from '@app/constants/themes';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { actionSheet } from './action-sheet';
 
 interface ImageUploadProps {
     setImage: (image: string) => void;
@@ -73,6 +74,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ image, setImage, authToken })
             setLoading(false); 
         }
     };
+
+    const confirmDeleteImage = () => {
+        const actions = [{ actionName: 'Delete Image', actionFunction: handleDeleteImage}]
+        actionSheet(actions, 1);
+    }
     
 
     return (
@@ -80,12 +86,14 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ image, setImage, authToken })
             {loading && <LoadingSpinner text="Uploading Image..." />}
             {!image ? (
                 <TouchableOpacity style={theme.uploadButton} onPress={handleImageUpload}>
-                    <Icon name='add-a-photo' color={'black'} size={40}/>
+                    {!loading && <Icon name='add-a-photo' color={'black'} size={40}/>}
                 </TouchableOpacity>
             ) : (
                 <View style={theme.imageContainer}>
                     <Image source={{ uri: image }} style={theme.imagePreview} />
-                    <Button title="Delete Image" onPress={handleDeleteImage} color="red" />
+                    <TouchableOpacity style={theme.deleteButton} onPress={confirmDeleteImage}>
+                        <Icon name='delete' size={30}/>
+                    </TouchableOpacity>
                 </View>
             )}
         </View>
@@ -101,6 +109,8 @@ const styles = (theme: ThemeType) =>
             width: '100%',
             aspectRatio: 1,
             borderWidth: 1,
+            borderColor: '#87848C',
+            borderRadius: 5,
         },
         uploadButton: {
             height: '100%',
@@ -115,15 +125,29 @@ const styles = (theme: ThemeType) =>
             fontSize: 16,
         },
         imageContainer: {
+            height: '100%',
+            width: '100%',
             alignItems: 'center',
             justifyContent: 'center',
+            paddingVertical: 5
         },
         imagePreview: {
-            width: 200,
-            height: 200,
+            flex: 1,
+            height: 300,
+            width: 300,
             borderRadius: 10,
-            marginBottom: 10,
         },
+        deleteButton: {
+            position: 'absolute',
+            right: 10,
+            top: 10,
+            height: 40,
+            width: 40,
+            borderRadius: 100,
+            backgroundColor: 'white',
+            justifyContent: 'center',
+            alignItems: 'center'
+        }
     });
 
 export default ImageUpload;

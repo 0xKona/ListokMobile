@@ -70,7 +70,7 @@ export const themeColors: ThemeColorsType = {
   },
   barbie: {
     themeName: 'barbie',
-    surface: '#E0218A',
+    surface: 'white',
     surfaceText: 'white',
     background: 'white',
     backgroundText: 'black',

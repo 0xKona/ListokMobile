@@ -1,5 +1,8 @@
 import React from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { StyleSheet } from 'react-native';
+import useTheme from '../hooks/useTheme';
+import { ThemeType } from '@app/constants/themes';
+import { TextInput } from 'react-native-paper';
 
 /* TODO LIST
 
@@ -9,41 +12,48 @@ import { StyleSheet, TextInput } from 'react-native';
 */
 
 interface PropsInterface {
+  inputName: string;
   value: any;
   onChangeText: any;
   onEndEditing?: any;
   type?: 'text' | 'number';
+  multiline?: boolean;
+  backgroundColor?: string
 }
 
 const ListokInput = ({
+  inputName,
   value,
   onChangeText,
   onEndEditing,
   type,
+  multiline = false,
+  backgroundColor
 }: PropsInterface) => {
-  return type === 'number' ? (
+  const theme = useTheme(styles)
+
+  return (
     <TextInput
-      style={ListokInputStyles.default}
+      label={inputName}
+      style={theme.default}
       value={value}
       onChangeText={onChangeText}
       onEndEditing={onEndEditing}
-      keyboardType="numeric"
+      mode='outlined'
+      theme={{ colors : { primary: theme.outline.color, text: '', placeholder: '', background: backgroundColor}}}
+      keyboardType={type === 'number' ? 'numeric' : 'default'}
+      multiline={multiline}
     />
-  ) : (
-    <TextInput
-      style={ListokInputStyles.default}
-      value={value}
-      onChangeText={onChangeText}
-      onEndEditing={onEndEditing}
-    />
-  );
+  )
 };
 
-export const ListokInputStyles = StyleSheet.create({
+export const styles = (theme: ThemeType) => StyleSheet.create({
   default: {
     width: '100%',
-    borderWidth: 1,
-    padding: 10,
+    maxHeight: 100
+  },
+  outline: {
+    color: theme.buttonPrimaryBackground
   },
 });
 
