@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { ThemeType } from '@app/constants/themes';
 import useTheme from '@app/components/hooks/useTheme';
 import ListokButton from '@app/components/ui/button';
+import ListokPicker from '@app/components/ui/picker';
 
 const IngredientForm = ({ addNewIngredient, closeForm }: any) => {
   const [ingredientName, setIngredientName] = React.useState('');
@@ -50,49 +51,42 @@ const IngredientForm = ({ addNewIngredient, closeForm }: any) => {
 
       <View style={theme.container}>
         <View style={theme.formSection}>
-          <Text>Ingredient Name:</Text>
+          {/* <Text>Ingredient Name:</Text> */}
           <ListokInput
+            inputName='Ingredient Name'
             value={ingredientName}
             onChangeText={setIngredientName}
+            backgroundColor={theme.container.backgroundColor}
           />
         </View>
 
         <View style={theme.formSection}>
-          <Text>Ingredient Amount:</Text>
+          {/* <Text>Ingredient Amount:</Text> */}
           <ListokInput
+            inputName='Amount'
             value={ingredientAmount}
             onChangeText={setIngredientAmount}
             type="number"
+            backgroundColor={theme.container.backgroundColor}
           />
         </View>
 
-        <View style={theme.formSection}>
-          <Text>Amount Measurement:</Text>
-          <View style={theme.dropdown}>
-            <Icon name="caretdown" />
-            <RNPickerSelect
-              onValueChange={(value: any) => setIngredientMeasurement(value)}
-              items={ingredientMeasurementOptions}
-              value={ingredientMeasurement}
-              itemKey={ingredientMeasurement}
-            />
-          </View>
-        </View>
+        <ListokPicker 
+          label='Amount Measurement'
+          backgroundColor={theme.container.backgroundColor}
+          state={ingredientMeasurement}
+          setState={setIngredientMeasurement}
+          items={ingredientMeasurementOptions}
+        />
 
-        <View style={theme.formSection}>
-          <Text>Ingredient Category:</Text>
-          <View style={theme.dropdown}>
-            <Icon name="caretdown" />
-            <RNPickerSelect
-              onValueChange={(value: any) => setIngredientCategory(value)}
-              items={ingredientCategoryOptions}
-              value={ingredientCategory}
-              itemKey={ingredientCategory}
-            />
-          </View>
-        </View>
+        <ListokPicker 
+          label='Category' 
+          backgroundColor={theme.container.backgroundColor} 
+          state={ingredientCategory} setState={setIngredientCategory} 
+          items={ingredientCategoryOptions}
+        />
 
-        <View>
+        <View style={theme.submitButton}>
           <ListokButton text="Submit" onPress={handleSubmit} />
         </View>
       </View>
@@ -104,8 +98,10 @@ const IngredientForm = ({ addNewIngredient, closeForm }: any) => {
 const styles = (theme: ThemeType) =>
   StyleSheet.create({
     container: {
+      backgroundColor: theme.surface,
       display: 'flex',
       width: '100%',
+      flexGrow: 1
     },
     closeButtonContainer: {
       width: '100%',
@@ -126,6 +122,10 @@ const styles = (theme: ThemeType) =>
       padding: 10,
       flexDirection: 'row',
     },
+    submitButton: {
+      marginTop: "auto",
+      marginBottom: 10
+    }
   });
 
 export default IngredientForm;
