@@ -24,6 +24,7 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
   const { user } = useSelector((state: RootState) => state.user)
 
   const [title, setTitle] = React.useState<string>(recipeData.recipeData.title);
+  const [invalidTitle, setInvalidTitle] = React.useState<boolean>(false);
   const [desc, setDesc] = React.useState<string>(recipeData.recipeData.desc);
   const [image, setImage] = React.useState<string>(recipeData.recipeData.picture);
 
@@ -32,8 +33,12 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
   }, [image])
 
   const theme = useTheme(styles);
-
+  console.log('***RECIPE TITLE:: ', title)
   const handleNextPress = () => {
+    if (title.length < 1) {
+      setInvalidTitle(true);
+      return
+    }
     // TODO Verify fields here
     dispatch(updateRecipeTitle(title));
     dispatch(updateRecipeDesc(desc));
@@ -41,7 +46,12 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
     dispatch(changeCurrentStep(2));
   };
 
-  const updateTitle = () => dispatch(updateRecipeTitle(title));
+  const updateTitle = () => {
+    if (title.length > 0) {
+      setInvalidTitle(false);
+    }
+    dispatch(updateRecipeTitle(title))
+  };
   const updateDesc = () => dispatch(updateRecipeDesc(desc));
 
   return (
@@ -50,11 +60,12 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
 
         <View style={theme.inputSection}>
           <ListokInput
-            inputName='Recipe Name'
+            inputName='Recipe Name*'
             value={title}
             onChangeText={setTitle}
             onEndEditing={updateTitle}
             backgroundColor={theme.container.backgroundColor}
+            error={invalidTitle}
           />
         </View>
 
