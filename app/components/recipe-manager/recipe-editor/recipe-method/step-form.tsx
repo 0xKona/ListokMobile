@@ -36,12 +36,11 @@ const StepForm = ({ addNewStep, closeForm }: StepFormProps) => {
 
       <View style={theme.container}>
         <View style={theme.formSection}>
-          <Text>Step Detail:</Text>
-          <ListokInput value={stepDetail} onChangeText={setStepDetail} />
+          <ListokInput inputName='Step Details' value={stepDetail} onChangeText={setStepDetail} backgroundColor={theme.container.backgroundColor} />
         </View>
 
-        <View>
-          <ListokButton text="Submit" onPress={handleSubmit} />
+        <View style={theme.submitButton}>
+          <ListokButton text="Submit" onPress={handleSubmit} propStyles={{borderRadius: 5}}/>
         </View>
       </View>
     </>
@@ -54,6 +53,8 @@ const styles = (theme: ThemeType) =>
     container: {
       display: 'flex',
       width: '100%',
+      flexGrow: 1,
+      backgroundColor: theme.surface
     },
     closeButtonContainer: {
       width: '100%',
@@ -67,6 +68,10 @@ const styles = (theme: ThemeType) =>
     formSection: {
       marginBottom: 10,
     },
+    submitButton: {
+      marginTop: 'auto',
+      marginBottom: 15
+    }
   });
 
 export default StepForm;

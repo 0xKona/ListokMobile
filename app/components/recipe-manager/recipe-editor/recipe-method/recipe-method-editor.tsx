@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { MethodStepType } from '@typed/recipe-types';
 import StepForm from './step-form';
 import StepList from './step-list';
+import ListokButton from '@app/components/ui/button';
 
 interface PropsType {
   recipeData: RecipeEditorState;
@@ -80,10 +81,12 @@ const RecipeMethodEditor = ({ recipeData }: PropsType) => {
           </>
         )}
       </View>
-      <View style={theme.buttonContainer}>
-        <Button title="Back" onPress={handleBack} />
-        <Button title="Next" onPress={handleNext} />
-      </View>
+      { !openStepForm && (
+        <View style={theme.buttonContainer}>
+          <ListokButton text="Back" onPress={handleBack} propStyles={{width: '35%', borderRadius: 5}} />
+          <ListokButton text="Next" onPress={handleNext} propStyles={{width: '35%', borderRadius: 5}}/>
+        </View>
+      )}
     </>
   );
 };
@@ -97,6 +100,8 @@ const styles = (theme: ThemeType) =>
       flexGrow: 1,
       padding: 20,
       margin: 20,
+      height: '100%',
+      borderRadius: 10
     },
     addNewButton: {
       width: '100%',
