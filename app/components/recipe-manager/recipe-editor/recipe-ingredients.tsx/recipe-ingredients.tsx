@@ -12,6 +12,7 @@ import IngredientForm from './ingredient-form';
 import { ThemeType } from '@app/constants/themes';
 import useTheme from '@app/components/hooks/useTheme';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ListokButton from '@app/components/ui/button';
 
 interface PropsType {
   recipeData: RecipeEditorState;
@@ -73,17 +74,21 @@ const RecipeIngredientsEditor = ({ recipeData }: PropsType) => {
               </>
             </TouchableOpacity>
             {noIngredients ? (
-              <Text>No Ingredients</Text>
+              <View style={{height: '100%', marginTop: 50}}>
+                <Text style={{textAlign: 'center'}}>{'No Ingredients \n Press Add New to add a new ingredient!'}</Text>
+              </View>
             ) : (
               <IngredientList ingredients={ingredients} />
             )}
           </>
         )}
       </View>
-      <View style={theme.buttonContainer}>
-        <Button title="Back" onPress={handleBack} />
-        <Button title="Next" onPress={handleNext} />
-      </View>
+      {!openIngredientForm && (
+        <View style={theme.buttonContainer}>
+          <ListokButton text="Back" onPress={handleBack} propStyles={{width: '35%', borderRadius: 5}}/>
+          <ListokButton text="Next" onPress={handleNext} propStyles={{width: '35%', borderRadius: 5}}/>
+        </View>
+      )}
     </>
   );
 };
@@ -97,6 +102,8 @@ const styles = (theme: ThemeType) =>
       flexGrow: 1,
       padding: 20,
       margin: 20,
+      height: '99%',
+      borderRadius: 10
     },
     addNewButton: {
       width: '100%',
