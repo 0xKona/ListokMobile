@@ -1,4 +1,5 @@
 import useTheme from '@app/components/hooks/useTheme';
+import { actionSheet } from '@app/components/ui/action-sheet';
 import { ThemeType } from '@app/constants/themes';
 import { updateRecipeIngredients } from '@redux/slices/recipeEditorSlice';
 import { IngredientType } from '@typed/recipe-types';
@@ -10,7 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Swipeable } from 'react-native-gesture-handler';
+import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useDispatch } from 'react-redux';
 
@@ -22,6 +23,13 @@ const IngredientList = ({ ingredients }: PropsInterface) => {
   const theme = useTheme(styles);
   const dispatch = useDispatch();
 
+  const swipeableRef = React.useRef<any>(null);
+  const closeSwipeable = () => {
+    if (swipeableRef.current) {
+      swipeableRef.current.close();
+    }
+  }
+
   const handleDelete = (indexToDelete: number) => {
     const newIngredients = [...ingredients];
     newIngredients.splice(indexToDelete, 1);
@@ -29,17 +37,23 @@ const IngredientList = ({ ingredients }: PropsInterface) => {
     dispatch(updateRecipeIngredients(newIngredients));
   };
 
+  const handlePressDelete = (index: number) => {
+    const actions = [{actionName: 'Delete Ingredient', actionFunction: () => {handleDelete(index); closeSwipeable()}}]
+    actionSheet(actions, 1, closeSwipeable)
+  }
+
   const renderDelete = (index: number) => (
-    <TouchableOpacity onPress={() => handleDelete(index)} style={theme.delete}>
-      <Icon name="delete" size={20} />
+    <TouchableOpacity onPress={() => handlePressDelete(index)} style={theme.delete}>
+      <Icon name="delete" size={20} color={'white'}/>
     </TouchableOpacity>
   );
   return (
     <ScrollView style={theme.container}>
       {ingredients.map((ingredient: IngredientType, index: number) => (
-        <Swipeable renderRightActions={() => renderDelete(index)}>
-          <View style={theme.listItem} key={ingredient.name}>
+        <Swipeable ref={swipeableRef} renderRightActions={() => renderDelete(index)} overshootRight={false}>
+          <View style={[theme.listItem, theme.shadowProp]} key={ingredient.name}>
             <Text>{ingredient.name}</Text>
+            <Text>{`${ingredient.amount} ${ingredient.measurement}`}</Text>
           </View>
         </Swipeable>
       ))}
@@ -59,14 +73,23 @@ const styles = (theme: ThemeType) =>
       width: 50,
       justifyContent: 'center',
       alignItems: 'center',
+      backgroundColor: 'red',
+      borderRadius: 5
     },
     listItem: {
       // TODO Adjust theming
-      backgroundColor: 'lightgrey',
+      backgroundColor: theme.surface,
+      shadowRadius: 1,
       width: '100%',
       height: 50,
       padding: 10,
       marginBottom: 5,
+      borderColor: theme.buttonPrimaryBackground,
+      borderWidth: 1,
+      borderRadius: 5,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center'
     },
   });
 
