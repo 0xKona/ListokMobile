@@ -1,7 +1,6 @@
 import React from 'react';
 import ListokInput from '@app/components/ui/input';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
 import { CategoryType, MeasurementType } from '@typed/recipe-types';
 import {
   ingredientCategoryOptions,
@@ -12,6 +11,7 @@ import { ThemeType } from '@app/constants/themes';
 import useTheme from '@app/components/hooks/useTheme';
 import ListokButton from '@app/components/ui/button';
 import ListokPicker from '@app/components/ui/picker';
+import { useAlert } from '@app/components/ui/alert';
 
 const IngredientForm = ({ addNewIngredient, closeForm }: any) => {
   const [ingredientName, setIngredientName] = React.useState('');
@@ -40,11 +40,15 @@ const IngredientForm = ({ addNewIngredient, closeForm }: any) => {
     setIngredientCategory('fruit');
   };
 
+  const handlePressClose = () => {
+    useAlert('Lose Ingredient without saving?', 'You will lose this ingredient', [{text: 'Close', style: 'destructive', onPress: handleClose}])
+  }
+
   return (
     <>
       <View style={theme.closeButtonContainer}>
         <Text style={theme.title}>Add New Ingredient</Text>
-        <TouchableOpacity onPress={handleClose}>
+        <TouchableOpacity onPress={handlePressClose}>
           <Icon name="closecircle" size={20} />
         </TouchableOpacity>
       </View>
@@ -87,7 +91,7 @@ const IngredientForm = ({ addNewIngredient, closeForm }: any) => {
         />
 
         <View style={theme.submitButton}>
-          <ListokButton text="Submit" onPress={handleSubmit} />
+          <ListokButton text="Submit" onPress={handleSubmit} propStyles={{borderRadius: 5}}/>
         </View>
       </View>
     </>
