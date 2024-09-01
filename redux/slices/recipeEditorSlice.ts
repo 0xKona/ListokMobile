@@ -13,6 +13,7 @@ export interface RecipeEditorState {
   steps: StepType[];
   currentStep: number;
   recipeData: RecipeType;
+  loading: boolean;
 }
 
 const initialState: RecipeEditorState = {
@@ -36,12 +37,13 @@ const initialState: RecipeEditorState = {
     ingredients: [],
     method: [],
   },
+  loading: false
 };
 
 // Thunk for submitting the recipe
 export const submitRecipe = createAsyncThunk(
   'recipe/submitRecipe',
-  async (_, { getState }) => {
+  async (navigate: () => void, { getState }) => {
     const state = getState() as RootState;
     const { recipeData, existingRecipe } = state.recipeEditor;
     const { user } = state.user;
@@ -63,6 +65,7 @@ export const submitRecipe = createAsyncThunk(
         user.token,
       );
     }
+    navigate();
   }
 );
 
@@ -95,6 +98,21 @@ const recipeEditorSlice = createSlice({
     updateRecipeMethod(state, action: PayloadAction<MethodStepType[]>) {
       state.recipeData.method = action.payload;
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(submitRecipe.pending, state => {
+      state.loading = true;
+      console.log("Submitting Recipe")
+    });
+    builder.addCase(submitRecipe.fulfilled, (state, action: any) => {
+      state.recipeData = initialState.recipeData;
+      state.loading = false;
+      console.log("Successfully Submitted Recipe")
+    });
+    builder.addCase(submitRecipe.rejected, state => {
+      state.loading = false;
+      console.log('Error submitting recipe')
+    });
   },
 });
 
