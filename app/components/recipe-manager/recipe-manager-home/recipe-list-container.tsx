@@ -13,11 +13,7 @@ const RecipeListContainer = () => {
   const [currentTab, setCurrentTab] = useState<string>(recipeTabs[0].value);
 
   const dispatch = useDispatch<AppDispatch>();
-
-  const { userRecipes } = useSelector(
-    (state: RootState) => state.recipeManager,
-  );
-  console.log('Redux State of Recipes: ', userRecipes);
+  
   const { user } = useSelector((state: RootState) => state.user);
 
   const handlePressTab = (tab: string) => {
