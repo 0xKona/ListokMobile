@@ -20,6 +20,7 @@ const RecipesNavigator = () => {
         },
         headerTintColor: currentTheme.themeGradientText,
       }}
+      
     >
       <Stack.Screen name="Your Recipes" component={RecipeManager} />
       <Stack.Screen name="New Recipe" component={RecipeEditor} />

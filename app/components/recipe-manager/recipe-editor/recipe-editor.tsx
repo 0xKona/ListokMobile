@@ -2,12 +2,14 @@ import { RootState } from '@redux/store';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { Alert } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import { resetRecipeEditor } from '@redux/slices/recipeEditorSlice';
 import RecipeDetailsEditor from './recipe-details/recipe-details';
 import RecipeIngredientsEditor from './recipe-ingredients.tsx/recipe-ingredients';
 import RecipeMethodEditor from './recipe-method/recipe-method-editor';
 import RecipeEditorConfirmation from './recipe-confirmation/recipe-confirmation';
+import { ThemeType } from '@app/constants/themes';
+import useTheme from '@app/components/hooks/useTheme';
 
 // TODO : Fix when to display discard popup
 
@@ -48,25 +50,48 @@ const RecipeEditor = () => {
 
   const recipeState = useSelector((state: RootState) => state.recipeEditor);
 
-  console.log('Recipe State:: ', recipeState);
+  const theme = useTheme(styles);
 
   switch (recipeState.currentStep) {
     case 1:
-      return <RecipeDetailsEditor recipeData={recipeState} />;
+      return (
+        <View style={theme.container}>
+          <RecipeDetailsEditor recipeData={recipeState} />
+        </View>
+      );
     case 2:
-      return <RecipeIngredientsEditor recipeData={recipeState} />;
+      return (
+        <View style={theme.container}>
+          <RecipeIngredientsEditor recipeData={recipeState} />
+        </View>
+      );
     case 3:
-      return <RecipeMethodEditor recipeData={recipeState} />;
+      return (
+        <View style={theme.container}>
+          <RecipeMethodEditor recipeData={recipeState} />
+        </View>
+      );
     case 4:
       return (
-        <RecipeEditorConfirmation
-          recipeData={recipeState}
-          setIgnorePopup={setIgnorePopup}
-        />
+        <View style={theme.container}>
+          <RecipeEditorConfirmation
+            recipeData={recipeState}
+            setIgnorePopup={setIgnorePopup}
+          />
+        </View>
       );
     default:
-      return null; // Return null for safety if no cases match
+      return null;
   }
 };
+
+const styles = (theme: ThemeType) => StyleSheet.create({
+  container: {
+    backgroundColor: theme.background,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 20
+  }
+})
 
 export default RecipeEditor;
