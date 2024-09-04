@@ -86,13 +86,13 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ image, setImage, authToken })
             {loading && <LoadingSpinner text="Uploading Image..." />}
             {!image ? (
                 <TouchableOpacity style={theme.uploadButton} onPress={handleImageUpload}>
-                    {!loading && <Icon name='add-a-photo' color={'black'} size={40}/>}
+                    {!loading && <Icon name='add-a-photo' color={theme.deleteButton.color} size={40}/>}
                 </TouchableOpacity>
             ) : (
                 <View style={theme.imageContainer}>
                     <Image source={{ uri: image }} style={theme.imagePreview} />
                     <TouchableOpacity style={theme.deleteButton} onPress={confirmDeleteImage}>
-                        <Icon name='delete' size={30}/>
+                        <Icon name='delete' size={30} />
                     </TouchableOpacity>
                 </View>
             )}
@@ -146,7 +146,8 @@ const styles = (theme: ThemeType) =>
             borderRadius: 100,
             backgroundColor: 'white',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            color: theme.surfaceText
         }
     });
 

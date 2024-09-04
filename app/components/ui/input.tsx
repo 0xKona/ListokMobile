@@ -19,7 +19,8 @@ interface PropsInterface {
   type?: 'text' | 'number';
   multiline?: boolean;
   backgroundColor?: string
-  error?: boolean
+  error?: boolean;
+  textColor?: string;
 }
 
 const ListokInput = ({
@@ -30,7 +31,8 @@ const ListokInput = ({
   type,
   multiline = false,
   backgroundColor,
-  error
+  error,
+  textColor
 }: PropsInterface) => {
   const theme = useTheme(styles)
 
@@ -43,7 +45,8 @@ const ListokInput = ({
       onChangeText={onChangeText}
       onEndEditing={onEndEditing}
       mode='outlined'
-      theme={{ colors : { primary: error ? theme.outlineError.color : theme.outline.color, text: '', placeholder: '', background: backgroundColor}}}
+      textColor={textColor}
+      theme={{ colors : { primary: error ? theme.outlineError.color : theme.outline.color, background: backgroundColor}}}
       keyboardType={type === 'number' ? 'numeric' : 'default'}
       multiline={multiline}
     />
