@@ -7,6 +7,8 @@ import { RootState } from '@redux/store';
 import { RecipeType } from '@typed/recipe-types';
 import EmptyRecipeList from './empty-recipe-list';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { ThemeType } from '@app/constants/themes';
+import { RefreshControl } from 'react-native-gesture-handler';
 
 interface PropsType {
   currentTab: string;
@@ -23,7 +25,7 @@ const RecipeList = ({ currentTab, refreshRecipes }: PropsType) => {
   if (currentTab === 'favorites') {
     return (
       <View style={theme.construction}>
-        <Icon name="construction" size={100} />
+        <Icon name="construction" size={100} color={theme.constructionText.color}/>
         <Text style={theme.constructionText} >{"Imma be real dawg, \n I just haven't had time to do this yet"}</Text>
       </View>
     )
@@ -31,9 +33,16 @@ const RecipeList = ({ currentTab, refreshRecipes }: PropsType) => {
 
   return (
     <FlatList
-      refreshing={loading}
-      onRefresh={refreshRecipes}
+      refreshControl={
+        <RefreshControl 
+          refreshing={loading} 
+          onRefresh={refreshRecipes} 
+          colors={['white', 'white']} 
+          tintColor={theme.constructionText.color}
+        />
+      }
       extraData={loading}
+      contentContainerStyle={{ flexGrow: 1 }}
       style={theme.container}
       data={userRecipes}
       renderItem={({ item }) => (
@@ -45,19 +54,22 @@ const RecipeList = ({ currentTab, refreshRecipes }: PropsType) => {
   );
 };
 
-const styles = () =>
+const styles = (theme: ThemeType) =>
   StyleSheet.create({
     container: {
       width: '100%',
+      flexGrow: 1,
+      // backgroundColor: 'orange'
     },
     construction: {
       justifyContent: 'center',
       alignItems: 'center',
       flexGrow: 1,
-      backgroundColor: 'white'
+      backgroundColor: theme.surface
     },
     constructionText: {
-      textAlign: 'center'
+      textAlign: 'center',
+      color: theme.surfaceText
     }
   });
 

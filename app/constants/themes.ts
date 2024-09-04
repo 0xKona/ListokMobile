@@ -59,14 +59,14 @@ export const themeColors: ThemeColorsType = {
   },
   dark: {
     themeName: 'dark',
-    surface: 'rgb(27, 27, 27)',
-    surfaceText: 'white',
-    background: 'black',
-    backgroundText: 'white',
-    highlight: 'rgb(1 ,3, 92)',
-    highlightText: 'white',
+    surface: 'rgb(40, 40, 40)',           // Darker grey for surface to soften contrast
+    surfaceText: 'rgb(220, 220, 220)',    // Off-white text to reduce harshness
+    background: 'rgb(18, 18, 18)',        // Near-black background for deep contrast
+    backgroundText: 'rgb(200, 200, 200)', // Softer grey-white for text on background
+    highlight: 'rgb(32, 56, 128)',        // Muted blue for highlight (less harsh than pure blue)
+    highlightText: 'rgb(240, 240, 240)',  // Slightly off-white highlight text for better contrast
     themeGradient: themeGradient.dark,
-    themeGradientText: 'white'
+    themeGradientText: 'rgb(225, 225, 225)'  // Light grey for gradient text
   },
   barbie: {
     themeName: 'barbie',

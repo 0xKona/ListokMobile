@@ -57,32 +57,35 @@ const RecipeCard = ({ data, refreshRecipes }: PropsType) => {
     <Swipeable ref={swipeableRef} renderRightActions={renderRightAction} overshootRight={false} >
       <View style={theme.container}>
         <View style={theme.titleContainer}>
-          <Text>{data.title}</Text>
-          <Text>{data.desc}</Text>
+          <Text style={theme.titleContainerText}>{data.title}</Text>
+          <Text style={theme.titleContainerText}>{data.desc}</Text>
         </View>
         {/* eslint-disable-next-line react-native/no-inline-styles */}
         <TouchableOpacity style={{ marginLeft: 'auto', height: 75, aspectRatio: 1, justifyContent: 'center', alignItems: 'center'}} onPress={openRecipe} >
-          <Icon name='edit' size={20}/>
+          <Icon name='edit' size={20} color={theme.titleContainerText.color}/>
         </TouchableOpacity>
       </View>
     </Swipeable>
   );
 };
 
-const styles = (props: ThemeType) =>
+const styles = (theme: ThemeType) =>
   StyleSheet.create({
     container: {
       width: '100%',
-      backgroundColor: props.surface,
+      backgroundColor: theme.surface,
       marginBottom: 2,
       height: 75,
-      flexDirection: 'row'
+      flexDirection: 'row',
     },
     titleContainer: {
       height: '100%',
       justifyContent: 'center',
       padding: 20,
-    }
+    },
+    titleContainerText: {
+      color: theme.surfaceText
+    },
   });
 
 export default RecipeCard;
