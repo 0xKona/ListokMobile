@@ -30,13 +30,19 @@ const StepForm = ({ addNewStep, closeForm }: StepFormProps) => {
       <View style={theme.closeButtonContainer}>
         <Text style={theme.title}>Add New Step</Text>
         <TouchableOpacity onPress={handleClose}>
-          <Icon name="closecircle" size={20} />
+          <Icon name="closecircle" size={20} color={theme.title.color} />
         </TouchableOpacity>
       </View>
 
       <View style={theme.container}>
         <View style={theme.formSection}>
-          <ListokInput inputName='Step Details' value={stepDetail} onChangeText={setStepDetail} backgroundColor={theme.container.backgroundColor} />
+          <ListokInput 
+            inputName='Step Details' 
+            value={stepDetail} 
+            onChangeText={setStepDetail} 
+            backgroundColor={theme.container.backgroundColor}
+            textColor={theme.title.color}
+          />
         </View>
 
         <View style={theme.submitButton}>
@@ -64,6 +70,7 @@ const styles = (theme: ThemeType) =>
     },
     title: {
       fontSize: 20,
+      color: theme.surfaceText
     },
     formSection: {
       marginBottom: 10,

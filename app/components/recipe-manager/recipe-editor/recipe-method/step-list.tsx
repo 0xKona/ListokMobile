@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useDispatch } from 'react-redux';
@@ -51,7 +51,7 @@ const StepList = ({ steps, setSteps }: PropsInterface) => {
         style={[theme.listItem, isActive ? theme.activeItem : null]}
         onLongPress={drag}
         key={item.index}>
-        <Text>{`Step ${item.index}: ${item.step}`}</Text>
+        <Text style={theme.text}>{`Step ${item.index}: ${item.step}`}</Text>
       </TouchableOpacity>
     </Swipeable>
   );
@@ -82,6 +82,9 @@ const styles = (theme: ThemeType) =>
     container: {
       width: '100%',
       flexGrow: 1,
+    },
+    text: {
+      color: theme.surfaceText
     },
     delete: {
       height: 50,

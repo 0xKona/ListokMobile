@@ -73,7 +73,7 @@ const RecipeMethodEditor = ({ recipeData }: PropsType) => {
             <View style={theme.stepContainer}>
               {noSteps ? (
                 // eslint-disable-next-line react-native/no-inline-styles
-                <Text style={{ alignSelf: 'center' }}>No Steps</Text>
+                <Text style={theme.noStepsText}>No Steps</Text>
               ) : (
                 <StepList steps={steps} setSteps={setSteps} />
               )}
@@ -121,12 +121,17 @@ const styles = (theme: ThemeType) =>
       alignSelf: 'center',
       fontSize: 20,
       marginBottom: 20,
+      color: theme.surfaceText
     },
     stepContainer: {
       width: '100%',
       flexDirection: 'column',
       maxHeight: '85%',
     },
+    noStepsText: { 
+      alignSelf: 'center',
+      color: theme.surfaceText
+    }
   });
 
 export default RecipeMethodEditor;
