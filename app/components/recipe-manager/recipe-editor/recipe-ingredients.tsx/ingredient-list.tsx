@@ -84,7 +84,7 @@ const styles = (theme: ThemeType) =>
       height: 50,
       padding: 10,
       marginBottom: 5,
-      borderColor: theme.buttonPrimaryBackground,
+      borderColor: theme.highlight,
       borderWidth: 1,
       borderRadius: 5,
       flexDirection: 'row',

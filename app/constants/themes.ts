@@ -4,8 +4,8 @@ export interface ThemeType {
   surfaceText: string;
   background: string;
   backgroundText: string;
-  buttonPrimaryBackground: string;
-  buttonPrimaryText: string;
+  highlight: string;
+  highlightText: string;
   themeGradient: string[]
   themeGradientText: string;
 }
@@ -50,32 +50,32 @@ export const themeColors: ThemeColorsType = {
     themeName: 'light',
     surface: 'white',
     surfaceText: 'black',
-    background: 'darkgrey',
+    background: 'rgb(242, 242, 242)',
     backgroundText: 'black',
-    buttonPrimaryBackground: '#4CA8F4',
-    buttonPrimaryText: 'white',
+    highlight: '#4CA8F4',
+    highlightText: 'white',
     themeGradient: themeGradient.light,
     themeGradientText: 'white',
   },
   dark: {
     themeName: 'dark',
-    surface: 'darkgrey',
+    surface: 'rgb(27, 27, 27)',
     surfaceText: 'white',
     background: 'black',
     backgroundText: 'white',
-    buttonPrimaryBackground: 'white',
-    buttonPrimaryText: 'black',
+    highlight: 'rgb(1 ,3, 92)',
+    highlightText: 'black',
     themeGradient: themeGradient.dark,
     themeGradientText: 'white'
   },
   barbie: {
     themeName: 'barbie',
     surface: 'white',
-    surfaceText: 'white',
-    background: 'white',
+    surfaceText: 'black',
+    background: '#f2f2f2',
     backgroundText: 'black',
-    buttonPrimaryBackground: '#E0218A',
-    buttonPrimaryText: 'white',
+    highlight: '#E0218A',
+    highlightText: 'white',
     themeGradient: themeGradient.barbie,
     themeGradientText: 'white'
   },

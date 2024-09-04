@@ -32,12 +32,12 @@ const styles = (props: ThemeType) =>
     container: {
       height: 50,
       width: '100%',
-      backgroundColor: props.buttonPrimaryBackground,
+      backgroundColor: props.highlight,
       justifyContent: 'center',
       alignItems: 'center',
     },
     text: {
-      color: props.buttonPrimaryText,
+      color: props.highlightText,
     },
   });
 
