@@ -11,7 +11,8 @@ interface PropsInterface {
     state: any;
     setState: any; 
     items: any;
-    backgroundColor?: string
+    backgroundColor?: string;
+    textColor: string
 }
 
 const ListokPicker: React.FC<PropsInterface> = ({
@@ -19,7 +20,8 @@ const ListokPicker: React.FC<PropsInterface> = ({
     state,
     setState,
     items,
-    backgroundColor
+    backgroundColor,
+    textColor
 }) => {
 
     const theme = useTheme(styles)
@@ -35,8 +37,8 @@ const ListokPicker: React.FC<PropsInterface> = ({
                 style={{viewContainer: {width: '100%'}}}
             >
                 <View style={theme.pickerInternal}>
-                    <Icon name="caretdown" size={12} />
-                    <Text style={theme.pickerText}>{capitaliseWord(state)}</Text>
+                    <Icon name="caretdown" size={12} color={textColor}/>
+                    <Text style={{...theme.pickerText, color: textColor}}>{capitaliseWord(state)}</Text>
                 </View>
             </RNPickerSelect>
         </View>

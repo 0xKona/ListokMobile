@@ -30,7 +30,6 @@ const RecipeIngredientsEditor = ({ recipeData }: PropsType) => {
   const [openIngredientForm, setOpenIngredientForm] = React.useState(false);
 
   const noIngredients = ingredients.length === 0;
-  console.log(recipeData);
   const dispatch = useDispatch();
   const theme = useTheme(styles);
 
@@ -74,8 +73,8 @@ const RecipeIngredientsEditor = ({ recipeData }: PropsType) => {
               </>
             </TouchableOpacity>
             {noIngredients ? (
-              <View style={{height: '100%', marginTop: 50}}>
-                <Text style={{textAlign: 'center'}}>{'No Ingredients \n Press Add New to add a new ingredient!'}</Text>
+              <View style={theme.noIngredients}>
+                <Text style={theme.noIngredientsText}>{'No Ingredients \n Press Add New to add a new ingredient!'}</Text>
               </View>
             ) : (
               <IngredientList ingredients={ingredients} />
@@ -123,7 +122,16 @@ const styles = (theme: ThemeType) =>
       alignSelf: 'center',
       fontSize: 20,
       marginBottom: 20,
+      color: theme.surfaceText
     },
+    noIngredients: {
+      height: '100%', 
+      marginTop: 50
+    },
+    noIngredientsText: {
+      textAlign: 'center',
+      color: theme.surfaceText
+    }
   });
 
 export default RecipeIngredientsEditor;

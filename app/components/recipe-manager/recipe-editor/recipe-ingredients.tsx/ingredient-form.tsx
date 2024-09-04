@@ -49,7 +49,7 @@ const IngredientForm = ({ addNewIngredient, closeForm }: any) => {
       <View style={theme.closeButtonContainer}>
         <Text style={theme.title}>Add New Ingredient</Text>
         <TouchableOpacity onPress={handlePressClose}>
-          <Icon name="closecircle" size={20} />
+          <Icon name="closecircle" size={20} color={theme.title.color}/>
         </TouchableOpacity>
       </View>
 
@@ -61,6 +61,7 @@ const IngredientForm = ({ addNewIngredient, closeForm }: any) => {
             value={ingredientName}
             onChangeText={setIngredientName}
             backgroundColor={theme.container.backgroundColor}
+            textColor={theme.title.color}
           />
         </View>
 
@@ -72,6 +73,7 @@ const IngredientForm = ({ addNewIngredient, closeForm }: any) => {
             onChangeText={setIngredientAmount}
             type="number"
             backgroundColor={theme.container.backgroundColor}
+            textColor={theme.title.color}
           />
         </View>
 
@@ -81,6 +83,7 @@ const IngredientForm = ({ addNewIngredient, closeForm }: any) => {
           state={ingredientMeasurement}
           setState={setIngredientMeasurement}
           items={ingredientMeasurementOptions}
+          textColor={theme.title.color}
         />
 
         <ListokPicker 
@@ -88,6 +91,7 @@ const IngredientForm = ({ addNewIngredient, closeForm }: any) => {
           backgroundColor={theme.container.backgroundColor} 
           state={ingredientCategory} setState={setIngredientCategory} 
           items={ingredientCategoryOptions}
+          textColor={theme.title.color}
         />
 
         <View style={theme.submitButton}>
@@ -115,6 +119,7 @@ const styles = (theme: ThemeType) =>
     },
     title: {
       fontSize: 20,
+      color: theme.surfaceText
     },
     formSection: {
       marginBottom: 10,
