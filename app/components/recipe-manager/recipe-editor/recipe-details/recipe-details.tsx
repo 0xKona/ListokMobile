@@ -12,7 +12,7 @@ import {
 } from '@redux/slices/recipeEditorSlice';
 import { RootState } from '@redux/store';
 import React, { useEffect } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 interface PropsType {
@@ -33,13 +33,12 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
   }, [image])
 
   const theme = useTheme(styles);
-  console.log('***RECIPE TITLE:: ', title)
+
   const handleNextPress = () => {
     if (title.length < 1) {
       setInvalidTitle(true);
       return
     }
-    // TODO Verify fields here
     dispatch(updateRecipeTitle(title));
     dispatch(updateRecipeDesc(desc));
     dispatch(updateRecipePicture(image))
@@ -66,6 +65,7 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
             onEndEditing={updateTitle}
             backgroundColor={theme.container.backgroundColor}
             error={invalidTitle}
+            textColor={theme.titleText.color}
           />
         </View>
 
@@ -77,6 +77,7 @@ const RecipeDetailsEditor = ({ recipeData }: PropsType) => {
             onEndEditing={updateDesc}
             multiline={true}
             backgroundColor={theme.container.backgroundColor}
+            textColor={theme.titleText.color}
           />
         </View>
         <ImageUpload image={image} setImage={setImage} authToken={user.token}/>
@@ -101,6 +102,7 @@ const styles = (theme: ThemeType) =>
       alignSelf: 'center',
       fontSize: 20,
       marginBottom: 20,
+      color: theme.surfaceText
     },
     inputSection: {
       marginTop: 10,
