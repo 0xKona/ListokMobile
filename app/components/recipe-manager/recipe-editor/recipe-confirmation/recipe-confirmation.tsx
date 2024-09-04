@@ -102,6 +102,7 @@ const styles = (theme: ThemeType) =>
       fontWeight: 'bold',
       marginBottom: 20,
       alignSelf: 'center',
+      color: theme.surfaceText
     },
     section: {
       marginBottom: 15,
@@ -109,11 +110,11 @@ const styles = (theme: ThemeType) =>
     label: {
       fontSize: 16,
       fontWeight: 'bold',
-      // color: theme.primary,
+      color: theme.surfaceText
     },
     value: {
       fontSize: 16,
-      // color: theme.text,
+      color: theme.surfaceText
     },
     buttonContainer: {
       width: '100%',
