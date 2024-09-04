@@ -27,17 +27,17 @@ const ListokButton = ({ onPress, text, propStyles }: PropType): JSX.Element => {
   );
 };
 
-const styles = (props: ThemeType) =>
+const styles = (theme: ThemeType) =>
   StyleSheet.create({
     container: {
       height: 50,
       width: '100%',
-      backgroundColor: props.highlight,
+      backgroundColor: theme.highlight,
       justifyContent: 'center',
       alignItems: 'center',
     },
     text: {
-      color: props.highlightText,
+      color: theme.highlightText,
     },
   });
 
