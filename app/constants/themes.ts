@@ -64,7 +64,7 @@ export const themeColors: ThemeColorsType = {
     background: 'black',
     backgroundText: 'white',
     highlight: 'rgb(1 ,3, 92)',
-    highlightText: 'black',
+    highlightText: 'white',
     themeGradient: themeGradient.dark,
     themeGradientText: 'white'
   },

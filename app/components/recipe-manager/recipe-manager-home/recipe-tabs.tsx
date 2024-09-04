@@ -31,12 +31,11 @@ const RecipeTabs = ({ currentTab, handlePressTab }: PropsType) => {
       ? {
           ...theme.tab,
           ...borderRadius,
-          borderBottomWidth: 2,
+          borderBottomWidth: 4,
           borderBottomColor: currentTheme.highlight
         }
       : {...theme.tab,
         ...borderRadius,
-        backgroundColor: 'white'
       };
   };
 
@@ -52,7 +51,7 @@ const RecipeTabs = ({ currentTab, handlePressTab }: PropsType) => {
           style={selectedStyle(currentTab === tab.value, index)}
           onPress={() => handlePressTab(tab.value)}
           key={tab.value}>
-          <Text>{tab.text}</Text>
+          <Text style={theme.tabText}>{tab.text}</Text>
         </TouchableOpacity>
       ))}
       <ListokButton
@@ -64,7 +63,7 @@ const RecipeTabs = ({ currentTab, handlePressTab }: PropsType) => {
   );
 };
 
-const styles = (props: ThemeType) =>
+const styles = (theme: ThemeType) =>
   StyleSheet.create({
     container: {
       width: '100%',
@@ -72,12 +71,15 @@ const styles = (props: ThemeType) =>
       height: 50,
     },
     tab: {
-      backgroundColor: props.surface,
+      backgroundColor: theme.surface,
       height: '100%',
       justifyContent: 'center',
       alignItems: 'center',
       paddingHorizontal: 10,
       minWidth: 100,
+    },
+    tabText: {
+      color: theme.surfaceText
     },
     newRecipeButton: {
       width: 110,
