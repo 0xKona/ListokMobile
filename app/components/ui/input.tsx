@@ -56,7 +56,7 @@ export const styles = (theme: ThemeType) => StyleSheet.create({
     maxHeight: 100,
   },
   outline: {
-    color: theme.buttonPrimaryBackground
+    color: theme.highlight
   },
   outlineError: {
     color: 'red'

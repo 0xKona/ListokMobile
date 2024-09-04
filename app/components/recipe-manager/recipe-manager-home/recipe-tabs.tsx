@@ -32,7 +32,7 @@ const RecipeTabs = ({ currentTab, handlePressTab }: PropsType) => {
           ...theme.tab,
           ...borderRadius,
           borderBottomWidth: 2,
-          borderBottomColor: currentTheme.buttonPrimaryBackground
+          borderBottomColor: currentTheme.highlight
         }
       : {...theme.tab,
         ...borderRadius,
