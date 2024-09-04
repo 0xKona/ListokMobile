@@ -93,7 +93,6 @@ const styles = (theme: ThemeType) =>
     container: {
       backgroundColor: theme.surface,
       padding: 20,
-      margin: 20,
       borderTopLeftRadius: 10,
       borderTopRightRadius: 10,
       height: '100%'

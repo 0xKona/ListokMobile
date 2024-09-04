@@ -100,7 +100,6 @@ const styles = (theme: ThemeType) =>
       backgroundColor: theme.surface,
       flexGrow: 1,
       padding: 20,
-      margin: 20,
       height: '99%',
       borderRadius: 10
     },
