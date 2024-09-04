@@ -33,7 +33,6 @@ const IngredientList = ({ ingredients }: PropsInterface) => {
   const handleDelete = (indexToDelete: number) => {
     const newIngredients = [...ingredients];
     newIngredients.splice(indexToDelete, 1);
-    console.log('New Ingredients: ', newIngredients);
     dispatch(updateRecipeIngredients(newIngredients));
   };
 
@@ -52,8 +51,8 @@ const IngredientList = ({ ingredients }: PropsInterface) => {
       {ingredients.map((ingredient: IngredientType, index: number) => (
         <Swipeable ref={swipeableRef} renderRightActions={() => renderDelete(index)} overshootRight={false}>
           <View style={[theme.listItem, theme.shadowProp]} key={ingredient.name}>
-            <Text>{ingredient.name}</Text>
-            <Text>{`${ingredient.amount} ${ingredient.measurement}`}</Text>
+            <Text style={theme.text}>{ingredient.name}</Text>
+            <Text style={theme.text}>{`${ingredient.amount} ${ingredient.measurement}`}</Text>
           </View>
         </Swipeable>
       ))}
@@ -91,6 +90,9 @@ const styles = (theme: ThemeType) =>
       justifyContent: 'space-between',
       alignItems: 'center'
     },
+    text: {
+      color: theme.surfaceText
+    }
   });
 
 export default IngredientList;
