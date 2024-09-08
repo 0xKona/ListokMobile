@@ -1,10 +1,14 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Tab from './tab';
+import { ThemeType } from '@app/constants/themes';
+import useTheme from '../hooks/useTheme';
 
 const TabNavigation = ({ state, descriptors, navigation }: any) => {
+  const theme = useTheme(styles)
+
   return (
-    <View style={styles.container}>
+    <View style={theme.container}>
       {state.routes.map((route: any, index: any) => {
         const { options } = descriptors[route.key];
         const label =
@@ -46,13 +50,14 @@ const TabNavigation = ({ state, descriptors, navigation }: any) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = (theme: ThemeType) => StyleSheet.create({
   container: {
     height: 75,
     flexDirection: 'row',
     justifyContent: 'space-around',
     borderTopColor: 'black',
     borderTopWidth: 1,
+    backgroundColor: theme.surface
   },
 });
 
