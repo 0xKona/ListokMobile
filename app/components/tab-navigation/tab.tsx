@@ -1,9 +1,13 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import NavBarIcon from './icon';
+import { ThemeType } from '@app/constants/themes';
+import useTheme from '../hooks/useTheme';
 
 const Tab = ({ props }: any) => {
   const { label, isFocused, options, onPress, onLongPress } = props;
+  const theme = useTheme(styles)
+
   return (
     <TouchableOpacity
       accessibilityRole="button"
@@ -12,14 +16,14 @@ const Tab = ({ props }: any) => {
       testID={options.tabBarTestID}
       onPress={onPress}
       onLongPress={onLongPress}
-      style={style.container}>
+      style={theme.container}>
       <NavBarIcon label={label} isFocused={isFocused} />
-      <Text style={isFocused ? style.textIsFocused : style.text}>{label}</Text>
+      <Text style={isFocused ? theme.textIsFocused : theme.text}>{label}</Text>
     </TouchableOpacity>
   );
 };
 
-const style = StyleSheet.create({
+const styles = (theme: ThemeType) => StyleSheet.create({
   container: {
     width: '20%',
     marginTop: 5,
@@ -27,11 +31,11 @@ const style = StyleSheet.create({
   },
   text: {
     fontSize: 10,
-    color: '#222',
+    color: theme.surfaceText,
   },
   textIsFocused: {
     fontSize: 10,
-    color: '#673ab7',
+    color: theme.surfaceText,
   },
 });
 
