@@ -9,8 +9,8 @@ const EmptyRecipeList = () => {
 
   return (
     <View style={theme.container}>
-      <Text>You have no recipes</Text>
-      <Text>(pull down to try refreshing)</Text>
+      <Text style={theme.text}>You have no recipes</Text>
+      <Text style={theme.text}>(pull down to try refreshing)</Text>
     </View>
   );
 };
@@ -24,6 +24,10 @@ const styles = (theme: ThemeType) => StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: theme.surface
   },
+  text: {
+    color: theme.surfaceText
+  }
+
 });
 
 export default EmptyRecipeList;

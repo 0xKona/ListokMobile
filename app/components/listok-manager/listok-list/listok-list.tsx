@@ -9,6 +9,7 @@ import ListokCard from './listok-card';
 import { ListokManagerTabInterface } from '../listok-manager';
 import { ThemeType } from '@app/constants/themes';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { RefreshControl } from 'react-native-gesture-handler';
 
 interface PropsInterface {
   currentTab: ListokManagerTabInterface;
@@ -24,9 +25,16 @@ const ListokList = ({ currentTab, refreshListoks }: PropsInterface) => {
   return (
     currentTab.value === "users" ? (
       <FlatList
-        refreshing={loadingListoks}
-        onRefresh={refreshListoks}
+        refreshControl={
+          <RefreshControl 
+            refreshing={loadingListoks} 
+            onRefresh={refreshListoks} 
+            colors={['white', 'white']} 
+            tintColor={theme.constructionText.color}
+          />
+        }
         extraData={loadingListoks}
+        contentContainerStyle={{ flexGrow: 1 }}
         style={theme.container}
         data={userListoks}
         renderItem={({ item }) => (
