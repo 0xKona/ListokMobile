@@ -7,7 +7,7 @@ import { resetRecipeEditor } from '@redux/slices/recipeEditorSlice';
 import { RootState } from '@redux/store';
 import { RecipeNavigationProp } from '@typed/navigation';
 import React from 'react';
-import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 interface PropsType {
