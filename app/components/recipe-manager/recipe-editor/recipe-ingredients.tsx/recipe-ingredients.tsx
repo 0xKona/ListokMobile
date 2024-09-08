@@ -12,6 +12,7 @@ import IngredientForm from './ingredient-form';
 import { ThemeType } from '@app/constants/themes';
 import useTheme from '@app/components/hooks/useTheme';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ListokButton from '@app/components/ui/button';
 
 interface PropsType {
   recipeData: RecipeEditorState;
@@ -29,7 +30,6 @@ const RecipeIngredientsEditor = ({ recipeData }: PropsType) => {
   const [openIngredientForm, setOpenIngredientForm] = React.useState(false);
 
   const noIngredients = ingredients.length === 0;
-  console.log(recipeData);
   const dispatch = useDispatch();
   const theme = useTheme(styles);
 
@@ -73,17 +73,21 @@ const RecipeIngredientsEditor = ({ recipeData }: PropsType) => {
               </>
             </TouchableOpacity>
             {noIngredients ? (
-              <Text>No Ingredients</Text>
+              <View style={theme.noIngredients}>
+                <Text style={theme.noIngredientsText}>{'No Ingredients \n Press Add New to add a new ingredient!'}</Text>
+              </View>
             ) : (
               <IngredientList ingredients={ingredients} />
             )}
           </>
         )}
       </View>
-      <View style={theme.buttonContainer}>
-        <Button title="Back" onPress={handleBack} />
-        <Button title="Next" onPress={handleNext} />
-      </View>
+      {!openIngredientForm && (
+        <View style={theme.buttonContainer}>
+          <ListokButton text="Back" onPress={handleBack} propStyles={{width: '35%', borderRadius: 5}}/>
+          <ListokButton text="Next" onPress={handleNext} propStyles={{width: '35%', borderRadius: 5}}/>
+        </View>
+      )}
     </>
   );
 };
@@ -96,7 +100,9 @@ const styles = (theme: ThemeType) =>
       backgroundColor: theme.surface,
       flexGrow: 1,
       padding: 20,
-      margin: 20,
+      height: '100%',
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10
     },
     addNewButton: {
       width: '100%',
@@ -116,7 +122,16 @@ const styles = (theme: ThemeType) =>
       alignSelf: 'center',
       fontSize: 20,
       marginBottom: 20,
+      color: theme.surfaceText
     },
+    noIngredients: {
+      height: '100%', 
+      marginTop: 50
+    },
+    noIngredientsText: {
+      textAlign: 'center',
+      color: theme.surfaceText
+    }
   });
 
 export default RecipeIngredientsEditor;

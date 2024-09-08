@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { Swipeable } from 'react-native-gesture-handler';
+import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useDispatch } from 'react-redux';
 import { ThemeType } from '@app/constants/themes';
 import useTheme from '@app/components/hooks/useTheme';
 import { updateRecipeMethod } from '@redux/slices/recipeEditorSlice';
 import DraggableFlatList from 'react-native-draggable-flatlist';
-import { MethodStepType } from '@typed/recipe-types';
+import { MethodStepType, StepType } from '@typed/recipe-types';
+import { actionSheet } from '@app/components/ui/action-sheet';
 
 interface PropsInterface {
   steps: MethodStepType[];
@@ -18,6 +19,13 @@ const StepList = ({ steps, setSteps }: PropsInterface) => {
   const theme = useTheme(styles);
   const dispatch = useDispatch();
 
+  const swipeableRef = React.useRef<any>(null);
+  const closeSwipeable = () => {
+    if (swipeableRef.current) {
+      swipeableRef.current.close();
+    }
+  }
+
   const handleDelete = (indexToDelete: number) => {
     const newSteps = steps
       .filter(step => step.index !== indexToDelete)
@@ -26,19 +34,24 @@ const StepList = ({ steps, setSteps }: PropsInterface) => {
     dispatch(updateRecipeMethod(newSteps));
   };
 
+  const handlePressDelete = (index: number) => {
+    const actions = [{actionName: 'Delete Step', actionFunction: () => {closeSwipeable(); handleDelete(index)}}]
+    actionSheet(actions, 1, closeSwipeable)
+  }
+
   const renderDelete = (index: number) => (
-    <TouchableOpacity onPress={() => handleDelete(index)} style={theme.delete}>
+    <TouchableOpacity onPress={() => handlePressDelete(index)} style={theme.delete}>
       <Icon name="delete" size={20} />
     </TouchableOpacity>
   );
 
-  const renderItem = ({ item, drag, isActive }: any) => (
-    <Swipeable renderRightActions={() => renderDelete(item.index)}>
+  const RenderItem = ({ item, drag, isActive }: any) => (
+    <Swipeable ref={swipeableRef} renderRightActions={() => renderDelete(item.index)} overshootRight={false}>
       <TouchableOpacity
         style={[theme.listItem, isActive ? theme.activeItem : null]}
         onLongPress={drag}
         key={item.index}>
-        <Text>{`${item.index}. ${item.step}`}</Text>
+        <Text style={theme.text}>{`Step ${item.index}: ${item.step}`}</Text>
       </TouchableOpacity>
     </Swipeable>
   );
@@ -55,9 +68,10 @@ const StepList = ({ steps, setSteps }: PropsInterface) => {
   return (
     <DraggableFlatList
       data={steps}
-      renderItem={renderItem}
+      renderItem={RenderItem}
       keyExtractor={item => `draggable-item-${item.index}`}
       onDragEnd={handleDragEnd}
+      style={theme.flatlist}
     />
   );
 };
@@ -69,6 +83,9 @@ const styles = (theme: ThemeType) =>
       width: '100%',
       flexGrow: 1,
     },
+    text: {
+      color: theme.surfaceText
+    },
     delete: {
       height: 50,
       width: 50,
@@ -76,15 +93,23 @@ const styles = (theme: ThemeType) =>
       alignItems: 'center',
     },
     listItem: {
-      backgroundColor: 'lightgrey',
+      backgroundColor: theme.surface,
       width: '100%',
       height: 50,
       padding: 10,
       marginBottom: 5,
+      borderColor: theme.highlight,
+      borderWidth: 1,
+      borderRadius: 5,
+      justifyContent: 'center'
     },
     activeItem: {
       backgroundColor: 'lightblue',
     },
+    flatlist: {
+      width: '100%',
+      height: '95%'
+    }
   });
 
 export default StepList;

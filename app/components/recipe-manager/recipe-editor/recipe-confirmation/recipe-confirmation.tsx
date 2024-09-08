@@ -1,112 +1,108 @@
-import { recipeManagerApis } from '@app/utils/api-connections/recipe-manager-api';
 import { useNavigation } from '@react-navigation/native';
-import { changeCurrentStep } from '@redux/slices/recipeEditorSlice';
-import { RootState } from '@redux/store';
+import { changeCurrentStep, submitRecipe } from '@redux/slices/recipeEditorSlice';
+import { AppDispatch, RootState } from '@redux/store';
 import { RecipeNavigationProp } from '@typed/navigation';
 import React from 'react';
-import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeType } from '@app/constants/themes';
 import useTheme from '@app/components/hooks/useTheme';
+import ListokButton from '@app/components/ui/button';
+import LoadingSpinner from '@app/components/ui/loading-spinner';
 
 const RecipeEditorConfirmation = ({ recipeData, setIgnorePopup }: any) => {
   const navigation = useNavigation<RecipeNavigationProp>();
-  const { user } = useSelector((state: RootState) => state.user);
-  console.log('User State Token at Confirmation Screen:', user.token);
-  console.log('RecipeData.existing: ', recipeData.existingRecipe);
-  const dispatch = useDispatch();
+  const { loading } = useSelector((state: RootState) => state.recipeEditor);
+  const dispatch = useDispatch<AppDispatch>();
   const theme = useTheme(styles);
 
   const handleBack = () => {
     dispatch(changeCurrentStep(3));
   };
 
+  const navigateHome = () => {
+    navigation.navigate('Your Recipes');
+  }
+
   const handleSubmit = async () => {
-    if (recipeData.existingRecipe) {
-      console.log('Existing Recipe Submit Triggered: ', recipeData.recipeData);
-      try {
-        setIgnorePopup(true);
-        await recipeManagerApis.updateExistingRecipe(
-          JSON.stringify(recipeData.recipeData),
-          user.token,
-        );
-        navigation.navigate('Your Recipes');
-      } catch (error) {
-        console.log('Error submitting changes: ', error);
-      }
-    } else {
-      try {
-        console.log('recipeSubmitted: ', recipeData.recipeData);
-        setIgnorePopup(true);
-        await recipeManagerApis.postNewRecipe(
-          JSON.stringify({
-            ...recipeData.recipeData,
-            createdBy: user.userId,
-            createdByName: user.name,
-          }),
-          user.token,
-        );
-        navigation.navigate('Your Recipes');
-      } catch (error) {
-        console.error('Error submitting recipe:', error);
-        setIgnorePopup(false);
-      }
-    }
-  };
+    setIgnorePopup(true);
+    dispatch(submitRecipe(navigateHome));
+    
+  }
 
   return (
-    <ScrollView style={theme.container}>
-      <Text style={theme.titleText}>Confirm</Text>
-      <View style={theme.section}>
-        <Text style={theme.label}>Title:</Text>
-        <Text style={theme.value}>{recipeData.recipeData.title}</Text>
+    loading ? (
+      <LoadingSpinner text='Submitting Recipe' />
+    ) : (
+      <View style={theme.container}>
+        <Text style={theme.titleText}>Confirm</Text>
+
+        <ScrollView style={theme.details}>
+          <View style={theme.section}>
+            <Text style={theme.label}>Title:</Text>
+            <Text style={theme.value}>{recipeData.recipeData.title}</Text>
+          </View>
+          <View style={theme.section}>
+            <Text style={theme.label}>Description:</Text>
+            <Text style={theme.value}>{recipeData.recipeData.desc}</Text>
+          </View>
+          <View style={theme.section}>
+            <Text style={theme.label}>Created By:</Text>
+            <Text style={theme.value}>{recipeData.recipeData.createdByName}</Text>
+          </View>
+          <View style={theme.section}>
+            <Text style={theme.label}>Ingredients:</Text>
+            {recipeData.recipeData.ingredients.map(
+              (ingredient: any, index: number) => (
+                <Text key={index} style={theme.value}>
+                  {ingredient.name} - {ingredient.amount} {ingredient.measurement}
+                </Text>
+              ),
+            )}
+          </View>
+          <View style={theme.section}>
+            <Text style={theme.label}>Method:</Text>
+            {recipeData.recipeData.method.map((step: any, index: number) => (
+              <Text key={index} style={theme.value}>
+                {index + 1}. {step.step}
+              </Text>
+            ))}
+          </View>
+        </ScrollView>
+
+        <View style={theme.buttonContainer}>
+          <ListokButton text="Back" onPress={handleBack} propStyles={{width: '40%', borderRadius: 5}}/>
+          <ListokButton text="Submit Recipe" onPress={handleSubmit} propStyles={{width: '40%', borderRadius: 5}} />
+        </View>
+
       </View>
-      <View style={theme.section}>
-        <Text style={theme.label}>Description:</Text>
-        <Text style={theme.value}>{recipeData.recipeData.desc}</Text>
-      </View>
-      <View style={theme.section}>
-        <Text style={theme.label}>Created By:</Text>
-        <Text style={theme.value}>{recipeData.recipeData.createdByName}</Text>
-      </View>
-      <View style={theme.section}>
-        <Text style={theme.label}>Ingredients:</Text>
-        {recipeData.recipeData.ingredients.map(
-          (ingredient: any, index: number) => (
-            <Text key={index} style={theme.value}>
-              {ingredient.name} - {ingredient.amount} {ingredient.measurement}
-            </Text>
-          ),
-        )}
-      </View>
-      <View style={theme.section}>
-        <Text style={theme.label}>Method:</Text>
-        {recipeData.recipeData.method.map((step: any, index: number) => (
-          <Text key={index} style={theme.value}>
-            {index + 1}. {step.step}
-          </Text>
-        ))}
-      </View>
-      <View style={theme.buttonContainer}>
-        <Button title="Back" onPress={handleBack} />
-        <Button title="Submit Recipe" onPress={handleSubmit} />
-      </View>
-    </ScrollView>
+    )
   );
 };
 
 const styles = (theme: ThemeType) =>
   StyleSheet.create({
     container: {
-      flex: 1,
-      padding: 20,
+      display: 'flex',
+      alignItems: 'center',
       backgroundColor: theme.surface,
+      flexGrow: 1,
+      padding: 10,
+      height: '100%',
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10
+    },
+    details: {
+      width: '100%',
+      padding: 20
     },
     titleText: {
+      marginTop: 10,
       fontSize: 24,
       fontWeight: 'bold',
       marginBottom: 20,
       alignSelf: 'center',
+      color: theme.surfaceText
     },
     section: {
       marginBottom: 15,
@@ -114,16 +110,18 @@ const styles = (theme: ThemeType) =>
     label: {
       fontSize: 16,
       fontWeight: 'bold',
-      // color: theme.primary,
+      color: theme.surfaceText
     },
     value: {
       fontSize: 16,
-      // color: theme.text,
+      color: theme.surfaceText
     },
     buttonContainer: {
+      width: '100%',
+      marginTop: 'auto',
       flexDirection: 'row',
-      justifyContent: 'space-around',
-      marginTop: 20,
+      justifyContent: 'space-between',
+      marginBottom: 30
     },
   });
 

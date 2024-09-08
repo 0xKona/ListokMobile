@@ -10,14 +10,10 @@ import { useIsFocused } from '@react-navigation/native';
 
 const RecipeListContainer = () => {
   const isFocused = useIsFocused();
-  const [currentTab, setCurrentTab] = useState(recipeTabs[0].value);
+  const [currentTab, setCurrentTab] = useState<string>(recipeTabs[0].value);
 
   const dispatch = useDispatch<AppDispatch>();
-
-  const { userRecipes } = useSelector(
-    (state: RootState) => state.recipeManager,
-  );
-  console.log('Redux State of Recipes: ', userRecipes);
+  
   const { user } = useSelector((state: RootState) => state.user);
 
   const handlePressTab = (tab: string) => {
@@ -37,7 +33,7 @@ const RecipeListContainer = () => {
   return (
     <View style={styles.container}>
       <RecipeTabs currentTab={currentTab} handlePressTab={handlePressTab} />
-      <RecipeList refreshRecipes={refreshRecipes} />
+      <RecipeList currentTab={currentTab} refreshRecipes={refreshRecipes} />
     </View>
   );
 };
@@ -47,7 +43,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: '100%',
     flexGrow: 1,
-    maxHeight: '90%',
+    height: '99%'
   },
 });
 

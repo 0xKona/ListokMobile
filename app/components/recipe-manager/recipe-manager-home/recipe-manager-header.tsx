@@ -9,6 +9,7 @@ import { RecipeNavigationProp } from '@typed/navigation';
 import { useDispatch } from 'react-redux';
 import { resetRecipeEditor } from '@redux/slices/recipeEditorSlice';
 
+
 const RecipeHeader = () => {
   const componentStyles = useTheme(styles);
   const navigation = useNavigation<RecipeNavigationProp>();

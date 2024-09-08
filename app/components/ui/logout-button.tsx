@@ -29,12 +29,12 @@ const styles = (props: ThemeType) =>
       height: 50,
       width: '100%',
       marginTop: 'auto',
-      backgroundColor: props.buttonPrimaryBackground,
+      backgroundColor: props.highlight,
       justifyContent: 'center',
       alignItems: 'center',
     },
     text: {
-      color: props.buttonPrimaryText,
+      color: props.highlightText,
     },
   });
 
