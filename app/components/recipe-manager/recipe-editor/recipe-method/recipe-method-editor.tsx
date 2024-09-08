@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { MethodStepType } from '@typed/recipe-types';
 import StepForm from './step-form';
 import StepList from './step-list';
+import ListokButton from '@app/components/ui/button';
 
 interface PropsType {
   recipeData: RecipeEditorState;
@@ -72,7 +73,7 @@ const RecipeMethodEditor = ({ recipeData }: PropsType) => {
             <View style={theme.stepContainer}>
               {noSteps ? (
                 // eslint-disable-next-line react-native/no-inline-styles
-                <Text style={{ alignSelf: 'center' }}>No Steps</Text>
+                <Text style={theme.noStepsText}>No Steps</Text>
               ) : (
                 <StepList steps={steps} setSteps={setSteps} />
               )}
@@ -80,10 +81,12 @@ const RecipeMethodEditor = ({ recipeData }: PropsType) => {
           </>
         )}
       </View>
-      <View style={theme.buttonContainer}>
-        <Button title="Back" onPress={handleBack} />
-        <Button title="Next" onPress={handleNext} />
-      </View>
+      { !openStepForm && (
+        <View style={theme.buttonContainer}>
+          <ListokButton text="Back" onPress={handleBack} propStyles={{width: '35%', borderRadius: 5}} />
+          <ListokButton text="Next" onPress={handleNext} propStyles={{width: '35%', borderRadius: 5}}/>
+        </View>
+      )}
     </>
   );
 };
@@ -96,7 +99,9 @@ const styles = (theme: ThemeType) =>
       backgroundColor: theme.surface,
       flexGrow: 1,
       padding: 20,
-      margin: 20,
+      height: '100%',
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10
     },
     addNewButton: {
       width: '100%',
@@ -116,12 +121,17 @@ const styles = (theme: ThemeType) =>
       alignSelf: 'center',
       fontSize: 20,
       marginBottom: 20,
+      color: theme.surfaceText
     },
     stepContainer: {
       width: '100%',
       flexDirection: 'column',
       maxHeight: '85%',
     },
+    noStepsText: { 
+      alignSelf: 'center',
+      color: theme.surfaceText
+    }
   });
 
 export default RecipeMethodEditor;

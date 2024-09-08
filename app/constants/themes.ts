@@ -1,17 +1,13 @@
-import React from "react";
-import LinearGradient from "react-native-linear-gradient";
-
 export interface ThemeType {
   themeName: string;
   surface: string;
   surfaceText: string;
   background: string;
   backgroundText: string;
-  buttonPrimaryBackground: string;
-  buttonPrimaryText: string;
+  highlight: string;
+  highlightText: string;
   themeGradient: string[]
   themeGradientText: string;
-  gradientStartEnd?: any;
 }
 
 export interface ThemeColorsType {
@@ -26,10 +22,6 @@ export const themeGradient = {
     'hsl(201, 98%, 65%)',   
     'hsl(199, 100%, 74%)', 
   ],
-  lightStartEnd: {
-    start: { x: 0.2, y: 0 },
-    end: { x: 1, y: 1 }
-  },
   dark: [
     'hsl(270, 100%, 7%)',
     'hsl(249, 94%, 15%)',
@@ -58,33 +50,32 @@ export const themeColors: ThemeColorsType = {
     themeName: 'light',
     surface: 'white',
     surfaceText: 'black',
-    background: 'darkgrey',
+    background: 'rgb(242, 242, 242)',
     backgroundText: 'black',
-    buttonPrimaryBackground: 'black',
-    buttonPrimaryText: 'white',
+    highlight: '#4CA8F4',
+    highlightText: 'white',
     themeGradient: themeGradient.light,
     themeGradientText: 'white',
-    gradientStartEnd: themeGradient.lightStartEnd
   },
   dark: {
     themeName: 'dark',
-    surface: 'darkgrey',
-    surfaceText: 'white',
-    background: 'black',
-    backgroundText: 'white',
-    buttonPrimaryBackground: 'white',
-    buttonPrimaryText: 'black',
+    surface: 'rgb(40, 40, 40)',           // Darker grey for surface to soften contrast
+    surfaceText: 'rgb(220, 220, 220)',    // Off-white text to reduce harshness
+    background: 'rgb(18, 18, 18)',        // Near-black background for deep contrast
+    backgroundText: 'rgb(200, 200, 200)', // Softer grey-white for text on background
+    highlight: 'rgb(32, 56, 128)',        // Muted blue for highlight (less harsh than pure blue)
+    highlightText: 'rgb(240, 240, 240)',  // Slightly off-white highlight text for better contrast
     themeGradient: themeGradient.dark,
-    themeGradientText: 'white'
+    themeGradientText: 'rgb(225, 225, 225)'  // Light grey for gradient text
   },
   barbie: {
     themeName: 'barbie',
-    surface: 'pink',
-    surfaceText: 'white',
-    background: 'white',
+    surface: 'white',
+    surfaceText: 'black',
+    background: '#f2f2f2',
     backgroundText: 'black',
-    buttonPrimaryBackground: 'pink',
-    buttonPrimaryText: 'white',
+    highlight: '#E0218A',
+    highlightText: 'white',
     themeGradient: themeGradient.barbie,
     themeGradientText: 'white'
   },

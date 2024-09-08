@@ -6,8 +6,7 @@
     - To Fix:
         - Either change logic so that it only submits the new image at the same time as the recipe form, or add logic to exiting the form so that it deletes the image upon exiting, the first option makes more sense but will require reworking the image selector component. 
 
-- When a user uploads or deletes a picture, the loading spinner appears on top of the image component in a way that looks janky and items below is can be seen ( basically it looks terrible ).
-    - Side Effects:
-        - None.
-    - To Fix: 
-        - Conditionally remove conflicting items when loading. component may be reworked anyway. 
+- User token expires after 24hrs no matter what.
+    - To Fix
+        - Extend token life.
+        - Refresh when api accessed via middleware.

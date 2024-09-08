@@ -1,7 +1,6 @@
 import React from 'react';
 import ListokInput from '@app/components/ui/input';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
 import { CategoryType, MeasurementType } from '@typed/recipe-types';
 import {
   ingredientCategoryOptions,
@@ -11,6 +10,8 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { ThemeType } from '@app/constants/themes';
 import useTheme from '@app/components/hooks/useTheme';
 import ListokButton from '@app/components/ui/button';
+import ListokPicker from '@app/components/ui/picker';
+import { useAlert } from '@app/components/ui/alert';
 
 const IngredientForm = ({ addNewIngredient, closeForm }: any) => {
   const [ingredientName, setIngredientName] = React.useState('');
@@ -39,61 +40,62 @@ const IngredientForm = ({ addNewIngredient, closeForm }: any) => {
     setIngredientCategory('fruit');
   };
 
+  const handlePressClose = () => {
+    useAlert('Lose Ingredient without saving?', 'You will lose this ingredient', [{text: 'Close', style: 'destructive', onPress: handleClose}])
+  }
+
   return (
     <>
       <View style={theme.closeButtonContainer}>
         <Text style={theme.title}>Add New Ingredient</Text>
-        <TouchableOpacity onPress={handleClose}>
-          <Icon name="closecircle" size={20} />
+        <TouchableOpacity onPress={handlePressClose}>
+          <Icon name="closecircle" size={20} color={theme.title.color}/>
         </TouchableOpacity>
       </View>
 
       <View style={theme.container}>
         <View style={theme.formSection}>
-          <Text>Ingredient Name:</Text>
+          {/* <Text>Ingredient Name:</Text> */}
           <ListokInput
+            inputName='Ingredient Name'
             value={ingredientName}
             onChangeText={setIngredientName}
+            backgroundColor={theme.container.backgroundColor}
+            textColor={theme.title.color}
           />
         </View>
 
         <View style={theme.formSection}>
-          <Text>Ingredient Amount:</Text>
+          {/* <Text>Ingredient Amount:</Text> */}
           <ListokInput
+            inputName='Amount'
             value={ingredientAmount}
             onChangeText={setIngredientAmount}
             type="number"
+            backgroundColor={theme.container.backgroundColor}
+            textColor={theme.title.color}
           />
         </View>
 
-        <View style={theme.formSection}>
-          <Text>Amount Measurement:</Text>
-          <View style={theme.dropdown}>
-            <Icon name="caretdown" />
-            <RNPickerSelect
-              onValueChange={(value: any) => setIngredientMeasurement(value)}
-              items={ingredientMeasurementOptions}
-              value={ingredientMeasurement}
-              itemKey={ingredientMeasurement}
-            />
-          </View>
-        </View>
+        <ListokPicker 
+          label='Amount Measurement'
+          backgroundColor={theme.container.backgroundColor}
+          state={ingredientMeasurement}
+          setState={setIngredientMeasurement}
+          items={ingredientMeasurementOptions}
+          textColor={theme.title.color}
+        />
 
-        <View style={theme.formSection}>
-          <Text>Ingredient Category:</Text>
-          <View style={theme.dropdown}>
-            <Icon name="caretdown" />
-            <RNPickerSelect
-              onValueChange={(value: any) => setIngredientCategory(value)}
-              items={ingredientCategoryOptions}
-              value={ingredientCategory}
-              itemKey={ingredientCategory}
-            />
-          </View>
-        </View>
+        <ListokPicker 
+          label='Category' 
+          backgroundColor={theme.container.backgroundColor} 
+          state={ingredientCategory} setState={setIngredientCategory} 
+          items={ingredientCategoryOptions}
+          textColor={theme.title.color}
+        />
 
-        <View>
-          <ListokButton text="Submit" onPress={handleSubmit} />
+        <View style={theme.submitButton}>
+          <ListokButton text="Submit" onPress={handleSubmit} propStyles={{borderRadius: 5}}/>
         </View>
       </View>
     </>
@@ -104,8 +106,10 @@ const IngredientForm = ({ addNewIngredient, closeForm }: any) => {
 const styles = (theme: ThemeType) =>
   StyleSheet.create({
     container: {
+      backgroundColor: theme.surface,
       display: 'flex',
       width: '100%',
+      flexGrow: 1
     },
     closeButtonContainer: {
       width: '100%',
@@ -115,6 +119,7 @@ const styles = (theme: ThemeType) =>
     },
     title: {
       fontSize: 20,
+      color: theme.surfaceText
     },
     formSection: {
       marginBottom: 10,
@@ -126,6 +131,10 @@ const styles = (theme: ThemeType) =>
       padding: 10,
       flexDirection: 'row',
     },
+    submitButton: {
+      marginTop: "auto",
+      marginBottom: 10
+    }
   });
 
 export default IngredientForm;
