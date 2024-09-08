@@ -100,8 +100,9 @@ const styles = (theme: ThemeType) =>
       backgroundColor: theme.surface,
       flexGrow: 1,
       padding: 20,
-      height: '99%',
-      borderRadius: 10
+      height: '100%',
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10
     },
     addNewButton: {
       width: '100%',

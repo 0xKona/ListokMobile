@@ -89,7 +89,8 @@ const styles = (theme: ThemeType) =>
       flexGrow: 1,
       padding: 10,
       height: '100%',
-      borderRadius: 10
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10
     },
     details: {
       width: '100%',
