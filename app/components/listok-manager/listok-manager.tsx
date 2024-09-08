@@ -47,7 +47,7 @@ const ListokManager = () => {
   return (
     <View style={theme.container}>
       <ListoksHeader currentTab={currentTab} handlePressTab={handlePressTab} />
-      <ListokList refreshListoks={refreshListoks} />
+      <ListokList currentTab={currentTab} refreshListoks={refreshListoks} />
     </View>
   );
 };
@@ -57,7 +57,9 @@ const styles = (theme: ThemeType) => StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 10,
     alignItems: 'center',
-    backgroundColor: theme.background
+    backgroundColor: theme.background,
+    width: '100%',
+    height: '100%'
   },
 });
 
