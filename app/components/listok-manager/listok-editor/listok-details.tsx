@@ -1,5 +1,7 @@
+import useTheme from '@app/components/hooks/useTheme';
 import ListokButton from '@app/components/ui/button';
 import ListokInput from '@app/components/ui/input';
+import { ThemeType } from '@app/constants/themes';
 import {
   changeListokStep,
   updateListokDesc,
@@ -17,6 +19,8 @@ const ListokEditorDetails = () => {
   const [title, setTitle] = React.useState(listokData.title);
   const [desc, setDesc] = React.useState(listokData.desc);
 
+  const theme = useTheme(styles);
+
   console.log(listokData);
 
   const handleNextPress = () => {
@@ -27,27 +31,53 @@ const ListokEditorDetails = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text>Details</Text>
-      <Text>Listok name:</Text>
-      <ListokInput value={title} onChangeText={setTitle} />
-      <Text>Listok description:</Text>
-      <ListokInput value={desc} onChangeText={setDesc} />
-
-      <View style={styles.buttonContainer}>
-        <ListokButton text="Next" onPress={handleNextPress} />
+    <View style={theme.container}>
+      <Text style={theme.titleText}>Details</Text>
+      <View style={theme.inputSection}>
+        <ListokInput 
+          inputName='Listok Name*'
+          value={title} 
+          onChangeText={setTitle}
+          backgroundColor={theme.container.backgroundColor}
+          textColor={theme.container.color}
+        />
+      </View>
+      <View style={theme.inputSection}>
+        <ListokInput 
+          inputName='Description'
+          value={desc} 
+          onChangeText={setDesc} 
+          backgroundColor={theme.container.backgroundColor}
+          textColor={theme.container.color}
+        />
+      </View>
+      <View style={theme.buttonContainer}>
+        <ListokButton text="Next" onPress={handleNextPress} propStyles={{borderRadius: 5}}/>
       </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const styles = (theme: ThemeType) => StyleSheet.create({
   container: {
-    justifyContent: 'space-between',
+    backgroundColor: theme.surface,
+    padding: 20,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
     height: '100%',
+    color: theme.surfaceText
   },
   buttonContainer: {
     marginTop: 'auto',
+  },
+  titleText: {
+    alignSelf: 'center',
+    fontSize: 20,
+    marginBottom: 20,
+    color: theme.surfaceText
+  },
+  inputSection: {
+    marginTop: 10,
   },
 });
 
