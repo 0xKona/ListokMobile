@@ -9,7 +9,9 @@ export interface ActionInterface {
 export const actionSheet = (
     actions: ActionInterface[],
     destructiveIndex?: number,
-    cancelFunction?: () => any
+    cancelFunction?: () => any,
+    title?: string,
+    message?: string
 ) => {
 
     if (Platform.OS === 'ios') {
@@ -25,7 +27,9 @@ export const actionSheet = (
                 options: actionNames,
                 destructiveButtonIndex: destructiveButtonIndex,
                 cancelButtonIndex: 0,
-                userInterfaceStyle: checkDarkMode() ? 'dark' : 'light'
+                userInterfaceStyle: checkDarkMode() ? 'dark' : 'light',
+                title,
+                message
             },
             buttonIndex => {
                 actionFuncs[buttonIndex]();
