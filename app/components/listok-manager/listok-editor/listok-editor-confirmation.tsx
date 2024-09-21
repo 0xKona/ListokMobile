@@ -3,8 +3,10 @@ import useTheme from '@app/components/hooks/useTheme';
 import ListokButton from '@app/components/ui/button';
 import { ThemeType } from '@app/constants/themes';
 import { listokManagerApis } from '@app/utils/api-connections/listok-manager-api';
+import { capitaliseWord } from '@app/utils/capitaliseWord';
 import { useNavigation } from '@react-navigation/native';
-import { changeListokStep } from '@redux/slices/listokEditorSlice';
+import { changeListokStep, DaysOfWeek } from '@redux/slices/listokEditorSlice';
+import { getRecipeByID } from '@redux/slices/recipeManagerSlice';
 import { RootState } from '@redux/store';
 import { ListokNavigationProp } from '@typed/navigation';
 import React from 'react';
@@ -13,6 +15,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const ListokEditorConfirmation = () => {
   const listok = useSelector((state: RootState) => state.listokEditor);
+  const { userRecipes } = useSelector((state: RootState) => state.recipeManager)
+  console.log('USER RECIPES IN LISTOK CONFIRMATION ::', userRecipes)
   const theme = useTheme(styles)
   const { userId, name, token } = useSelector(
     (state: RootState) => state.user.user,
@@ -56,21 +60,37 @@ const ListokEditorConfirmation = () => {
 
   return (
     <View style={theme.container}>
-      <Text>Confirmation</Text>
-      <Text>{JSON.stringify(listok.listokData)}</Text>
+      <Text style={theme.title}>{listok.listokData.title}</Text>
+      <Text style={theme.desc}>{listok.listokData.desc}</Text>
+      <View style={theme.daysContainer}>
+        {Object.keys(listok.listokData.days).map((day: string) => (
+          <View key={day} style={theme.dayContainer}>
+            <Text style={theme.dayTitle}>{capitaliseWord(day)}</Text>
+            {listok.listokData.days[day as DaysOfWeek].map((recipeID: string) => {
+              const recipe = getRecipeByID(recipeID)
+              return recipe && (
+                <View key={recipeID}>
+                  <Text style={{...theme.text, paddingLeft: 5}}>{recipe.title}</Text>
+                </View>
+              )
+            })}
+          </View>
+        ))}
+      </View>
 
       <View style={theme.buttonWrapper}>
         <ListokButton
           text="Back"
           onPress={handleBackPress}
-          propStyles={{ width: '45%' }}
+          propStyles={{ width: '45%', borderRadius: 5 }}
         />
         <ListokButton
           text="Confirm and Save"
           onPress={handleConfirmPress}
-          propStyles={{ width: '45%' }}
+          propStyles={{ width: '45%', borderRadius: 5 }}
         />
       </View>
+
     </View>
   );
 };
@@ -78,6 +98,11 @@ const ListokEditorConfirmation = () => {
 const styles = (theme: ThemeType) => StyleSheet.create({
   container: {
     height: '100%',
+    backgroundColor: theme.surface,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    paddingTop: 10,
+    paddingHorizontal: 10
   },
   buttonWrapper: {
     flexDirection: 'row',
@@ -86,6 +111,33 @@ const styles = (theme: ThemeType) => StyleSheet.create({
     marginTop: 'auto',
     margin: 10,
   },
+  text: {
+    color: theme.surfaceText
+  },
+  title: {
+    color: theme.surfaceText,
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    margin: 25
+  },
+  desc: {
+    color: theme.surfaceText,
+    fontSize: 15,
+    alignSelf: 'center'
+  },
+  daysContainer: {
+    marginTop: 10
+  },
+  dayContainer: {
+    margin: 5,
+    alignItems: 'center'
+  },
+  dayTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: theme.surfaceText
+  }
 });
 
 export default ListokEditorConfirmation;

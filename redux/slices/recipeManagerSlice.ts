@@ -1,4 +1,5 @@
 import { recipeManagerApis } from '@app/utils/api-connections/recipe-manager-api';
+import { store } from '@redux/store';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RecipeType } from '@typed/recipe-types';
 
@@ -31,6 +32,16 @@ export const fetchRecipes = createAsyncThunk(
     }
   },
 );
+
+export const getRecipeByID = (recipeID: string): RecipeType | null => {
+  const {recipeManager} = store.getState();
+  const findRecipe = recipeManager.userRecipes.find((recipe: RecipeType) => recipe.id === recipeID);
+  if (findRecipe) {
+    return findRecipe
+  } else {
+    return null
+  }
+};
 
 const recipeManagerSlice = createSlice({
   name: 'recipeManager',
