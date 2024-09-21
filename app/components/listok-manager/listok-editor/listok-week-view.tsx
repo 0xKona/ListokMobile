@@ -3,7 +3,7 @@ import ListokButton from '@app/components/ui/button';
 import { changeListokStep } from '@redux/slices/listokEditorSlice';
 import { RootState } from '@redux/store';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import WeekdayCard from './weekday-card';
 
@@ -16,22 +16,22 @@ const ListokEditorWeekView = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.weekdayContainer}>
+      <ScrollView contentContainerStyle={styles.weekdayContainer}>
         {Object.keys(listokData.days).map((day: string, index: number) => (
           <WeekdayCard index={index} />
         ))}
-      </View>
+      </ScrollView>
 
       <View style={styles.buttonWrapper}>
         <ListokButton
           text="Back"
           onPress={handleBackPress}
-          propStyles={{ width: '45%' }}
+          propStyles={{ width: '45%', borderRadius: 5 }}
         />
         <ListokButton
           text="Next"
           onPress={handleNextPress}
-          propStyles={{ width: '45%' }}
+          propStyles={{ width: '45%', borderRadius: 5 }}
         />
       </View>
     </View>
@@ -40,20 +40,21 @@ const ListokEditorWeekView = () => {
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
     height: '100%',
   },
   weekdayContainer: {
-    margin: 10,
     width: '100%',
     flexGrow: 1,
     justifyContent: 'space-evenly',
+    marginBottom: 20
   },
   buttonWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     maxWidth: '100%',
     marginTop: 'auto',
-    margin: 10,
+    marginVertical: 20,
   },
 });
 
