@@ -6,6 +6,8 @@ import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import ListokSelectionRecipeCard from './recipe-card';
+import ListokButton from '@app/components/ui/button';
+import { useNavigation } from '@react-navigation/native';
 
 const ListokRecipeSelector = () => {
   const theme = useTheme(styles);
@@ -16,16 +18,19 @@ const ListokRecipeSelector = () => {
   const { listokData, selectingRecipesForDay } = useSelector(
     (state: RootState) => state.listokEditor,
   );
+  const navigation = useNavigation();
 
   const day = Object.keys(listokData.days)[selectingRecipesForDay];
   console.log('Selecting Recipes for day: ', day);
+  console.log('Selected Recipes for', day, ':', listokData.days)
+  const handleBack = () => navigation.goBack();
 
   React.useEffect(() => {
     fetchRecipes({ userId: userId, token: token });
   }, [token, userId]);
 
   return (
-    <View style={theme.container}>
+    <View style={theme.background}>
       <FlatList
         data={userRecipes}
         numColumns={2}
@@ -35,18 +40,17 @@ const ListokRecipeSelector = () => {
         )}
         columnWrapperStyle={theme.row}
       />
+      <ListokButton text='Back' onPress={handleBack} propStyles={{borderRadius: 5}}/>
     </View>
   );
 };
 
 const styles = (theme: ThemeType) =>
   StyleSheet.create({
-    container: {
-      backgroundColor: theme.surface,
-      margin: 10,
-
+    background: {
+      backgroundColor: theme.background,
       padding: 10,
-      height: '97%',
+      height: '100%',
     },
     title: {
       alignSelf: 'center',

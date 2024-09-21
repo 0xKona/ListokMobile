@@ -1,5 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
+import useTheme from '@app/components/hooks/useTheme';
 import ListokButton from '@app/components/ui/button';
+import { ThemeType } from '@app/constants/themes';
 import { listokManagerApis } from '@app/utils/api-connections/listok-manager-api';
 import { useNavigation } from '@react-navigation/native';
 import { changeListokStep } from '@redux/slices/listokEditorSlice';
@@ -11,9 +13,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const ListokEditorConfirmation = () => {
   const listok = useSelector((state: RootState) => state.listokEditor);
+  const theme = useTheme(styles)
   const { userId, name, token } = useSelector(
     (state: RootState) => state.user.user,
   );
+  console.log('LISTOK IN CONFIRMATION ::', listok.listokData)
+  
   const dispatch = useDispatch();
   const navigation = useNavigation<ListokNavigationProp>();
 
@@ -50,11 +55,11 @@ const ListokEditorConfirmation = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={theme.container}>
       <Text>Confirmation</Text>
       <Text>{JSON.stringify(listok.listokData)}</Text>
 
-      <View style={styles.buttonWrapper}>
+      <View style={theme.buttonWrapper}>
         <ListokButton
           text="Back"
           onPress={handleBackPress}
@@ -70,7 +75,7 @@ const ListokEditorConfirmation = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = (theme: ThemeType) => StyleSheet.create({
   container: {
     height: '100%',
   },

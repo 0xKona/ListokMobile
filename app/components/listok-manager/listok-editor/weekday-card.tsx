@@ -25,7 +25,7 @@ const WeekdayCard = ({ index }: PropsInterface) => {
 
   return (
     <TouchableOpacity style={theme.container} onPress={handlePress}>
-      <Text>{days[index]}</Text>
+      <Text style={theme.text} >{days[index]}</Text>
     </TouchableOpacity>
   );
 };
@@ -38,7 +38,11 @@ const styles = (theme: ThemeType) =>
       backgroundColor: theme.surface,
       justifyContent: 'center',
       alignItems: 'center',
+      borderRadius: 5,
     },
+    text: {
+      color: theme.surfaceText
+    }
   });
 
 export default WeekdayCard;
