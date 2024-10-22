@@ -47,7 +47,7 @@ export interface MethodStepType {
 }
 
 export interface RecipeType {
-  id: number | null;
+  id: string;
   title: string;
   desc: string;
   createdBy: string | null;

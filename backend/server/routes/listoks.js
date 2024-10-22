@@ -86,6 +86,7 @@ router.put('/edit_listok/', authMiddleware, async (req, res) => {
   const listokData = req.body;
   console.log('received edit listok request:', listokData);
 
+  // this isn't being triggered
   if (!listokData.id || !listokData.title || !listokData.createdBy) {
     console.log('missing params triggered');
     res
@@ -97,16 +98,14 @@ router.put('/edit_listok/', authMiddleware, async (req, res) => {
   try {
     const updateData = {
       title: listokData.title,
-      desc: listokData.desc || null,
+      desc: listokData.desc,
+      picture: listokData.picture,
+      days: JSON.stringify(listokData.days),
       createdBy: listokData.createdBy,
       createdByName: listokData.createdByName,
       createdOn: listokData.createdOn || Date.now(),
-      public: listokData.public,
-      picture: listokData.picture || null,
-      ingredients: JSON.stringify(listokData.ingredients) || null,
-      method: JSON.stringify(listokData.method) || null,
     };
-
+    console.log('Update Listok Data: ', updateData)
     await Listok.updateOne({ _id: listokData.id }, { $set: updateData });
     res.status(200).json({ message: 'Success: Listok updated' });
   } catch (error) {

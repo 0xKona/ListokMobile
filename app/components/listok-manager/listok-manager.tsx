@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@redux/store';
 import { fetchListoks } from '@redux/slices/listokManagerSlice';
 import { useIsFocused } from '@react-navigation/native';
+import { ThemeType } from '@app/constants/themes';
+import useTheme from '../hooks/useTheme';
 
 export interface ListokManagerTabInterface {
   name: 'Your Listoks' | 'Imported Listoks';
@@ -22,6 +24,8 @@ const ListokManager = () => {
     ListokManagerTabs[0],
   );
   const isFocused = useIsFocused();
+
+  const theme = useTheme(styles)
 
   const { userId, token } = useSelector((state: RootState) => state.user.user);
 
@@ -41,17 +45,21 @@ const ListokManager = () => {
   }, [token, userId, isFocused]);
 
   return (
-    <View style={styles.container}>
+    <View style={theme.container}>
       <ListoksHeader currentTab={currentTab} handlePressTab={handlePressTab} />
-      <ListokList refreshListoks={refreshListoks} />
+      <ListokList currentTab={currentTab} refreshListoks={refreshListoks} />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const styles = (theme: ThemeType) => StyleSheet.create({
   container: {
-    padding: 20,
+    paddingTop: 20,
+    paddingHorizontal: 10,
     alignItems: 'center',
+    backgroundColor: theme.background,
+    width: '100%',
+    height: '100%'
   },
 });
 

@@ -1,3 +1,4 @@
+import { IngredientType } from '@typed/recipe-types';
 import { authenticatedAxios } from './authenicatedAxios';
 
 export const shoppingListApis = {
@@ -13,5 +14,24 @@ export const shoppingListApis = {
       JSON.stringify({ listokId }),
     );
     return response.ingredients;
+  },
+  updateAdditionalItemsList: async (itemsList: IngredientType[], authToken: string) => {
+    console.log('updateAdditionalItemsList API Called with token: ', authToken);
+    const response = await authenticatedAxios(
+      '/api/shopping/updateAdditionalItems',
+      'POST',
+      authToken,
+      itemsList
+    );
+    return response;
+  },
+  fetchAdditionalItemsList: async (authToken: string) => {
+    console.log('fetchAdditionalItemsList API Called with token: ', authToken);
+    const response = await authenticatedAxios(
+      '/api/shopping/fetchAdditionalItems',
+      'GET',
+      authToken
+    );
+    return response;
   },
 };
