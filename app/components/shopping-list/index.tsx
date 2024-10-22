@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@redux/store';
 
 const ShoppingList = () => {
+  
   const theme = useTheme(styles);
 
   const { ingredients } = useSelector(
@@ -24,13 +25,16 @@ const ShoppingList = () => {
   );
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const styles = (theme: any) =>
   StyleSheet.create({
     container: {
       flex: 1,
+      marginHorizontal: 20,
+      marginTop: 20,
       padding: 20,
-      // backgroundColor: theme.surface,
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10,
+      backgroundColor: theme.surface,
     },
     titleText: {
       fontSize: 24,

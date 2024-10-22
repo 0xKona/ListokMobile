@@ -2,11 +2,13 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { shoppingListApis } from '@app/utils/api-connections/shopping-api';
 import { IngredientType } from '@typed/recipe-types';
 import { useUniqueId } from '@app/components/hooks/useUniqueId';
+import { RootState } from '@redux/store';
 
 // Define the initial state interface
 interface ShoppingManagerState {
   loadingList: boolean;
   selectedListok: string | null;
+  additionalItems: IngredientType[];
   ingredients: IngredientType[];
 }
 
@@ -14,6 +16,7 @@ interface ShoppingManagerState {
 const initialState: ShoppingManagerState = {
   loadingList: false,
   selectedListok: null,
+  additionalItems: [],
   ingredients: [],
 };
 
@@ -59,6 +62,53 @@ export const generateShoppingList = createAsyncThunk(
   },
 );
 
+export const updateAdditionalItemsList = createAsyncThunk(
+  'shoppingManager/updateAdditionalItemsList',
+  async (
+    newAdditionalItemsList: IngredientType[],
+    { rejectWithValue, getState, dispatch }
+  ) => {
+    const state: RootState = getState() as RootState; // Access the entire state
+    const { token } = state.user.user;        // Now retrieve the token from
+    console.log('update additional items token: ', token)
+    if (!newAdditionalItemsList) {
+      console.warn("updateAdditionalItemsList called with no items array!");
+      return rejectWithValue("Additional Items Array Required");
+    } else {
+      // Call the api here
+
+      try {
+        await shoppingListApis.updateAdditionalItemsList(newAdditionalItemsList, token);
+        await dispatch(fetchAdditionalItemsList(null))
+      } catch (error: any) {
+        console.warn("Error updating additional items");
+        return rejectWithValue(error.message);
+      }
+
+    }
+
+  }
+);
+
+export const fetchAdditionalItemsList= createAsyncThunk(
+  'shoppingManager/fetchAdditionalItemsList',
+  async (
+    _params: null,
+    { rejectWithValue, getState }
+  ) => {
+    const state: RootState = getState() as RootState;
+    const { token } = state.user.user;
+
+    try {
+      const additionalItems = await shoppingListApis.fetchAdditionalItemsList(token);
+      console.log("Fetch Additional Response: ", additionalItems);
+      return additionalItems;
+    } catch (error: any) {
+      rejectWithValue("failed to fect additional items");
+    }
+  }
+)
+
 // Define the shopping manager slice
 const shoppingManagerSlice = createSlice({
   name: 'shoppingManager',
@@ -99,6 +149,17 @@ const shoppingManagerSlice = createSlice({
       console.error('Error generating shopping list:', action.payload); // Log the error
       state.loadingList = false; // Set loading state to false
     });
+    builder.addCase(fetchAdditionalItemsList.rejected, (state) => {
+      state.loadingList = false;
+    });
+    builder.addCase(fetchAdditionalItemsList.pending, state => {
+      state.loadingList = true;
+    });
+    builder.addCase(fetchAdditionalItemsList.fulfilled, (state, action) => {
+      state.loadingList = false;
+      console.log("Additional Items builder: ", action.payload)
+      state.additionalItems = [...action.payload];
+    })
   },
 });
 

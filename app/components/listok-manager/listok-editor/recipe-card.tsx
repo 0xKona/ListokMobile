@@ -1,10 +1,11 @@
 import useTheme from '@app/components/hooks/useTheme';
+import GreenCheckbox from '@app/components/ui/checkbox';
 import { ThemeType } from '@app/constants/themes';
 import { DaysOfWeek, pressOnRecipe } from '@redux/slices/listokEditorSlice';
 import { RootState } from '@redux/store';
 import { RecipeType } from '@typed/recipe-types';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 interface PropsInterface {
@@ -24,9 +25,6 @@ const ListokSelectionRecipeCard = ({ recipe, day }: PropsInterface) => {
     );
   }, [listokData, day, recipe.id]);
 
-  //   console.log('RecipeName: ', recipe.title, ' is selected: ', isSelected);
-  //   console.log('Listok Data: ', listokData);
-
   const borderStyle = isSelected
     ? { borderWidth: 3, borderColor: 'darkblue' }
     : {};
@@ -39,7 +37,19 @@ const ListokSelectionRecipeCard = ({ recipe, day }: PropsInterface) => {
     <TouchableOpacity
       style={{ ...theme.container, ...borderStyle }}
       onPress={handlePress}>
-      <Text>{recipe.title}</Text>
+      <View style={{ height: '70%'}}>
+        {/* @ts-ignore */}
+        <Image source={{uri: recipe.picture}} width={'100%'} height={'100%'} style={theme.image}/>
+      </View>
+      <View style={theme.detailsContainer} >
+        <View style={{ height: '100%' , flexGrow: 1}}>
+          <Text style={theme.text}>{recipe.title}</Text>
+          <Text style={theme.textDesc}>{recipe.desc}</Text>
+        </View>
+        <View>
+          <GreenCheckbox checked={isSelected} onPress={handlePress} />
+        </View>
+      </View>
     </TouchableOpacity>
   );
 };
@@ -50,9 +60,27 @@ const styles = (theme: ThemeType) =>
     container: {
       width: '45%',
       height: 200,
-      backgroundColor: 'orange',
+      backgroundColor: theme.surface,
       margin: 10,
+      borderRadius: 10
     },
+    text: {
+      color: theme.surfaceText,
+      fontWeight: 'bold'
+    },
+    textDesc: {
+      color: theme.surfaceText,
+
+    },
+    image: {
+      borderTopLeftRadius: 5, 
+      borderTopRightRadius: 5
+    },
+    detailsContainer: { 
+      height: '30%', 
+      padding: 5, 
+      flexDirection: 'row'
+    }
   });
 
 export default ListokSelectionRecipeCard;
