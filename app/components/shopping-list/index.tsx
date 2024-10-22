@@ -15,11 +15,6 @@ const ShoppingList = () => {
   const theme = useTheme(styles);
   const navigation = useNavigation();
 
-  navigation.setOptions({
-    headerLeft: () => <RegenButton />,
-    headerRight: () => <AdditionalOptions />
-  });
-
   const { ingredients } = useSelector(
     (state: RootState) => state.shoppingManager,
   );
