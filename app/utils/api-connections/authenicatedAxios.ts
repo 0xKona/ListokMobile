@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import * as config from '@root/config/config.json';
 import { logout } from '@redux/slices/userSlice';
 import { store } from '@redux/store';

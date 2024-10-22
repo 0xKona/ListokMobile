@@ -7,7 +7,7 @@ import { ingredientCategoryOptions, ingredientMeasurementOptions } from '@app/co
 import { ThemeType } from '@app/constants/themes';
 import { CategoryType, IngredientType, MeasurementType } from '@typed/recipe-types';
 import React from 'react';
-import { Modal, View, Text, StyleSheet, TouchableOpacity, TouchableHighlight, Touchable, TouchableHighlightBase } from 'react-native';
+import { Modal, View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 
 interface PropsInterface {
   visible: boolean;

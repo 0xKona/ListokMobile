@@ -1,6 +1,5 @@
 import { IngredientType } from '@typed/recipe-types';
 import { authenticatedAxios } from './authenicatedAxios';
-import { fetchAdditionalItemsList } from '@redux/slices/shoppingManagerSlice';
 
 export const shoppingListApis = {
   getIngredientsList: async (listokId: string, authToken: string) => {
