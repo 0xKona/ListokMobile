@@ -8,11 +8,17 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@redux/store';
 import { useNavigation } from '@react-navigation/native';
 import RegenButton from './regenerate-list';
+import AdditionalOptions from './additional-options';
 
 const ShoppingList = () => {
+  
   const theme = useTheme(styles);
   const navigation = useNavigation();
-  navigation.setOptions({headerRight: () => <RegenButton />});
+
+  navigation.setOptions({
+    headerLeft: () => <RegenButton />,
+    headerRight: () => <AdditionalOptions />
+  });
 
   const { ingredients } = useSelector(
     (state: RootState) => state.shoppingManager,
@@ -28,13 +34,16 @@ const ShoppingList = () => {
   );
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const styles = (theme: any) =>
   StyleSheet.create({
     container: {
       flex: 1,
+      marginHorizontal: 20,
+      marginTop: 20,
       padding: 20,
-      // backgroundColor: theme.surface,
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10,
+      backgroundColor: theme.surface,
     },
     titleText: {
       fontSize: 24,

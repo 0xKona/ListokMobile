@@ -25,12 +25,12 @@ const ShoppingOptions = () => {
   return (
     <View style={theme.container}>
       <Text>Options Here</Text>
-      <ListokButton
-        text="Re-generate List"
+      {/* <ListokButton
+        text="Additional Items"
         onPress={regenerate}
         // eslint-disable-next-line react-native/no-inline-styles
         propStyles={{ width: 130, height: 40, marginLeft: 'auto' }}
-      />
+      /> */}
     </View>
   );
 };
