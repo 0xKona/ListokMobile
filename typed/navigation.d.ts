@@ -49,6 +49,13 @@ export type ListokStackParamList = {
 export type ListokNavigationProp = StackNavigationProp<ListokStackParamList>;
 export type ListokRouteProp = RouteProp<ListokStackParamList, 'Your Listoks'>;
 
+export type ShoppingStackParamList = {
+  'Shopping List': undefined;
+  'Additional Items': undefined;
+};
+export type ShoppingNavigationProp = StackNavigationProp<ShoppingStackParamList>;
+export type ShoppingRouteProp = RouteProp<ShoppingStackParamList, 'Shopping List'>;
+
 export type LoadingScreenRouteProp = RouteProp<RootStackParamList, 'Loading'>;
 export type LoginScreenRouteProp = RouteProp<RootStackParamList, 'Login'>;
 export type MainScreenRouteProp = RouteProp<RootStackParamList, 'Home'>;
