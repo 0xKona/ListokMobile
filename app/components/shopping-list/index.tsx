@@ -19,7 +19,7 @@ const ShoppingList = () => {
   return (
     <View style={theme.container}>
       <ListokDropdownSelector />
-      <ShoppingOptions />
+      {/* <ShoppingOptions /> */}
       <ShoppingListComponent shoppingIngredients={ingredients} />
     </View>
   );
@@ -31,7 +31,7 @@ const styles = (theme: any) =>
       flex: 1,
       marginHorizontal: 20,
       marginTop: 20,
-      padding: 20,
+      // padding: 20,
       borderTopLeftRadius: 10,
       borderTopRightRadius: 10,
       backgroundColor: theme.surface,
