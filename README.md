@@ -18,6 +18,10 @@ Features to be Added:
 - Edit / Delete Account
 - Proper login system (Email, Google, Apple etc).
 
+Notes for Future me (If I ever come back to this):
+- Redo backend in Java or GO
+- Implement testing
+
 >**Important Note**: Currently the app only runs on iOS, due to the (in all honestly) my poor implementation of google login.
 
 ## Overview
