@@ -30,3 +30,7 @@ This project was created with the intent to learn React-Native, Redux and MongoD
 - [Configure Google Cloud](./docs/configure-google-cloud.md)
 - [Known Bugs and Issues](./docs/known-bugs.md)
 - [Styling Components](./docs/styling.md)
+
+### Example Home Screen
+
+![Recipe Screen](./docs/examples/recipes-screen.png)
