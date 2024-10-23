@@ -24,32 +24,43 @@ const initialState: ShoppingManagerState = {
 export const generateShoppingList = createAsyncThunk(
   'shoppingManager/generateShoppingList',
   async (
-    params: { listokId: string | null; token: string },
-    { rejectWithValue },
+    listokId: string,
+    { rejectWithValue, getState, dispatch },
   ) => {
     // Ensure that the listokId is provided
-    if (!params.listokId) {
+    if (!listokId) {
       console.log('generateShoppingList called with no listokId');
       return rejectWithValue('Listok ID is required'); // Reject with a value for error handling
     }
 
     try {
+
+      const state: RootState = getState() as RootState;
+      const { token } = state.user.user;
+
+      await dispatch(fetchAdditionalItemsList(null));
+
+      const additionalItems = state.shoppingManager.additionalItems
       // Call the API to fetch the ingredients list
-      const fetchedIngredients = await shoppingListApis.getIngredientsList(
-        params.listokId,
-        params.token,
+      const fetchedIngredients: IngredientType[] = await shoppingListApis.getIngredientsList(
+        listokId,
+        token,
       );
 
       console.log('Async Thunk fetchedIngredients: ', fetchedIngredients);
 
       // Map the fetched ingredients, adding checked and id properties
-      const ingredientsWithChecked = fetchedIngredients.map(
-        (ingredient: IngredientType) => ({
+      const ingredientsWithChecked = [...fetchedIngredients, ...additionalItems]
+        .map((ingredient: IngredientType) => ({
           ...ingredient,
           checked: false, // Initialize as not checked
           id: useUniqueId(),
-        }),
-      );
+        }))
+        .sort((a, b) => {
+          if (a.category < b.category) return -1;
+          if (a.category > b.category) return 1;
+          return 0; // If categories are equal, they stay in the same order
+        });
 
       console.log('Ingredients With Checked and Id: ', ingredientsWithChecked);
 

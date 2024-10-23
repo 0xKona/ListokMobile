@@ -20,7 +20,7 @@ const RegenButton = () => {
 
     const refreshAction = [{
         actionName: 'Regenerate Shopping List', 
-        actionFunction: () => dispatch(generateShoppingList({ listokId: selectedListok, token: token }))
+        actionFunction: () => dispatch(generateShoppingList(selectedListok as string))
     }]
 
     const regenerate = () => {
